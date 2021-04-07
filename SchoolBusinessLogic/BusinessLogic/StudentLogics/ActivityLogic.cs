@@ -9,54 +9,54 @@ namespace SchoolBusinessLogic.BusinessLogic.StudentLogics
 {
     public class ActivityLogic
     {
-        private readonly IActivityStorage _materialStorage;
+        private readonly IActivityStorage _activityStorage;
 
-        public ActivityLogic(IActivityStorage materialStorage)
+        public ActivityLogic(IActivityStorage activityStorage)
         {
-            _materialStorage = materialStorage;
+            _activityStorage = activityStorage;
         }
 
         public List<ActivityViewModel> Read(ActivityBindingModel model)
         {
             if (model == null)
             {
-                return _materialStorage.GetFullList();
+                return _activityStorage.GetFullList();
             }
             if (model.Id.HasValue)
             {
-                return new List<ActivityViewModel> { _materialStorage.GetElement(model) };
+                return new List<ActivityViewModel> { _activityStorage.GetElement(model) };
             }
-            return _materialStorage.GetFilteredList(model);
+            return _activityStorage.GetFilteredList(model);
         }
 
         public void CreateOrUpdate(ActivityBindingModel model)
         {
-            var element = _materialStorage.GetElement(new ActivityBindingModel
+            var element = _activityStorage.GetElement(new ActivityBindingModel
             {
                 Name = model.Name
             });
             if (element != null && element.Id != model.Id)
             {
-                throw new Exception("There is already a material with the same name");
+                throw new Exception("There is already a activity with the same name");
             }
             if (model.Id.HasValue)
             {
-                _materialStorage.Update(model);
+                _activityStorage.Update(model);
             }
             else
             {
-                _materialStorage.Insert(model);
+                _activityStorage.Insert(model);
             }
         }
 
         public void Delete(ActivityBindingModel model)
         {
-            var element = _materialStorage.GetElement(new ActivityBindingModel { Id = model.Id });
+            var element = _activityStorage.GetElement(new ActivityBindingModel { Id = model.Id });
             if (element == null)
             {
-                throw new Exception("Element not found");
+                throw new Exception("Activity not found");
             }
-            _materialStorage.Delete(model);
+            _activityStorage.Delete(model);
         }
     }
 }

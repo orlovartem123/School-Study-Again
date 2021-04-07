@@ -29,10 +29,10 @@ namespace SchoolRestApi.Controllers
         public List<ActivityViewModel> GetActivityList() => _activity.Read(null)?.ToList();
 
         [HttpGet]
-        public List<ActivityViewModel> GetActivityList(int teacherId) => _activity.Read(new ActivityBindingModel { TeacherId = teacherId })?.ToList();
+        public List<ActivityViewModel> GetActivityList(int studentId) => _activity.Read(new ActivityBindingModel { StudentId = studentId })?.ToList();
 
         [HttpGet]
-        public ActivityViewModel GetActivity(int materialId) => _activity.Read(new ActivityBindingModel { Id = materialId })?[0];
+        public ActivityViewModel GetActivity(int activityId) => _activity.Read(new ActivityBindingModel { Id = activityId })?[0];
 
         [HttpPost]
         public void CreateActivity(ActivityBindingModel model) => _activity.CreateOrUpdate(model);
@@ -51,10 +51,10 @@ namespace SchoolRestApi.Controllers
         public List<InterestViewModel> GetInterestList() => _interest.Read(null)?.ToList();
 
         [HttpGet]
-        public List<InterestViewModel> GetInterestList(int teacherId) => _interest.Read(new InterestBindingModel { TeacherId = teacherId })?.ToList();
+        public List<InterestViewModel> GetInterestList(int interestId) => _interest.Read(new InterestBindingModel())?.ToList();
 
         [HttpGet]
-        public InterestViewModel GetInterest(int electiveId) => _interest.Read(new InterestBindingModel { Id = electiveId })?[0];
+        public InterestViewModel GetInterest(int interestId) => _interest.Read(new InterestBindingModel())?[0];
 
         [HttpPost]
         public void CreateInterest(InterestBindingModel model) => _interest.CreateOrUpdate(model);

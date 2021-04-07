@@ -1,8 +1,21 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Actions</h1>
+</div>
+<div class="text-center">
+    @{
+        if (Model == null)
+        {
+            <h3 class="display-4">Log in</h3>
+            return;
+        }
+        <p>
+            <button class="btn-toolbar" asp-action="Create">Create Material</button>
+        </p>
+        <p>
+            <a asp-action="Create">Create order</a>
+        </p>
+    }
 </div>

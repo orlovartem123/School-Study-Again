@@ -54,7 +54,7 @@ namespace SchoolBusinessLogic.BusinessLogic.TeacherLogics
             var element = _materialStorage.GetElement(new MaterialBindingModel { Id = model.Id });
             if (element == null)
             {
-                throw new Exception("Element not found");
+                throw new Exception("Material not found");
             }
             _materialStorage.Delete(model);
         }

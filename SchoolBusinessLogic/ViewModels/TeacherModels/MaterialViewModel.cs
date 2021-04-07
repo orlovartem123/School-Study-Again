@@ -18,5 +18,8 @@ namespace SchoolBusinessLogic.ViewModels.TeacherModels
 
         [DataMember]
         public decimal Price { get; set; }
+
+        [DataMember]
+        public DateTime DateCreate { get; set; }
     }
 }

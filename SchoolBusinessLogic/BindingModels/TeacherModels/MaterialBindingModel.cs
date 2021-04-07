@@ -16,5 +16,11 @@ namespace SchoolBusinessLogic.BindingModels.TeacherModels
 
         [DataMember]
         public string Name { get; set; }
+
+        [DataMember]
+        public decimal Price { get; set; }
+
+        [DataMember]
+        public DateTime DateCreate { get; set; }
     }
 }

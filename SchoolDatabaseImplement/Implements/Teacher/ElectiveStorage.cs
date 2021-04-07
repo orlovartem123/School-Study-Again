@@ -1,8 +1,10 @@
-﻿using SchoolBusinessLogic.BindingModels.TeacherModels;
+﻿using Microsoft.EntityFrameworkCore;
+using SchoolBusinessLogic.BindingModels.TeacherModels;
 using SchoolBusinessLogic.Interfaces.Teacher;
 using SchoolBusinessLogic.ViewModels.TeacherModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace SchoolDatabaseImplement.Implements.Teacher
@@ -11,12 +13,44 @@ namespace SchoolDatabaseImplement.Implements.Teacher
     {
         public void Delete(ElectiveBindingModel model)
         {
-            throw new NotImplementedException();
+            using (var context = new SchoolDbContext())
+            {
+                var element = context.Electives.FirstOrDefault(rec => rec.Id == model.Id);
+                if (element != null)
+                {
+                    context.Electives.Remove(element);
+                    context.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception("Elective not found");
+                }
+            }
         }
 
         public ElectiveViewModel GetElement(ElectiveBindingModel model)
         {
-            throw new NotImplementedException();
+            if (model == null)
+            {
+                return null;
+            }
+            using (var context = new SchoolDbContext())
+            {
+                var elective = context.Electives
+                .Include(rec => rec.ElectiveMaterials)
+                .ThenInclude(rec => rec.Material)
+                .Include(rec=>rec.ActivityElectives)
+                .ThenInclude(rec=>rec.Activity)
+                .FirstOrDefault(rec => rec.Name == model.Name || rec.Id == model.Id);
+                return elective != null ?
+                new ElectiveViewModel
+                {
+                    Id = elective.Id,
+                    Name = elective.Name,
+                    Price = elective.Price,
+                    ElectiveMaterials = elective.ElectiveMaterials.ToDictionary(recEM => recEM.MaterialId, recEM => (recEM.Material?.Name, recEM.MaterialCount))
+                } : null;
+            }
         }
 
         public List<ElectiveViewModel> GetFilteredList(ElectiveBindingModel model)

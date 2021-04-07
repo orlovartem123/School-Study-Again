@@ -18,6 +18,9 @@ namespace SchoolDatabaseImplement.Models
         [Required]
         public decimal Price { get; set; }
 
+        [Required]
+        public DateTime DateCreate { get; set; }
+
         [ForeignKey("MaterialId")]
         public virtual List<ElectiveMaterial> ElectiveMaterials { get; set; }
 
