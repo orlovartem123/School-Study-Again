@@ -33,6 +33,5 @@ namespace SchoolDatabaseImplement.Models
 
         [ForeignKey("TeacherId")]
         public virtual List<Medal> Medals { get; set; }
-
     }
 }
