@@ -19,7 +19,7 @@ border-bottom box-shadow mb-3">
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                @*<div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area=""
@@ -38,7 +38,50 @@ border-bottom box-shadow mb-3">
                                asp-controller="Home" asp-action="Register">Sign Up</a>
                         </li>
                     </ul>
-                </div>
+                </div>*@
+            <ul class="nav nav-tabs">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Materials</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" asp-controller="Material" asp-action="CreateMaterial">Create</a>
+                        <a class="dropdown-item" asp-controller="Material" asp-action="UpdateMaterial">Update</a>
+                        <a class="dropdown-item" href="#">Delete</a>
+                        <a class="dropdown-item" href="#">Show materials</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Electives</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Create</a>
+                        <a class="dropdown-item" href="#">Update</a>
+                        <a class="dropdown-item" href="#">Delete</a>
+                        <a class="dropdown-item" href="#">Show electives</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Medals</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Create</a>
+                        <a class="dropdown-item" href="#">Update</a>
+                        <a class="dropdown-item" href="#">Delete</a>
+                        <a class="dropdown-item" href="#">Show medals</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area=""
+                       asp-controller="Home" asp-action="Enter">Sign In</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area=""
+                       asp-controller="Home" asp-action="Register">Sign Up</a>
+                </li>
+                @*<li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+        </li>*@
+            </ul>
             </div>
         </nav>
     </header>
@@ -49,7 +92,7 @@ border-bottom box-shadow mb-3">
     </div>
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2021 - Car factory - <a asp-area="" aspcontroller="Home" asp-action="Privacy">Personal data</a>
+            &copy; 2021 - Study again - <a asp-area="" aspcontroller="Home" asp-action="Privacy">Personal data</a>
         </div>
     </footer>
     <script src="~/js/site.js" asp-append-version="true"></script>
