@@ -1,36 +1,38 @@
-﻿@{
+﻿@using SchoolBusinessLogic.ViewModels.TeacherModels
+@model MaterialViewModel
+@{
     ViewData["Title"] = "CreateMaterial";
 }
 
 
 @*@{
-    ViewData["Title"] = "Create";
-}
-<div class="text-center">
-    <h2 class="display-4">Create order</h2>
-</div>
-<form method="post">
-    <div class="row">
-        <div class="col-4">Car:</div>
-        <div class="col-8">
-            <select id="car" name="car" class="form-control" asp-items="@(new SelectList(@ViewBag.Cars,"Id", "CarName"))"></select>
+        ViewData["Title"] = "Create";
+    }
+    <div class="text-center">
+        <h2 class="display-4">Create order</h2>
+    </div>
+    <form method="post">
+        <div class="row">
+            <div class="col-4">Car:</div>
+            <div class="col-8">
+                <select id="car" name="car" class="form-control" asp-items="@(new SelectList(@ViewBag.Cars,"Id", "CarName"))"></select>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-4">Count:</div>
-        <div class="col-8"><input type="text" name="count" id="count" /></div>
-    </div>
-    <div class="row">
-        <div class="col-4">Sum:</div>
-        <div class="col-8">
-            <input type="text" id="sum" name="sum" readonly="true" />
+        <div class="row">
+            <div class="col-4">Count:</div>
+            <div class="col-8"><input type="text" name="count" id="count" /></div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-8"></div>
-        <div class="col-4"><input type="submit" value="Create" class="btn btnprimary" /></div>
-    </div>
-</form>*@
+        <div class="row">
+            <div class="col-4">Sum:</div>
+            <div class="col-8">
+                <input type="text" id="sum" name="sum" readonly="true" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8"></div>
+            <div class="col-4"><input type="submit" value="Create" class="btn btnprimary" /></div>
+        </div>
+    </form>*@
 
 
 
@@ -38,7 +40,8 @@
     <h2 class="display-4">Update material</h2>
 </div>
 
-﻿<form class="container-fluid" style="max-width: 580px;" method="post">
+﻿<form class="container-fluid" style="max-width: 580px;" asp-action="UpdateMaterial">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-group">
         <div class="row justify-content-between">
             <label class="col-lg-4">
@@ -60,7 +63,7 @@
                 Material name
             </label>
             <div class="col-lg-8">
-                <input type="text" name="name" required class="form-control" />
+                <input asp-for="Name" type="text" name="name" required class="form-control" />
             </div>
         </div>
     </div>
@@ -71,7 +74,7 @@
                 Material price
             </label>
             <div class="col-lg-8">
-                <input type="number" name="price" required class="form-control" />
+                <input asp-for="Price" type="text" name="price" required class="form-control" />
             </div>
         </div>
     </div>
@@ -84,3 +87,6 @@
         </div>
     </div>
 </form>
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -29,10 +29,10 @@ namespace SchoolRestApi.Controllers
         #region Materials
 
         [HttpGet]
-        public List<MaterialViewModel> GetMaterialList() => _material.Read(null)?.ToList();
+        public string Ping() => "Ok";
 
         [HttpGet]
-        public List<MaterialViewModel> GetMaterialList(int teacherId) => _material.Read(new MaterialBindingModel { TeacherId = teacherId })?.ToList();
+        public List<MaterialViewModel> GetMaterials() => _material.Read(null)?.ToList();
 
         [HttpGet]
         public MaterialViewModel GetMaterial(int materialId) => _material.Read(new MaterialBindingModel { Id = materialId })?[0];
@@ -51,10 +51,10 @@ namespace SchoolRestApi.Controllers
         #region Electives
 
         [HttpGet]
-        public List<ElectiveViewModel> GetElectiveList() => _elective.Read(null)?.ToList();
+        public List<ElectiveViewModel> GetElectives() => _elective.Read(null)?.ToList();
 
-        [HttpGet]
-        public List<ElectiveViewModel> GetElectiveList(int teacherId) => _elective.Read(new ElectiveBindingModel { TeacherId = teacherId })?.ToList();
+        //[HttpGet]
+        //public List<ElectiveViewModel> GetElectives(int teacherId) => _elective.Read(new ElectiveBindingModel { TeacherId = teacherId })?.ToList();
 
         [HttpGet]
         public ElectiveViewModel GetElective(int electiveId) => _elective.Read(new ElectiveBindingModel { Id = electiveId })?[0];
@@ -73,10 +73,10 @@ namespace SchoolRestApi.Controllers
         #region Medals
 
         [HttpGet]
-        public List<MedalViewModel> GetMedalList() => _medal.Read(null)?.ToList();
+        public List<MedalViewModel> GetMedals() => _medal.Read(null)?.ToList();
 
-        [HttpGet]
-        public List<MedalViewModel> GetMedalList(int teacherId) => _medal.Read(new MedalBindingModel { TeacherId = teacherId })?.ToList();
+        //[HttpGet]
+        //public List<MedalViewModel> GetMedals(int teacherId) => _medal.Read(new MedalBindingModel { TeacherId = teacherId })?.ToList();
 
         [HttpGet]
         public MedalViewModel GetMedal(int medalId) => _medal.Read(new MedalBindingModel { Id = medalId })?[0];

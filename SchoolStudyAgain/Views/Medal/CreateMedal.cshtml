@@ -1,10 +1,10 @@
-﻿@model SchoolBusinessLogic.BindingModels.TeacherModels.MaterialBindingModel
+﻿@model SchoolBusinessLogic.BindingModels.TeacherModels.MedalBindingModel
 
 @{
-    ViewData["Title"] = "CreateMaterial";
+    ViewData["Title"] = "CreateMedal";
 }
 <div class="text-center">
-    <h2 class="display-4">Create material</h2>
+    <h2 class="display-4">Create medal</h2>
 </div>
 @*<form class="container-fluid" style="max-width: 480px;" method="post">
         <div class="form-group">
@@ -22,12 +22,12 @@
         <button type="submit" style="min-width: 100px" class="btn btn-primary">Login</button>
     </form>*@
 
-﻿<form class="container-fluid" style="max-width: 580px;" asp-action="CreateMaterial">
+﻿<form class="container-fluid" style="max-width: 580px;" asp-action="CreateMedal">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-group">
         <div class="row justify-content-between">
             <label class="col-lg-4">
-                Material name
+                Medal name
             </label>
             <div class="col-lg-8">
                 <input asp-for="Name" type="text" name="name" required class="form-control" />
@@ -38,10 +38,25 @@
     <div class="form-group">
         <div class="row">
             <label class="col-lg-4 justify-content-between">
-                Material price
+                Medal price
             </label>
             <div class="col-lg-8">
-                <input asp-for="Price" type="number" name="price" required class="form-control" />
+                <input asp-for="Value" type="number" name="value" required class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="row">
+            <label class="col-lg-4 justify-content-between">
+                Elective
+            </label>
+            <div class="col-lg-8">
+                @*<select id="car" name="material" required class="form-control" asp-items="@(new SelectList(@ViewBag.Materials,"Id", "Name"))"></select>*@
+                <select asp-for="ElectiveId" name="material" required class="form-control">
+                    <option>1</option>
+                    <option>2</option>
+                </select>
             </div>
         </div>
     </div>

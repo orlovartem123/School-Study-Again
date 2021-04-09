@@ -1,0 +1,61 @@
+﻿@using SchoolBusinessLogic.ViewModels.TeacherModels
+@model List<MedalViewModel>
+@{
+    ViewData["Title"] = "MedalList";
+}
+<div class="text-center">
+    <h1 class="display-4">Medals</h1>
+</div>
+<div class="text-center">
+    @{
+        if (Model == null)
+        {
+            <h3 class="display-4">Log in</h3>
+            return;
+        }
+        <p>
+            <a asp-action="CreateMedal">Create medal</a>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Medal Id
+                    </th>
+                    <th>
+                        Medal name
+                    </th>
+                    <th>
+                        Value
+                    </th>
+                    <th>
+                        Elective
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Value)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ElectiveName)
+                        </td>
+                        <td>
+                            <a asp-action="UpdateMedal" asp-route-id="@(item.Id)">Update</a>
+                            <a asp-action="DeleteMedal" asp-route-id="@(item.Id)">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

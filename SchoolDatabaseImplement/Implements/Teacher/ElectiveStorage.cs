@@ -2,6 +2,7 @@
 using SchoolBusinessLogic.BindingModels.TeacherModels;
 using SchoolBusinessLogic.Interfaces.Teacher;
 using SchoolBusinessLogic.ViewModels.TeacherModels;
+using SchoolDatabaseImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,8 +40,8 @@ namespace SchoolDatabaseImplement.Implements.Teacher
                 var elective = context.Electives
                 .Include(rec => rec.ElectiveMaterials)
                 .ThenInclude(rec => rec.Material)
-                .Include(rec=>rec.ActivityElectives)
-                .ThenInclude(rec=>rec.Activity)
+                .Include(rec => rec.ActivityElectives)
+                .ThenInclude(rec => rec.Activity)
                 .FirstOrDefault(rec => rec.Name == model.Name || rec.Id == model.Id);
                 return elective != null ?
                 new ElectiveViewModel
@@ -55,12 +56,25 @@ namespace SchoolDatabaseImplement.Implements.Teacher
 
         public List<ElectiveViewModel> GetFilteredList(ElectiveBindingModel model)
         {
-            throw new NotImplementedException();
+            using (var context = new SchoolDbContext())
+            {
+                return context.Electives
+                .Include(rec => rec.ElectiveMaterials)
+                .ThenInclude(rec => rec.Elective).Where(rec =>
+                    (model.TeacherId.HasValue && rec.TeacherId == model.TeacherId))
+                    .Select(CreateModel).ToList();
+            }
         }
 
         public List<ElectiveViewModel> GetFullList()
         {
-            throw new NotImplementedException();
+            using (var context = new SchoolDbContext())
+            {
+                return context.Electives
+                .Include(rec => rec.ElectiveMaterials)
+                .ThenInclude(rec => rec.Elective).ToList()
+                .Select(CreateModel).ToList();
+            }
         }
 
         public void Insert(ElectiveBindingModel model)
@@ -71,6 +85,19 @@ namespace SchoolDatabaseImplement.Implements.Teacher
         public void Update(ElectiveBindingModel model)
         {
             throw new NotImplementedException();
+        }
+
+        private ElectiveViewModel CreateModel(Elective material)
+        {
+            return new ElectiveViewModel
+            {
+                Id = material.Id,
+                Name = material.Name,
+                Price = material.Price,
+                ElectiveMaterials = material.ElectiveMaterials
+                .ToDictionary(recME => recME.MaterialId, recME =>
+                (recME.Material?.Name, recME.MaterialCount))
+            };
         }
     }
 }

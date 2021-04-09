@@ -14,74 +14,74 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white
 border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" aspaction="Index">Study Again</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Study Again</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" datatarget=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 @*<div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area=""
-                               asp-controller="Home" asp-action="Index">Orders</a>
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area=""
+                                   asp-controller="Home" asp-action="Index">Orders</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area=""
+                                   asp-controller="Home" asp-action="Privacy">Personal data</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area=""
+                                   asp-controller="Home" asp-action="Enter">Sign In</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area=""
+                                   asp-controller="Home" asp-action="Register">Sign Up</a>
+                            </li>
+                        </ul>
+                    </div>*@
+                <ul class="nav nav-tabs">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Materials</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" asp-controller="Material" asp-action="CreateMaterial">Create</a>
+                            <a class="dropdown-item" asp-controller="Material" asp-action="UpdateMaterial">Update</a>
+                            <a class="dropdown-item" asp-controller="Material" asp-action="DeleteMaterial">Delete</a>
+                            <a class="dropdown-item" asp-controller="Material" asp-action="MaterialList">Show materials</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Electives</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" asp-controller="Elective" asp-action="CreateElective">Create</a>
+                            <a class="dropdown-item" asp-controller="Elective" asp-action="UpdateElective">Update</a>
+                            <a class="dropdown-item" asp-controller="Elective" asp-action="DeleteElective">Delete</a>
+                            <a class="dropdown-item" asp-controller="Elective" asp-action="ElectiveList">Show electives</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Medals</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" asp-controller="Medal" asp-action="CreateMedal">Create</a>
+                            <a class="dropdown-item" asp-controller="Medal" asp-action="UpdateMedal">Update</a>
+                            <a class="dropdown-item" asp-controller="Medal" asp-action="DeleteMedal">Delete</a>
+                            <a class="dropdown-item" asp-controller="Medal" asp-action="MedalList">Show medals</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area=""
+                           asp-controller="Home" asp-action="Enter">Sign In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area=""
+                           asp-controller="Home" asp-action="Register">Sign Up</a>
+                    </li>
+                    @*<li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area=""
-                               asp-controller="Home" asp-action="Privacy">Personal data</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area=""
-                               asp-controller="Home" asp-action="Enter">Sign In</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area=""
-                               asp-controller="Home" asp-action="Register">Sign Up</a>
-                        </li>
-                    </ul>
-                </div>*@
-            <ul class="nav nav-tabs">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Materials</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" asp-controller="Material" asp-action="CreateMaterial">Create</a>
-                        <a class="dropdown-item" asp-controller="Material" asp-action="UpdateMaterial">Update</a>
-                        <a class="dropdown-item" href="#">Delete</a>
-                        <a class="dropdown-item" href="#">Show materials</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Electives</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Create</a>
-                        <a class="dropdown-item" href="#">Update</a>
-                        <a class="dropdown-item" href="#">Delete</a>
-                        <a class="dropdown-item" href="#">Show electives</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Medals</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Create</a>
-                        <a class="dropdown-item" href="#">Update</a>
-                        <a class="dropdown-item" href="#">Delete</a>
-                        <a class="dropdown-item" href="#">Show medals</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area=""
-                       asp-controller="Home" asp-action="Enter">Sign In</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area=""
-                       asp-controller="Home" asp-action="Register">Sign Up</a>
-                </li>
-                @*<li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-        </li>*@
-            </ul>
+                            <a class="nav-link disabled" href="#">Disabled</a>
+                        </li>*@
+                </ul>
             </div>
         </nav>
     </header>

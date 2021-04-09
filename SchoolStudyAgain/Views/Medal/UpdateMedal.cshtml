@@ -1,0 +1,60 @@
+﻿@using SchoolBusinessLogic.ViewModels.TeacherModels
+@model MedalViewModel
+@{
+    ViewData["Title"] = "CreateMedal";
+}
+
+<div class="text-center">
+    <h2 class="display-4">Update medal</h2>
+</div>
+
+﻿<form class="container-fluid" style="max-width: 580px;" asp-action="UpdateMedal">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <div class="row justify-content-between">
+            <label class="col-lg-4">
+                Medal name
+            </label>
+            <div class="col-lg-8">
+                <input asp-for="Name" type="text" name="name" required class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="row">
+            <label class="col-lg-4 justify-content-between">
+                Medal price
+            </label>
+            <div class="col-lg-8">
+                <input asp-for="Value" type="text" name="price" required class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="row justify-content-between">
+            <label class="col-lg-4">
+                Elective
+            </label>
+            <div class="col-lg-8">
+                @*<select id="car" name="medal" required class="form-control" asp-items="@(new SelectList(@ViewBag.Medals,"Id", "Name"))"></select>*@
+                <select asp-for="ElectiveId" name="medal" required class="form-control">
+                    <option>1</option>
+                    <option>2</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-lg-12">
+            <button type="button" style="min-width: 100px" class="btn btn-sm btn-light">
+                Update
+            </button>
+        </div>
+    </div>
+</form>
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

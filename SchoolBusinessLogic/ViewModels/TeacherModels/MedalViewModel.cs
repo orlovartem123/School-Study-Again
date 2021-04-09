@@ -18,5 +18,12 @@ namespace SchoolBusinessLogic.ViewModels.TeacherModels
 
         [DataMember]
         public int Value { get; set; }
+
+        [DataMember]
+        public int ElectiveId { get; set; }
+
+        [DataMember]
+        [DisplayName("ElectiveName")]
+        public int ElectiveName { get; set; }
     }
 }

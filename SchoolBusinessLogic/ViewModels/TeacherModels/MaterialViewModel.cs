@@ -13,11 +13,14 @@ namespace SchoolBusinessLogic.ViewModels.TeacherModels
         public int Id { get; set; }
 
         [DataMember]
-        [DisplayName("Matrial Name")]
+        [DisplayName("Material Name")]
         public string Name { get; set; }
 
         [DataMember]
         public decimal Price { get; set; }
+
+        [DataMember]
+        public Dictionary<int, (string, int)> MaterialElectives { get; set; }
 
         [DataMember]
         public DateTime DateCreate { get; set; }

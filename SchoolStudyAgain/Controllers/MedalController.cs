@@ -8,42 +8,42 @@ using System.Threading.Tasks;
 
 namespace SchoolStudyAgain.Controllers
 {
-    public class MaterialController : Controller
+    public class MedalController : Controller
     {
-        public MaterialController()
+        public MedalController()
         {
         }
 
-        public IActionResult CreateMaterial()
+        public IActionResult CreateMedal()
         {
             //if (Program.Teacher == null) { return Redirect("~/Home/Enter"); }
             return View();
         }
 
         [HttpGet]
-        public IActionResult UpdateMaterial(int id)
+        public IActionResult UpdateMedal(int id)
         {
             //if (Program.Teacher == null) { return Redirect("~/Home/Enter"); }
-            return View(APIClient.GetRequest<MaterialViewModel>($"api/teacher/getmaterial?materialId={id}"));
+            return View(/*APIClient.GetRequest<MedalViewModel>($"api/teacher/getmedal?medalId={id}")*/);
         }
 
         [HttpPost]
-        public void UpdateMaterial(MaterialBindingModel material)
+        public void UpdateMedal(MedalBindingModel medal)
         {
-            APIClient.PostRequest("api/teacher/updatematerial", material);
-            Response.Redirect("MaterialList");
+            //APIClient.PostRequest("api/teacher/updatemedal", medal);
+            Response.Redirect("MedalList");
         }
 
-        public IActionResult DeleteMaterial()
+        public IActionResult DeleteMedal()
         {
             //if (Program.Teacher == null) { return Redirect("~/Home/Enter"); }
             return View();
         }
 
-        public IActionResult MaterialList()
+        public IActionResult MedalList()
         {
             //if (Program.Teacher == null) { return Redirect("~/Home/Enter"); }
-            return View(APIClient.GetRequest<List<MaterialViewModel>>($"api/teacher/getmaterials?teacherId={3}"));
+            return View(/*APIClient.GetRequest<List<MedalViewModel>>($"api/teacher/getmedals?teacherId={3}")*/);
         }
     }
 }

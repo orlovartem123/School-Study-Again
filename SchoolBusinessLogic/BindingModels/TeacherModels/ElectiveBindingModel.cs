@@ -12,7 +12,7 @@ namespace SchoolBusinessLogic.BindingModels.TeacherModels
         public int? Id { get; set; }
 
         [DataMember]
-        public int TeacherId { get; set; }
+        public int? TeacherId { get; set; }
 
         [DataMember]
         public string Name { get; set; }

@@ -8,42 +8,42 @@ using System.Threading.Tasks;
 
 namespace SchoolStudyAgain.Controllers
 {
-    public class MaterialController : Controller
+    public class ElectiveController : Controller
     {
-        public MaterialController()
+        public ElectiveController()
         {
         }
 
-        public IActionResult CreateMaterial()
+        public IActionResult CreateElective()
         {
             //if (Program.Teacher == null) { return Redirect("~/Home/Enter"); }
             return View();
         }
 
         [HttpGet]
-        public IActionResult UpdateMaterial(int id)
+        public IActionResult UpdateElective(int id)
         {
             //if (Program.Teacher == null) { return Redirect("~/Home/Enter"); }
-            return View(APIClient.GetRequest<MaterialViewModel>($"api/teacher/getmaterial?materialId={id}"));
+            return View(/*APIClient.GetRequest<ElectiveViewModel>($"api/teacher/getelective?electiveId={id}")*/);
         }
 
         [HttpPost]
-        public void UpdateMaterial(MaterialBindingModel material)
+        public void UpdateElective(ElectiveBindingModel elective)
         {
-            APIClient.PostRequest("api/teacher/updatematerial", material);
-            Response.Redirect("MaterialList");
+            //APIClient.PostRequest("api/teacher/updateelective", elective);
+            Response.Redirect("ElectiveList");
         }
 
-        public IActionResult DeleteMaterial()
+        public IActionResult DeleteElective()
         {
             //if (Program.Teacher == null) { return Redirect("~/Home/Enter"); }
             return View();
         }
 
-        public IActionResult MaterialList()
+        public IActionResult ElectiveList()
         {
             //if (Program.Teacher == null) { return Redirect("~/Home/Enter"); }
-            return View(APIClient.GetRequest<List<MaterialViewModel>>($"api/teacher/getmaterials?teacherId={3}"));
+            return View(/*APIClient.GetRequest<List<ElectiveViewModel>>($"api/teacher/getelectives")*/);
         }
     }
 }

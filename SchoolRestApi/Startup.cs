@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using SchoolBusinessLogic.BusinessLogic.TeacherLogics;
 using SchoolBusinessLogic.Interfaces.Student;
 using SchoolBusinessLogic.Interfaces.Teacher;
 using SchoolDatabaseImplement.Implements.Student;
@@ -36,6 +37,9 @@ namespace SchoolRestApi
             services.AddTransient<IStudentStorage, StudentStorage>();
             services.AddTransient<IActivityStorage, ActivityStorage>();
             services.AddTransient<IInterestStorage, InterestStorage>();
+            services.AddTransient<MaterialLogic>();
+            services.AddTransient<ElectiveLogic>();
+            services.AddTransient<MedalLogic>();
             services.AddControllers().AddNewtonsoftJson();
         }
 
