@@ -15,5 +15,8 @@ namespace SchoolBusinessLogic.ViewModels.StudentModels
         [DataMember]
         [DisplayName("Activity Name")]
         public string Name { get; set; }
+
+        [DataMember]
+        public Dictionary<int, string> ActivityElectives { get; set; }
     }
 }

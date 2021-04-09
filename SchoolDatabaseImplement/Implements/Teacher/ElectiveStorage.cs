@@ -87,16 +87,19 @@ namespace SchoolDatabaseImplement.Implements.Teacher
             throw new NotImplementedException();
         }
 
-        private ElectiveViewModel CreateModel(Elective material)
+        private ElectiveViewModel CreateModel(Elective elective)
         {
             return new ElectiveViewModel
             {
-                Id = material.Id,
-                Name = material.Name,
-                Price = material.Price,
-                ElectiveMaterials = material.ElectiveMaterials
+                Id = elective.Id,
+                Name = elective.Name,
+                Price = elective.Price,
+                ElectiveMaterials = elective.ElectiveMaterials
                 .ToDictionary(recME => recME.MaterialId, recME =>
-                (recME.Material?.Name, recME.MaterialCount))
+                (recME.Material?.Name, recME.MaterialCount)),
+                ElectiveActivities = elective.ActivityElectives
+                .ToDictionary(recME => recME.ActivityId, recME =>
+                recME.Activity?.Name)
             };
         }
     }

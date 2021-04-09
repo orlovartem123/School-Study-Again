@@ -41,12 +41,11 @@ namespace SchoolDatabaseImplement.Implements.Teacher
             }
             using (var context = new SchoolDbContext())
             {
-                return context.Materials.Include(rec => rec.ElectiveMaterials).ThenInclude(rec=>rec.Elective)
-                    .Where(rec => (!model.DateFrom.HasValue &&
-                    !model.DateTo.HasValue && rec.DateCreate.Date == model.DateCreate.Date) ||
+                return context.Materials.Include(rec => rec.ElectiveMaterials).ThenInclude(rec => rec.Elective)
+                    .Where(rec =>
                     (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date >=
-                    model.DateFrom.Value.Date && rec.DateCreate.Date <= model.DateTo.Value.Date) ||
-                    (model.TeacherId.HasValue && rec.TeacherId == model.TeacherId))
+                    model.DateFrom.Value.Date && rec.DateCreate.Date <= model.DateTo.Value.Date) &&
+                    model.TeacherId.HasValue && rec.TeacherId == model.TeacherId)
                     .Select(CreateModel).ToList();
             }
         }

@@ -16,5 +16,8 @@ namespace SchoolBusinessLogic.BindingModels.StudentModels
 
         [DataMember]
         public string Name { get; set; }
+
+        [DataMember]
+        public Dictionary<int, string> Electives { get; set; }
     }
 }

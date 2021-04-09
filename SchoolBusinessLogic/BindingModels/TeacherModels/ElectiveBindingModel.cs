@@ -19,5 +19,8 @@ namespace SchoolBusinessLogic.BindingModels.TeacherModels
 
         [DataMember]
         public decimal Price { get; set; }
+
+        [DataMember]
+        public List<int> Activities { get; set; }
     }
 }

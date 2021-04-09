@@ -21,5 +21,8 @@ namespace SchoolBusinessLogic.ViewModels.TeacherModels
 
         [DataMember]
         public Dictionary<int, (string, int)> ElectiveMaterials { get; set; }
+
+        [DataMember]
+        public Dictionary<int, string> ElectiveActivities { get; set; }
     }
 }
