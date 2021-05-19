@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SchoolBusinessLogic.BindingModels.TeacherModels;
+using SchoolBusinessLogic.ViewModels.StudentModels;
 using SchoolBusinessLogic.ViewModels.TeacherModels;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace SchoolStudyAgain.Controllers
 {
@@ -14,36 +13,54 @@ namespace SchoolStudyAgain.Controllers
         {
         }
 
-        public IActionResult CreateMaterial()
+        public IActionResult Create()
         {
             //if (Program.Teacher == null) { return Redirect("~/Home/Enter"); }
+            ViewBag.Electives = APIClient.GetRequest<List<ElectiveViewModel>>($"api/teacher/GetElectives?teacherId={Program.Teacher.Id}");
+            ViewBag.Interests = APIClient.GetRequest<List<InterestViewModel>>($"api/student/GetInterestList");
             return View();
         }
 
+        [HttpPost]
+        public void Create(MaterialBindingModel model)
+        {
+            model.TeacherId = Program.Teacher.Id;
+            APIClient.PostRequest("api/teacher/CreateOrUpdateMaterial", model);
+            Response.Redirect("List");
+        }
+
         [HttpGet]
-        public IActionResult UpdateMaterial(int id)
+        public IActionResult Update(int id)
         {
             //if (Program.Teacher == null) { return Redirect("~/Home/Enter"); }
             return View(APIClient.GetRequest<MaterialViewModel>($"api/teacher/getmaterial?materialId={id}"));
         }
 
         [HttpPost]
-        public void UpdateMaterial(MaterialBindingModel material)
+        public void Update(MaterialBindingModel material)
         {
-            APIClient.PostRequest("api/teacher/updatematerial", material);
-            Response.Redirect("MaterialList");
+            material.TeacherId = Program.Teacher.Id;
+            APIClient.PostRequest("api/teacher/CreateOrUpdateMaterial", material);
+            Response.Redirect("List");
         }
 
-        public IActionResult DeleteMaterial()
+        public IActionResult Delete()
         {
             //if (Program.Teacher == null) { return Redirect("~/Home/Enter"); }
             return View();
         }
 
-        public IActionResult MaterialList()
+        public IActionResult List()
         {
             //if (Program.Teacher == null) { return Redirect("~/Home/Enter"); }
-            return View(APIClient.GetRequest<List<MaterialViewModel>>($"api/teacher/getmaterials?teacherId={3}"));
+            return View(APIClient.GetRequest<List<MaterialViewModel>>($"api/teacher/getmaterials?teacherId={Program.Teacher.Id}"));
+        }
+
+        [HttpGet]
+        public JsonResult GetElectives()
+        {
+            var result= APIClient.GetRequest<List<ElectiveViewModel>>($"api/teacher/GetElectives?teacherId={Program.Teacher.Id}");
+            return Json(result);
         }
     }
 }

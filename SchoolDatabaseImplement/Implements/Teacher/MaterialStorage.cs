@@ -6,7 +6,6 @@ using SchoolDatabaseImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace SchoolDatabaseImplement.Implements.Teacher
 {
@@ -63,7 +62,14 @@ namespace SchoolDatabaseImplement.Implements.Teacher
 
         public void Insert(MaterialBindingModel model)
         {
-            throw new NotImplementedException();
+            if (model != null)
+            {
+                using (var context = new SchoolDbContext())
+                {
+                    context.Materials.Add(CreateModel(model));
+                    context.SaveChanges();
+                }
+            }
         }
 
         public void Update(MaterialBindingModel model)
@@ -84,11 +90,15 @@ namespace SchoolDatabaseImplement.Implements.Teacher
             };
         }
 
-        private Material CreateModel(MaterialBindingModel model, Material car)
+        private Material CreateModel(MaterialBindingModel model)
         {
-            //car.CarName = model.CarName;
-            //car.Price = model.Price;
-            return car;
+            return new Material
+            {
+                Name = model.Name,
+                Price = model.Price,
+                TeacherId = (int)model.TeacherId,
+                DateCreate = model.DateCreate
+            };
         }
     }
 }

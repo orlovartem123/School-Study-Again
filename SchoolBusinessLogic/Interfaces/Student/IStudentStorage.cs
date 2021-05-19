@@ -1,8 +1,6 @@
 ﻿using SchoolBusinessLogic.BindingModels.StudentModels;
 using SchoolBusinessLogic.ViewModels.StudentModels;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SchoolBusinessLogic.Interfaces.Student
 {

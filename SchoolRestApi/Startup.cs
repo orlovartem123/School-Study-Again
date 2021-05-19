@@ -1,20 +1,14 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using SchoolBusinessLogic.BusinessLogic.StudentLogics;
 using SchoolBusinessLogic.BusinessLogic.TeacherLogics;
 using SchoolBusinessLogic.Interfaces.Student;
 using SchoolBusinessLogic.Interfaces.Teacher;
 using SchoolDatabaseImplement.Implements.Student;
 using SchoolDatabaseImplement.Implements.Teacher;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SchoolRestApi
 {
@@ -40,6 +34,8 @@ namespace SchoolRestApi
             services.AddTransient<MaterialLogic>();
             services.AddTransient<ElectiveLogic>();
             services.AddTransient<MedalLogic>();
+            services.AddTransient<ActivityLogic>();
+            services.AddTransient<InterestLogic>();
             services.AddControllers().AddNewtonsoftJson();
         }
 

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Text;
 
 namespace SchoolBusinessLogic.BindingModels.TeacherModels
 {
@@ -28,5 +27,11 @@ namespace SchoolBusinessLogic.BindingModels.TeacherModels
 
         [DataMember]
         public DateTime? DateTo { get; set; }
+
+        [DataMember]
+        public List<int> ElectiveIds { get; set; }
+
+        [DataMember]
+        public List<int> InterestIds { get; set; }
     }
 }

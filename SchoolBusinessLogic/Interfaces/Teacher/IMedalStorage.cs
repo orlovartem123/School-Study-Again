@@ -1,8 +1,6 @@
 ﻿using SchoolBusinessLogic.BindingModels.TeacherModels;
 using SchoolBusinessLogic.ViewModels.TeacherModels;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SchoolBusinessLogic.Interfaces.Teacher
 {

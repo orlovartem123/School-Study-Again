@@ -2,10 +2,8 @@
 using SchoolBusinessLogic.BindingModels.TeacherModels;
 using SchoolBusinessLogic.BusinessLogic.TeacherLogics;
 using SchoolBusinessLogic.ViewModels.TeacherModels;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace SchoolRestApi.Controllers
 {
@@ -29,19 +27,13 @@ namespace SchoolRestApi.Controllers
         #region Materials
 
         [HttpGet]
-        public string Ping() => "Ok";
-
-        [HttpGet]
         public List<MaterialViewModel> GetMaterials() => _material.Read(null)?.ToList();
 
         [HttpGet]
         public MaterialViewModel GetMaterial(int materialId) => _material.Read(new MaterialBindingModel { Id = materialId })?[0];
 
         [HttpPost]
-        public void CreateMaterial(MaterialBindingModel model) => _material.CreateOrUpdate(model);
-
-        [HttpPost]
-        public void UpdateMaterial(MaterialBindingModel model) => _material.CreateOrUpdate(model);
+        public void CreateOrUpdateMaterial(MaterialBindingModel model) => _material.CreateOrUpdate(model);
 
         [HttpPost]
         public void DeleteMaterial(MaterialBindingModel model) => _material.Delete(model);
@@ -51,10 +43,7 @@ namespace SchoolRestApi.Controllers
         #region Electives
 
         [HttpGet]
-        public List<ElectiveViewModel> GetElectives() => _elective.Read(null)?.ToList();
-
-        //[HttpGet]
-        //public List<ElectiveViewModel> GetElectives(int teacherId) => _elective.Read(new ElectiveBindingModel { TeacherId = teacherId })?.ToList();
+        public List<ElectiveViewModel> GetElectives(int teacherId) => _elective.Read(new ElectiveBindingModel { TeacherId = teacherId })?.ToList();
 
         [HttpGet]
         public ElectiveViewModel GetElective(int electiveId) => _elective.Read(new ElectiveBindingModel { Id = electiveId })?[0];

@@ -6,7 +6,6 @@ using SchoolDatabaseImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace SchoolDatabaseImplement.Implements.Teacher
 {
@@ -58,9 +57,7 @@ namespace SchoolDatabaseImplement.Implements.Teacher
         {
             using (var context = new SchoolDbContext())
             {
-                return context.Electives
-                .Include(rec => rec.ElectiveMaterials)
-                .ThenInclude(rec => rec.Elective).Where(rec =>
+                return context.Electives.Where(rec =>
                     (model.TeacherId.HasValue && rec.TeacherId == model.TeacherId))
                     .Select(CreateModel).ToList();
             }
@@ -93,13 +90,7 @@ namespace SchoolDatabaseImplement.Implements.Teacher
             {
                 Id = elective.Id,
                 Name = elective.Name,
-                Price = elective.Price,
-                ElectiveMaterials = elective.ElectiveMaterials
-                .ToDictionary(recME => recME.MaterialId, recME =>
-                (recME.Material?.Name, recME.MaterialCount)),
-                ElectiveActivities = elective.ActivityElectives
-                .ToDictionary(recME => recME.ActivityId, recME =>
-                recME.Activity?.Name)
+                Price = elective.Price
             };
         }
     }

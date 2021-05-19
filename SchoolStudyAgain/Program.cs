@@ -1,13 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using SchoolBusinessLogic.ViewModels.StudentModels;
 using SchoolBusinessLogic.ViewModels.TeacherModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SchoolStudyAgain
 {
@@ -19,6 +13,8 @@ namespace SchoolStudyAgain
 
         public static void Main(string[] args)
         {
+            Teacher = new TeacherViewModel();
+            Teacher.Id = 3;
             CreateHostBuilder(args).Build().Run();
         }
 

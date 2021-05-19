@@ -18,4 +18,9 @@
     <ProjectReference Include="..\SchoolDatabaseImplement\SchoolDatabaseImplement.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\img\svg\" />
+    <Folder Include="wwwroot\img\png\" />
+  </ItemGroup>
+
 </Project>

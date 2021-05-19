@@ -3,7 +3,6 @@ using SchoolBusinessLogic.Interfaces.Student;
 using SchoolBusinessLogic.ViewModels.StudentModels;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SchoolDatabaseImplement.Implements.Student
 {

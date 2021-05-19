@@ -1,10 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SchoolBusinessLogic.BindingModels.TeacherModels;
-using SchoolBusinessLogic.ViewModels.TeacherModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SchoolStudyAgain.Controllers
 {

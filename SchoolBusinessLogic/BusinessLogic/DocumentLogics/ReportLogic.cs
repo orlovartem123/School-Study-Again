@@ -2,10 +2,7 @@
 using SchoolBusinessLogic.BindingModels.TeacherModels;
 using SchoolBusinessLogic.Interfaces.Student;
 using SchoolBusinessLogic.Interfaces.Teacher;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace SchoolBusinessLogic.BusinessLogic.DocumentLogics
 {

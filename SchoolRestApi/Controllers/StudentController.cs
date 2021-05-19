@@ -2,10 +2,8 @@
 using SchoolBusinessLogic.BindingModels.StudentModels;
 using SchoolBusinessLogic.BusinessLogic.StudentLogics;
 using SchoolBusinessLogic.ViewModels.StudentModels;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace SchoolRestApi.Controllers
 {
@@ -49,9 +47,6 @@ namespace SchoolRestApi.Controllers
 
         [HttpGet]
         public List<InterestViewModel> GetInterestList() => _interest.Read(null)?.ToList();
-
-        [HttpGet]
-        public List<InterestViewModel> GetInterestList(int interestId) => _interest.Read(new InterestBindingModel())?.ToList();
 
         [HttpGet]
         public InterestViewModel GetInterest(int interestId) => _interest.Read(new InterestBindingModel())?[0];

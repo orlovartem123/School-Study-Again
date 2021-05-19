@@ -2,10 +2,6 @@
 using SchoolBusinessLogic.BindingModels.TeacherModels;
 using SchoolBusinessLogic.BusinessLogic.TeacherLogics;
 using SchoolBusinessLogic.ViewModels.TeacherModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SchoolRestApi.Controllers
 {

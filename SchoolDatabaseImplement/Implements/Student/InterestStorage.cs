@@ -1,9 +1,11 @@
-﻿using SchoolBusinessLogic.BindingModels.StudentModels;
+﻿using Microsoft.EntityFrameworkCore;
+using SchoolBusinessLogic.BindingModels.StudentModels;
 using SchoolBusinessLogic.Interfaces.Student;
 using SchoolBusinessLogic.ViewModels.StudentModels;
+using SchoolDatabaseImplement.Models;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace SchoolDatabaseImplement.Implements.Student
 {
@@ -26,7 +28,11 @@ namespace SchoolDatabaseImplement.Implements.Student
 
         public List<InterestViewModel> GetFullList()
         {
-            throw new NotImplementedException();
+            using (var context = new SchoolDbContext())
+            {
+                return context.Interests
+                .Select(CreateModel).ToList();
+            }
         }
 
         public void Insert(InterestBindingModel model)
@@ -37,6 +43,15 @@ namespace SchoolDatabaseImplement.Implements.Student
         public void Update(InterestBindingModel model)
         {
             throw new NotImplementedException();
+        }
+
+        private InterestViewModel CreateModel(Interest interest)
+        {
+            return new InterestViewModel
+            {
+                Id = interest.Id,
+                Name = interest.Name
+            };
         }
     }
 }
