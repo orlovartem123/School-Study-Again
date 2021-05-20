@@ -42,7 +42,7 @@
         </div>*@
 
     <div class="form-group" id="electivesToMaterialsParent">
-        <div class="row">
+        <div class="row" id="electiveTomaterialsMarker">
             <label class="col-lg-4">
                 Electives
             </label>
@@ -76,9 +76,12 @@
 <script>
     function test() {
         let element = document.getElementById('electivesToMaterialsParent');
+        if (element.childElementCount === 2) {
+            return;
+        }
         let mainDiv = document.createElement('div');
         mainDiv.classList.add('row');
-        mainDiv.setAttribute('style','margin-top: 6px;');
+        mainDiv.setAttribute('style', 'margin-top: 6px;');
 
         let label = document.createElement('label');
         label.classList.add('col-lg-4');
@@ -87,37 +90,39 @@
         childDiv.setAttribute('style', 'display:flex;justify-content:space-between;');
         let select = document.createElement('select');
         select.classList.add('form-control');
+        let option = document.createElement('option');
+        option.value = 3;
+        select.options.add(option);
+        //var x = new XMLHttpRequest();
+        //x.onload = function () {
 
-        var x = new XMLHttpRequest();
-        x.onload = function () {
+        //    // преобразование ответа сервера в массив
+        //    var options = this.responseText.split('\n');
+        //    alert(options[0]);
 
-            // преобразование ответа сервера в массив
-            var options = this.responseText.split('\n');
-            alert(options[0]);
-
-            // заполнение списка
-            for (var i = 0; i < options.length; i++) {
-                var option = document.createElement('option');
-                option.value = options[i].Id;
-                option.text = options[i].Name;
-                select.options.add(option);
-            }
-        };
-        x.open("GET", "/Material/GetElectives", true);
-        x.send();
+        //    // заполнение списка
+        //    for (var i = 0; i < options.length; i++) {
+        //        var option = document.createElement('option');
+        //        option.value = options[i].Id;
+        //        option.text = options[i].Name;
+        //        select.options.add(option);
+        //    }
+        //};
+        //x.open("GET", "/Material/GetElectives", true);
+        //x.send();
 
         let inputCount = document.createElement('input');
         inputCount.classList.add('form-control');
-        inputCount.setAttribute('required');
+        inputCount.setAttribute('required', '');
         inputCount.setAttribute('type', 'number');
         inputCount.setAttribute('style', 'width:80px; margin-left: 6px;');
 
         let inputButton = document.createElement('input');
-        inputButton.classList.add('btn btn-sm btn-light');
-        inputCount.setAttribute('type', 'button');
-        inputCount.setAttribute('value', '+');
-        inputCount.setAttribute('onclick', 'test()');
-        inputCount.setAttribute('style', 'width: 50px; margin-left: 6px;');
+        inputButton.setAttribute('class', 'btn btn-sm btn-light');
+        inputButton.setAttribute('type', 'button');
+        inputButton.setAttribute('value', '+');
+        inputButton.setAttribute('onclick', 'test()');
+        inputButton.setAttribute('style', 'width: 50px; margin-left: 6px;');
 
         childDiv.appendChild(select);
         childDiv.appendChild(inputCount);

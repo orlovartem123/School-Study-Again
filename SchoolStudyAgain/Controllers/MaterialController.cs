@@ -57,10 +57,9 @@ namespace SchoolStudyAgain.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetElectives()
+        public List<ElectiveViewModel> GetElectives()
         {
-            var result= APIClient.GetRequest<List<ElectiveViewModel>>($"api/teacher/GetElectives?teacherId={Program.Teacher.Id}");
-            return Json(result);
+            return APIClient.GetRequest<List<ElectiveViewModel>>($"api/teacher/GetElectives?teacherId={Program.Teacher.Id}");
         }
     }
 }
