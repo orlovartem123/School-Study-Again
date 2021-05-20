@@ -6,14 +6,14 @@
 <div class="text-center">
     <h2 class="display-4">Create material</h2>
 </div>
-﻿<form class="container-fluid" style="max-width: 620px;" asp-action="Create">
+﻿<form class="container-fluid" style="max-width: 800px;" asp-action="Create">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-group">
         <div class="row justify-content-between">
-            <label class="col-lg-4">
+            <label class="col-lg-3">
                 Material name
             </label>
-            <div class="col-lg-8">
+            <div class="col-lg-9">
                 <input asp-for="Name" type="text" name="name" required class="form-control" />
             </div>
         </div>
@@ -21,45 +21,35 @@
 
     <div class="form-group">
         <div class="row">
-            <label class="col-lg-4 justify-content-between">
+            <label class="col-lg-3 justify-content-between">
                 Material price
             </label>
-            <div class="col-lg-8">
+            <div class="col-lg-9">
                 <input asp-for="Price" type="number" name="price" required class="form-control" />
             </div>
         </div>
     </div>
 
-    @*<div class="form-group">
-            <div class="row justify-content-between">
-                <label class="col-lg-4">
-                    Electives
-                </label>
-                <div class="col-lg-8">
-                    <select asp-for="ElectiveIds" name="ElectiveIds" multiple class="form-control" asp-items="@(new SelectList(@ViewBag.Electives,"Id", "Name"))"></select>
-                </div>
-            </div>
-        </div>*@
-
-    <div class="form-group" id="electivesToMaterialsParent">
+    <div class="form-group" id="electivesToMaterialsParent" onload="addElective();">
         <div class="row" id="electiveTomaterialsMarker">
-            <label class="col-lg-4">
+            <label class="col-lg-3">
                 Electives
             </label>
-            <div id="electivesToMaterials" class="col-lg-8" style="display:flex;justify-content:space-between;">
+            <div id="electivesToMaterials" class="col-lg-9" style="display:flex;justify-content:space-between;">
                 <select class="form-control" asp-items="@(new SelectList(@ViewBag.Electives,"Id", "Name"))"></select>
                 <input required type="number" class="form-control" style="width:80px; margin-left: 6px;" />
-                <input type="button" value="+" onclick="test();" style="width: 50px; margin-left: 6px;" class="btn btn-sm btn-light" />
+                <input type="button" value="+" onclick="addElective();" style="width: 50px; margin-left: 6px;" class="btn btn-sm btn-light" />
+                <input type="button" value="-" onclick="addElective();" style="width: 50px; margin-left: 6px;" class="btn btn-sm btn-light" />
             </div>
         </div>
     </div>
 
     <div class="form-group">
         <div class="row justify-content-between">
-            <label class="col-lg-4">
+            <label class="col-lg-3">
                 Interests
             </label>
-            <div class="col-lg-8">
+            <div class="col-lg-9">
                 <select asp-for="InterestIds" name="InterestIds" multiple class="form-control" asp-items="@(new SelectList(@ViewBag.Interests,"Id", "Name"))"></select>
             </div>
         </div>
@@ -74,42 +64,38 @@
     </div>
 </form>
 <script>
-    function test() {
+
+    const electives = $.ajax({
+        method: "GET",
+        url: "/Material/GetElectives",
+        success: function (result) {
+            return result;
+        }
+    });
+
+    function addElective() {
         let element = document.getElementById('electivesToMaterialsParent');
-        if (element.childElementCount === 2) {
+        if (element.childElementCount === electives.responseJSON.length) {
             return;
         }
+
         let mainDiv = document.createElement('div');
         mainDiv.classList.add('row');
         mainDiv.setAttribute('style', 'margin-top: 6px;');
 
         let label = document.createElement('label');
-        label.classList.add('col-lg-4');
+        label.classList.add('col-lg-3');
         let childDiv = document.createElement('div');
-        childDiv.classList.add('col-lg-8');
+        childDiv.classList.add('col-lg-9');
         childDiv.setAttribute('style', 'display:flex;justify-content:space-between;');
         let select = document.createElement('select');
         select.classList.add('form-control');
-        let option = document.createElement('option');
-        option.value = 3;
-        select.options.add(option);
-        //var x = new XMLHttpRequest();
-        //x.onload = function () {
-
-        //    // преобразование ответа сервера в массив
-        //    var options = this.responseText.split('\n');
-        //    alert(options[0]);
-
-        //    // заполнение списка
-        //    for (var i = 0; i < options.length; i++) {
-        //        var option = document.createElement('option');
-        //        option.value = options[i].Id;
-        //        option.text = options[i].Name;
-        //        select.options.add(option);
-        //    }
-        //};
-        //x.open("GET", "/Material/GetElectives", true);
-        //x.send();
+        electives.responseJSON.forEach(function (item, i, electives) {
+            let option = document.createElement('option');
+            option.value = item.id;
+            option.text = item.name;
+            select.options.add(option);
+        });
 
         let inputCount = document.createElement('input');
         inputCount.classList.add('form-control');
@@ -121,7 +107,7 @@
         inputButton.setAttribute('class', 'btn btn-sm btn-light');
         inputButton.setAttribute('type', 'button');
         inputButton.setAttribute('value', '+');
-        inputButton.setAttribute('onclick', 'test()');
+        inputButton.setAttribute('onclick', 'deleteElective()');
         inputButton.setAttribute('style', 'width: 50px; margin-left: 6px;');
 
         childDiv.appendChild(select);
@@ -130,9 +116,16 @@
 
         mainDiv.appendChild(label);
         mainDiv.appendChild(childDiv);
+        mainDiv.setAttribute('id', 'xyu');
 
         element.appendChild(mainDiv);
+    };
+
+    function deleteElective() {
+        let parent = document.getElementById('electivesToMaterialsParent');
+        let elem = document.getElementById('xyu');
+
+        parent.removeChild(elem);
+
     }
-
-
 </script>
