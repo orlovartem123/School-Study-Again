@@ -1,4 +1,14 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿function getMultipleValues(select) {
+    let result = [];
+    let options = select && select.options;
+    let opt;
 
-// Write your JavaScript code.
+    for (var i = 0; i < options.length; i++) {
+        opt = options[i];
+
+        if (opt.selected) {
+            result.push(opt.value);
+        }
+    }
+    return result;
+}

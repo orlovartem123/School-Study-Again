@@ -1,58 +1,151 @@
-﻿@using SchoolBusinessLogic.ViewModels.TeacherModels
-@model MaterialViewModel
+﻿@using SchoolBusinessLogic.ViewModels.StudentModels
+
+@model SchoolBusinessLogic.ViewModels.TeacherModels.MaterialViewModel
+
 @{
-    ViewData["Title"] = "CreateMaterial";
+    ViewData["Title"] = "UpdateMaterial";
 }
-<div class="text-center">
-    <h2 class="display-4">Update material</h2>
-</div>
-﻿<form class="container-fluid" style="max-width: 580px;" asp-action="UpdateMaterial">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="form-group">
-        <div class="row justify-content-between">
-            <label class="col-lg-4">
-                Material
-            </label>
-            <div class="col-lg-8">
-                @*<select id="car" name="material" required class="form-control" asp-items="@(new SelectList(@ViewBag.Materials,"Id", "Name"))"></select>*@
-                <select id="car" name="material" required class="form-control">
-                    <option>1</option>
-                    <option>2</option>
-                </select>
+@*<div class="text-center">
+        <h2 class="display-4">Update material</h2>
+    </div>
+    ﻿<form class="container-fluid" style="max-width: 800px;" asp-action="Update">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <div class="row justify-content-between">
+                <label class="col-lg-3">
+                    Material name
+                </label>
+                <div class="col-lg-9">
+                    <input asp-for="Name" type="text" name="name" required class="form-control" />
+                </div>
             </div>
         </div>
-    </div>
 
+        <div class="form-group">
+            <div class="row">
+                <label class="col-lg-3 justify-content-between">
+                    Material price
+                </label>
+                <div class="col-lg-9">
+                    <input asp-for="Price" type="number" name="price" required class="form-control" />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row justify-content-between">
+                <label class="col-lg-3">
+                    Interests
+                </label>
+                <div class="col-lg-9">
+                    <select asp-for="Interests" name="InterestIds" step="0.01" multiple class="form-control" asp-items="@(new SelectList(@ViewBag.Interests,"Id", "Name"))"></select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-lg-12">
+                <button type="submit" style="min-width: 100px" class="btn btn-sm btn-light">
+                    Update
+                </button>
+            </div>
+        </div>
+    </form>*@
+
+
+<div class="text-center">
+    <h2 class="display-4">Create material</h2>
+</div>
+
+﻿<form class="container-fluid" name="CreateMaterialForm" onsubmit="saveMaterial()" style="max-width: 800px;">
+    <div class="text-danger"></div>
     <div class="form-group">
         <div class="row justify-content-between">
-            <label class="col-lg-4">
+            <label class="col-lg-3">
                 Material name
             </label>
-            <div class="col-lg-8">
-                <input asp-for="Name" type="text" name="name" required class="form-control" />
+            <div class="col-lg-9">
+                <input type="text" name="name" value="@(Model.Name)" required class="form-control" />
             </div>
         </div>
     </div>
 
     <div class="form-group">
         <div class="row">
-            <label class="col-lg-4 justify-content-between">
+            <label class="col-lg-3 justify-content-between">
                 Material price
             </label>
-            <div class="col-lg-8">
-                <input asp-for="Price" type="text" name="price" required class="form-control" />
+            <div class="col-lg-9">
+                <input type="number" name="price" required min="0.01" step="0.5" value="@(Model.Price)" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group" id="electivesToMaterialsParent">
+        @{ int count = 0;}
+        @foreach (var record in Model.MaterialElectives)
+        {
+            <div class="row" style="margin-top: 6px;">
+                <label class="col-lg-3">
+                    @if (count == 0)
+                    {<span>Electives</span>}
+                </label>
+                <div class="col-lg-9" style="display: flex; justify-content:space-between;">
+                    <select name="ElectiveId" class="form-control" asp-items="@(new SelectList(@ViewBag.Electives, "Id", "Name", record.Key))"></select>
+                    <input name="count" required type="number" min="1" value="@(record.Value.Item2)" class="form-control" style="width: 80px; margin-left: 6px;" />
+                    @if (count == 0)
+                    {
+                        <input type="button" value="+" onclick="addElective();" style="width: 50px; margin-left: 6px;" class="btn btn-sm btn-light" />
+                    }
+                    else
+                    {
+                        <input type="button" value="-" onclick="deleteElective(1);" style="width: 50px; margin-left: 6px;" class="btn btn-sm btn-light" />
+                    }
+                </div>
+            </div>
+            count++;
+        }
+    </div>
+
+    <div class="form-group">
+        <div class="row justify-content-between">
+            <label class="col-lg-3">
+                Interests
+            </label>
+            <div class="col-lg-9">
+                <select multiple name="InterestIds" class="form-control">
+                    @{
+                        var list = (List<InterestViewModel>)ViewBag.Interests;
+                        foreach (var record in list)
+                        {
+                            if (Model.Interests.Contains((record.Id, record.Name)))
+                            {
+                                <option selected value="@(record.Id)">@(record.Name)</option>
+                            }
+                            else
+                            {
+                                <option value="@(record.Id)">@(record.Name)</option>
+                            }
+                        }
+                    }
+                </select>
+                @*<select name="InterestIds" multiple class="form-control" asp-items="@(new SelectList(@ViewBag.Interests,"Id", "Name"))"></select>*@
             </div>
         </div>
     </div>
 
     <div class="form-group row">
         <div class="col-lg-12">
-            <button type="button" style="min-width: 100px" class="btn btn-sm btn-light">
-                Update
+            <button type="submit" style="min-width: 100px" class="btn btn-sm btn-light">
+                Create
             </button>
         </div>
     </div>
 </form>
-@section Scripts{
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+<script>
+    function deleteElective(number) {
+        let parent = document.getElementById('electivesToMaterialsParent');
+        let elem = document.getElementById(childIdPref + number);
+        parent.removeChild(elem);
+    }
+</script>

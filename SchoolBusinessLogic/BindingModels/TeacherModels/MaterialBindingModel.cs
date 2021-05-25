@@ -29,9 +29,15 @@ namespace SchoolBusinessLogic.BindingModels.TeacherModels
         public DateTime? DateTo { get; set; }
 
         [DataMember]
-        public List<int> ElectiveIds { get; set; }
+        public int? ToSkip { get; set; }
+
+        [DataMember]
+        public int? ToTake { get; set; }
 
         [DataMember]
         public List<int> InterestIds { get; set; }
+
+        [DataMember]
+        public Dictionary<int, int> ElectiveMaterials { get; set; }
     }
 }

@@ -17,6 +17,8 @@ namespace SchoolRestApi.Controllers
 
         private readonly MedalLogic _medal;
 
+        private readonly int onPage = 30;
+
         public TeacherController(MaterialLogic material, ElectiveLogic elective, MedalLogic medal)
         {
             _material = material;
@@ -27,10 +29,13 @@ namespace SchoolRestApi.Controllers
         #region Materials
 
         [HttpGet]
-        public List<MaterialViewModel> GetMaterials() => _material.Read(null)?.ToList();
+        public List<MaterialViewModel> GetMaterials(int teacherId) => _material.Read(new MaterialBindingModel { TeacherId = teacherId })?.ToList();
 
         [HttpGet]
         public MaterialViewModel GetMaterial(int materialId) => _material.Read(new MaterialBindingModel { Id = materialId })?[0];
+
+        [HttpGet]
+        public List<MaterialViewModel> GetMaterialPaging(int teacherId, int page) => _material.Read(new MaterialBindingModel { TeacherId = teacherId, ToTake = onPage, ToSkip = (page - 1) * onPage }).ToList();
 
         [HttpPost]
         public void CreateOrUpdateMaterial(MaterialBindingModel model) => _material.CreateOrUpdate(model);

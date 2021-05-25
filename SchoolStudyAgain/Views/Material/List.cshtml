@@ -14,7 +14,7 @@
             return;
         }
         <p>
-            <a asp-action="CreateMaterial">Create material</a>
+            <a asp-action="Create">Create material</a>
         </p>
         <table class="table">
             <thead>
@@ -53,8 +53,8 @@
                             @Html.DisplayFor(modelItem => item.DateCreate)
                         </td>
                         <td>
-                            <a asp-action="UpdateMaterial" asp-route-id="@(item.Id)">Update</a>
-                            <a asp-action="DeleteMaterial" asp-route-id="@(item.Id)">Delete</a>
+                            <a asp-action="Update" asp-route-id="@(item.Id)">Update</a>
+                            <a asp-action="Delete" asp-route-materialId="@(item.Id)">Delete</a>
                         </td>
                     </tr>
                 }
