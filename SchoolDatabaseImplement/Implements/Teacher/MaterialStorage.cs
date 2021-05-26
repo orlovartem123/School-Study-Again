@@ -90,8 +90,14 @@ namespace SchoolDatabaseImplement.Implements.Teacher
                     context.Materials.Add(CreateModel(model));
                     context.SaveChanges();
                     var newId = context.Materials.FirstOrDefault(rec => rec.Name == model.Name).Id;
-                    context.MaterialInterests.AddRange(InsertMaterialInterests(model, newId));
-                    context.ElectiveMaterials.AddRange(InsertElectiveMaterials(model, newId));
+                    if (model.InterestIds != null)
+                    {
+                        context.MaterialInterests.AddRange(InsertMaterialInterests(model, newId));
+                    }
+                    if (model.ElectiveMaterials != null)
+                    {
+                        context.ElectiveMaterials.AddRange(InsertElectiveMaterials(model, newId));
+                    }
                     context.SaveChanges();
                 }
             }
