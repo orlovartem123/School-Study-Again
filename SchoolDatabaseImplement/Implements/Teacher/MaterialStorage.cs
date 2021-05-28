@@ -87,18 +87,23 @@ namespace SchoolDatabaseImplement.Implements.Teacher
             {
                 using (var context = new SchoolDbContext())
                 {
-                    context.Materials.Add(CreateModel(model));
-                    context.SaveChanges();
-                    var newId = context.Materials.FirstOrDefault(rec => rec.Name == model.Name).Id;
-                    if (model.InterestIds != null)
+                    using (var transaction = context.Database.BeginTransaction())
                     {
-                        context.MaterialInterests.AddRange(InsertMaterialInterests(model, newId));
+                        try
+                        {
+                            context.Materials.Add(CreateModel(model));
+                            context.SaveChanges();
+                            var newId = context.Materials.FirstOrDefault(rec => rec.Name == model.Name).Id;
+                            context.MaterialInterests.AddRange(InsertMaterialInterests(model, newId));
+                            context.ElectiveMaterials.AddRange(InsertElectiveMaterials(model, newId));
+                            context.SaveChanges();
+                            transaction.Commit();
+                        }
+                        catch (Exception)
+                        {
+                            transaction.Rollback();
+                        }
                     }
-                    if (model.ElectiveMaterials != null)
-                    {
-                        context.ElectiveMaterials.AddRange(InsertElectiveMaterials(model, newId));
-                    }
-                    context.SaveChanges();
                 }
             }
         }
@@ -109,19 +114,38 @@ namespace SchoolDatabaseImplement.Implements.Teacher
             {
                 using (var context = new SchoolDbContext())
                 {
-                    var element = context.Materials.Include(rec => rec.MaterialInterests).FirstOrDefault(rec => rec.Id == model.Id);
-                    if (element == null)
+                    using (var transaction = context.Database.BeginTransaction())
                     {
-                        throw new Exception("Elem not found");
+                        try
+                        {
+                            var element = context.Materials
+                            .Include(rec => rec.MaterialInterests)
+                            .Include(rec => rec.ElectiveMaterials)
+                            .FirstOrDefault(rec => rec.Id == model.Id);
+                            if (element == null)
+                            {
+                                throw new Exception("Elem not found");
+                            }
+                            element.Name = model.Name;
+                            element.Price = model.Price;
+                            var interestsToRm = context.MaterialInterests.Where(rec => rec.MaterialId == model.Id);
+                            context.MaterialInterests.RemoveRange(interestsToRm);
+                            context.SaveChanges();
+                            var electviesToRm = context.ElectiveMaterials.Where(rec => rec.MaterialId == model.Id);
+                            context.ElectiveMaterials.RemoveRange(electviesToRm);
+                            context.SaveChanges();
+                            context.MaterialInterests.AddRange(InsertMaterialInterests(model, (int)model.Id));
+                            context.ElectiveMaterials.AddRange(InsertElectiveMaterials(model, (int)model.Id));
+                            var material = context.Materials.FirstOrDefault(rec => rec.Id == model.Id);
+                            UpdateMaterial(material, model);
+                            context.SaveChanges();
+                            transaction.Commit();
+                        }
+                        catch (Exception)
+                        {
+                            transaction.Rollback();
+                        }
                     }
-                    element.Name = model.Name;
-                    element.Price = model.Price;
-
-                    var toRemove = context.MaterialInterests.Where(rec => rec.MaterialId == model.Id);
-                    context.MaterialInterests.RemoveRange(toRemove);
-                    //context.MaterialInterests.AddRange(CreateModels(model));
-                    context.Materials.Add(CreateModel(model));
-                    context.SaveChanges();
                 }
             }
         }
@@ -147,34 +171,48 @@ namespace SchoolDatabaseImplement.Implements.Teacher
             {
                 Name = model.Name,
                 Price = model.Price,
-                TeacherId = (int)model.TeacherId,
-                DateCreate = model.DateCreate
+                DateCreate = model.DateCreate,
+                TeacherId = (int)model.TeacherId
             };
         }
 
-        private List<MaterialInterest> InsertMaterialInterests(MaterialBindingModel model, int newId)
+        private void UpdateMaterial(Material material, MaterialBindingModel model)
+        {
+            material.Name = model.Name;
+            material.Price = model.Price;
+        }
+
+        private List<MaterialInterest> InsertMaterialInterests(MaterialBindingModel model, int id)
         {
             var result = new List<MaterialInterest>();
+            if (model.InterestIds == null)
+            {
+                return result;
+            }
             foreach (var el in model.InterestIds)
             {
                 result.Add(new MaterialInterest
                 {
-                    MaterialId = newId,
+                    MaterialId = id,
                     InterestId = el
                 });
             }
             return result;
         }
 
-        private List<ElectiveMaterial> InsertElectiveMaterials(MaterialBindingModel model, int newId)
+        private List<ElectiveMaterial> InsertElectiveMaterials(MaterialBindingModel model, int id)
         {
             var result = new List<ElectiveMaterial>();
+            if (model.ElectiveMaterials == null)
+            {
+                return result;
+            }
             foreach (var el in model.ElectiveMaterials)
             {
                 result.Add(new ElectiveMaterial
                 {
                     ElectiveId = el.Key,
-                    MaterialId = newId,
+                    MaterialId = id,
                     MaterialCount = el.Value
                 });
             }

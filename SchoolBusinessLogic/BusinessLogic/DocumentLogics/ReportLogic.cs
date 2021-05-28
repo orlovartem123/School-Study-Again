@@ -1,7 +1,11 @@
-﻿using SchoolBusinessLogic.BindingModels.StudentModels;
+﻿using SchoolBusinessLogic.BindingModels.Report;
 using SchoolBusinessLogic.BindingModels.TeacherModels;
+using SchoolBusinessLogic.HelperModels.Excel;
+using SchoolBusinessLogic.HelperModels.Pdf;
+using SchoolBusinessLogic.HelperModels.Word;
 using SchoolBusinessLogic.Interfaces.Student;
 using SchoolBusinessLogic.Interfaces.Teacher;
+using SchoolBusinessLogic.ViewModels.StudentModels;
 using System.Collections.Generic;
 
 namespace SchoolBusinessLogic.BusinessLogic.DocumentLogics
@@ -17,26 +21,75 @@ namespace SchoolBusinessLogic.BusinessLogic.DocumentLogics
             _electiveStorage = electiveStorage;
         }
 
-        public List<ReportActivityViewModel> GetActivityElectives(ActivityBindingModel filter)
+        public List<ActivityViewModel> GetActivityByMaterials(List<int> selectedMaterials)
         {
-            var activities = _activityStorage.GetFilteredList(filter);
-            var list = new List<ReportActivityViewModel>();
-            foreach (var actvity in activities)
+            var electiveIdList = new List<int>();
+            foreach (var el in _electiveStorage.GetFullList())
             {
-                var record = new ReportActivityViewModel
+                if (el.ElectiveMaterials == null)
                 {
-                    AcitivityName = actvity.Name,
-                    Electives = new List<string>(),
-                };
-                foreach (var elective in actvity.ActivityElectives)
-                {
-
-                    record.Electives.Add(elective.Value);
-
+                    continue;
                 }
-                list.Add(record);
+                foreach (var key in el.ElectiveMaterials.Keys)
+                {
+                    if (selectedMaterials.Contains(key))
+                    {
+                        electiveIdList.Add(el.Id);
+                        break;
+                    }
+                }
             }
-            return list;
+            var result = new List<ActivityViewModel>();
+            foreach (var el in _activityStorage.GetFullList())
+            {
+                if (el.ActivityElectives == null)
+                {
+                    continue;
+                }
+                foreach (var key in el.ActivityElectives.Keys)
+                {
+                    if (electiveIdList.Contains(key))
+                    {
+                        result.Add(el);
+                        break;
+                    }
+                }
+            }
+            return result;
+        }
+
+        public void SaveToWordFile(List<int> selectedMaterials, string filename)
+        {
+            SaveToWord.CreateDoc(new ExlelInfo
+            {
+                FileName = filename,
+                Title = "Activity list",
+                Activities = GetActivityByMaterials(selectedMaterials)
+            });
+        }
+
+        public void SaveToExcelFile(List<int> selectedMaterials, string filename)
+        {
+            SaveToExcel.CreateDoc(new ExcelInfo
+            {
+                FileName = filename,
+                Title = "Activity list",
+                Activities = GetActivityByMaterials(selectedMaterials)
+            });
+        }
+
+        [System.Obsolete]
+        public void SaveToPdfFile(PdfReportBindingModel model)
+        {
+            SaveToPdf.CreateDoc(new PdfInfo
+            {
+                FileName = model.FileName,
+                TeacherName = model.TeacherName,
+                Title = "Electives list",
+                DateFrom = model.DateFrom,
+                DateTo = model.DateTo,
+                Electives = _electiveStorage.GetFilteredList(new ElectiveBindingModel { DateFrom = model.DateFrom, DateTo = model.DateTo })
+            });
         }
     }
 }

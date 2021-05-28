@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace SchoolBusinessLogic.BindingModels.TeacherModels
@@ -17,6 +18,15 @@ namespace SchoolBusinessLogic.BindingModels.TeacherModels
 
         [DataMember]
         public decimal Price { get; set; }
+
+        [DataMember]
+        public DateTime DateCreate { get; set; }
+
+        [DataMember]
+        public DateTime? DateFrom { get; set; }
+
+        [DataMember]
+        public DateTime? DateTo { get; set; }
 
         [DataMember]
         public List<int> Activities { get; set; }

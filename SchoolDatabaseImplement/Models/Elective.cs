@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -15,6 +16,8 @@ namespace SchoolDatabaseImplement.Models
 
         [Required]
         public decimal Price { get; set; }
+
+        public DateTime DateCreate { get; set; }
 
         [ForeignKey("ElectiveId")]
         public virtual List<Medal> Medals { get; set; }

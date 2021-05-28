@@ -3,10 +3,13 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SchoolBusinessLogic.BusinessLogic.DocumentLogics;
 using SchoolBusinessLogic.BusinessLogic.StudentLogics;
 using SchoolBusinessLogic.BusinessLogic.TeacherLogics;
+using SchoolBusinessLogic.Interfaces.Diagram;
 using SchoolBusinessLogic.Interfaces.Student;
 using SchoolBusinessLogic.Interfaces.Teacher;
+using SchoolDatabaseImplement.Implements.Diagram;
 using SchoolDatabaseImplement.Implements.Student;
 using SchoolDatabaseImplement.Implements.Teacher;
 
@@ -31,7 +34,9 @@ namespace SchoolRestApi
             services.AddTransient<IStudentStorage, StudentStorage>();
             services.AddTransient<IActivityStorage, ActivityStorage>();
             services.AddTransient<IInterestStorage, InterestStorage>();
+            services.AddTransient<IDiagramDataStorage, DiagramStorage>();
             services.AddTransient<MaterialLogic>();
+            services.AddTransient<ReportLogic>();
             services.AddTransient<ElectiveLogic>();
             services.AddTransient<MedalLogic>();
             services.AddTransient<ActivityLogic>();

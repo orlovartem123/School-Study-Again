@@ -54,32 +54,26 @@ namespace SchoolRestApi.Controllers
         public ElectiveViewModel GetElective(int electiveId) => _elective.Read(new ElectiveBindingModel { Id = electiveId })?[0];
 
         [HttpPost]
-        public void CreateElective(ElectiveBindingModel model) => _elective.CreateOrUpdate(model);
-
-        [HttpPost]
-        public void UpdateElective(ElectiveBindingModel model) => _elective.CreateOrUpdate(model);
+        public void CreateOrUpdateElective(ElectiveBindingModel model) => _elective.CreateOrUpdate(model);
 
         [HttpPost]
         public void DeleteElective(ElectiveBindingModel model) => _elective.Delete(model);
+
+        [HttpPost]
+        public void BindActivityWithElectives(BindActivityWithElectivesBindingModel model) => _elective.BindActivityWithElectives(model);
 
         #endregion
 
         #region Medals
 
         [HttpGet]
-        public List<MedalViewModel> GetMedals() => _medal.Read(null)?.ToList();
-
-        //[HttpGet]
-        //public List<MedalViewModel> GetMedals(int teacherId) => _medal.Read(new MedalBindingModel { TeacherId = teacherId })?.ToList();
+        public List<MedalViewModel> GetMedals(int teacherId) => _medal.Read(new MedalBindingModel { TeacherId = teacherId })?.ToList();
 
         [HttpGet]
         public MedalViewModel GetMedal(int medalId) => _medal.Read(new MedalBindingModel { Id = medalId })?[0];
 
         [HttpPost]
-        public void CreateMedal(MedalBindingModel model) => _medal.CreateOrUpdate(model);
-
-        [HttpPost]
-        public void UpdateMedal(MedalBindingModel model) => _medal.CreateOrUpdate(model);
+        public void CreateOrUpdateMedal(MedalBindingModel model) => _medal.CreateOrUpdate(model);
 
         [HttpPost]
         public void DeleteMedal(MedalBindingModel model) => _medal.Delete(model);

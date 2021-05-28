@@ -58,7 +58,12 @@ namespace SchoolDatabaseImplement.Implements.Teacher
             using (var context = new SchoolDbContext())
             {
                 return context.Electives.Where(rec =>
-                    (model.TeacherId.HasValue && rec.TeacherId == model.TeacherId))
+                    (model.TeacherId.HasValue && rec.TeacherId == model.TeacherId) ||
+                    (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo))
+                    .Include(rec => rec.ElectiveMaterials)
+                    .ThenInclude(rec => rec.Material)
+                    .Include(rec => rec.ActivityElectives)
+                    .ThenInclude(rec => rec.Activity)
                     .Select(CreateModel).ToList();
             }
         }
@@ -69,19 +74,54 @@ namespace SchoolDatabaseImplement.Implements.Teacher
             {
                 return context.Electives
                 .Include(rec => rec.ElectiveMaterials)
-                .ThenInclude(rec => rec.Elective).ToList()
+                .ThenInclude(rec => rec.Material)
+                .Include(rec => rec.ActivityElectives)
+                .ThenInclude(rec => rec.Activity).ToList()
                 .Select(CreateModel).ToList();
             }
         }
 
         public void Insert(ElectiveBindingModel model)
         {
-            throw new NotImplementedException();
+            using (var context = new SchoolDbContext())
+            {
+                context.Electives.Add(CreateModel(model));
+                context.SaveChanges();
+            }
         }
 
         public void Update(ElectiveBindingModel model)
         {
-            throw new NotImplementedException();
+            using (var context = new SchoolDbContext())
+            {
+                var element = context.Electives.FirstOrDefault(rec => rec.Id == model.Id);
+                element.Name = model.Name;
+                element.Price = model.Price;
+                context.SaveChanges();
+            }
+        }
+
+        public void BindActivityWithElectives(BindActivityWithElectivesBindingModel model)
+        {
+            using (var context = new SchoolDbContext())
+            {
+                using (var transaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var toRemove = context.ActivityElectives.Where(rec => rec.ActivityId == model.ActivityId);
+                        context.ActivityElectives.RemoveRange(toRemove);
+                        context.SaveChanges();
+                        context.ActivityElectives.AddRange(CreateModels(model));
+                        context.SaveChanges();
+                        transaction.Commit();
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
+                    }
+                }
+            }
         }
 
         private ElectiveViewModel CreateModel(Elective elective)
@@ -90,8 +130,38 @@ namespace SchoolDatabaseImplement.Implements.Teacher
             {
                 Id = elective.Id,
                 Name = elective.Name,
-                Price = elective.Price
+                Price = elective.Price,
+                DateCreate = elective.DateCreate,
+                ElectiveMaterials = elective.ElectiveMaterials
+                .ToDictionary(recME => recME.MaterialId, recME =>
+                (recME.Material?.Name, recME.MaterialCount)),
+                ElectiveActivities = elective.ActivityElectives.ToDictionary(rec => rec.ActivityId, rec => rec.Activity?.Name)
             };
+        }
+
+        private Elective CreateModel(ElectiveBindingModel model)
+        {
+            return new Elective
+            {
+                Name = model.Name,
+                Price = model.Price,
+                TeacherId = (int)model.TeacherId,
+                DateCreate = model.DateCreate
+            };
+        }
+
+        private List<ActivityElective> CreateModels(BindActivityWithElectivesBindingModel model)
+        {
+            var result = new List<ActivityElective>();
+            foreach (var el in model.Electives)
+            {
+                result.Add(new ActivityElective
+                {
+                    ActivityId = (int)model.ActivityId,
+                    ElectiveId = el
+                });
+            }
+            return result;
         }
     }
 }

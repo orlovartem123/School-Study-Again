@@ -18,6 +18,11 @@ namespace SchoolStudyAgain
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
+        internal static object GetRequest<T>()
+        {
+            throw new NotImplementedException();
+        }
+
         public static T GetRequest<T>(string requestUrl)
         {
             var response = client.GetAsync(requestUrl);

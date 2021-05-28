@@ -28,6 +28,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\img\svg\" />
     <Folder Include="wwwroot\img\png\" />
+    <Folder Include="wwwroot\Reports\" />
   </ItemGroup>
 
 </Project>

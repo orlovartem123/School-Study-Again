@@ -69,6 +69,9 @@ namespace SchoolDatabaseImplement.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("DateCreate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -188,7 +191,7 @@ namespace SchoolDatabaseImplement.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ElectiveId")
+                    b.Property<int?>("ElectiveId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -361,9 +364,7 @@ namespace SchoolDatabaseImplement.Migrations
                 {
                     b.HasOne("SchoolDatabaseImplement.Models.Elective", "Elective")
                         .WithMany("Medals")
-                        .HasForeignKey("ElectiveId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ElectiveId");
 
                     b.HasOne("SchoolDatabaseImplement.Models.Teacher", "Teacher")
                         .WithMany("Medals")

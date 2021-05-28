@@ -17,10 +17,10 @@ namespace SchoolBusinessLogic.ViewModels.TeacherModels
         public int Value { get; set; }
 
         [DataMember]
-        public int ElectiveId { get; set; }
+        public int? ElectiveId { get; set; }
 
         [DataMember]
         [DisplayName("ElectiveName")]
-        public int ElectiveName { get; set; }
+        public string ElectiveName { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.Serialization;
 
@@ -16,6 +17,9 @@ namespace SchoolBusinessLogic.ViewModels.TeacherModels
 
         [DataMember]
         public decimal Price { get; set; }
+
+        [DataMember]
+        public DateTime DateCreate { get; set; }
 
         [DataMember]
         public Dictionary<int, (string, int)> ElectiveMaterials { get; set; }

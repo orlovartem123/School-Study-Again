@@ -25,26 +25,26 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Materials</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" asp-controller="Material" asp-action="Create">Create</a>                          
+                            <a class="dropdown-item" asp-controller="Material" asp-action="Create">Create</a>
+                            <a class="dropdown-item" asp-controller="Report" asp-action="Index">Create reports</a>
+                            <a class="dropdown-item" asp-controller="Diagram" asp-action="MostPopularMaterial">About most popular materials</a>
                             <a class="dropdown-item" asp-controller="Material" asp-action="List">Show materials</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Electives</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" asp-controller="Elective" asp-action="CreateElective">Create</a>
-                            <a class="dropdown-item" asp-controller="Elective" asp-action="UpdateElective">Update</a>
-                            <a class="dropdown-item" asp-controller="Elective" asp-action="DeleteElective">Delete</a>
-                            <a class="dropdown-item" asp-controller="Elective" asp-action="ElectiveList">Show electives</a>
+                            <a class="dropdown-item" asp-controller="Elective" asp-action="Create">Create</a>
+                            <a class="dropdown-item" asp-controller="Elective" asp-action="BindActivityWithElectives">Bind activity with electives</a>
+                            <a class="dropdown-item" asp-controller="Report" asp-action="PdfReport">Pdf report</a>
+                            <a class="dropdown-item" asp-controller="Elective" asp-action="List">Show electives</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Medals</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" asp-controller="Medal" asp-action="CreateMedal">Create</a>
-                            <a class="dropdown-item" asp-controller="Medal" asp-action="UpdateMedal">Update</a>
-                            <a class="dropdown-item" asp-controller="Medal" asp-action="DeleteMedal">Delete</a>
-                            <a class="dropdown-item" asp-controller="Medal" asp-action="MedalList">Show medals</a>
+                            <a class="dropdown-item" asp-controller="Medal" asp-action="Create">Create</a>
+                            <a class="dropdown-item" asp-controller="Medal" asp-action="List">Show medals</a>
                         </div>
                     </li>
                     <li class="nav-item">

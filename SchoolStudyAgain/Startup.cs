@@ -1,12 +1,12 @@
-using JavaScriptEngineSwitcher.ChakraCore;
-using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using React.AspNet;
+using SchoolBusinessLogic.BindingModels.Report;
+using SchoolBusinessLogic.HelperModels.Pdf;
+using System;
 
 namespace SchoolStudyAgain
 {
@@ -16,6 +16,13 @@ namespace SchoolStudyAgain
         {
             Configuration = configuration;
             APIClient.Connect(configuration);
+            MailLogic.MailConfig(new MailConfig
+            {
+                SmtpClientHost = configuration["SmtpClientHost"],
+                SmtpClientPort = Convert.ToInt32(configuration["SmtpClientPort"]),
+                MailLogin = configuration["MailLogin"],
+                MailPassword = configuration["MailPassword"],
+            });
         }
 
         public IConfiguration Configuration { get; }
@@ -24,9 +31,6 @@ namespace SchoolStudyAgain
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews().AddNewtonsoftJson();
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddReact();
-            services.AddJsEngineSwitcher(options => options.DefaultEngineName = ChakraCoreJsEngine.EngineName).AddChakraCore();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,8 +52,6 @@ namespace SchoolStudyAgain
             app.UseRouting();
 
             app.UseAuthorization();
-
-            app.UseReact(config => { });
 
             app.UseEndpoints(endpoints =>
             {

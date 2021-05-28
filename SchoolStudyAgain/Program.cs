@@ -15,6 +15,8 @@ namespace SchoolStudyAgain
         {
             Teacher = new TeacherViewModel();
             Teacher.Id = 3;
+            Teacher.Name = "Misha";
+            Teacher.Email = "orlovartem123@gmail.com";
             CreateHostBuilder(args).Build().Run();
         }
 

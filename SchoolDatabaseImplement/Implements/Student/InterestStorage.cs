@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SchoolBusinessLogic.BindingModels.StudentModels;
+﻿using SchoolBusinessLogic.BindingModels.StudentModels;
 using SchoolBusinessLogic.Interfaces.Student;
 using SchoolBusinessLogic.ViewModels.StudentModels;
 using SchoolDatabaseImplement.Models;

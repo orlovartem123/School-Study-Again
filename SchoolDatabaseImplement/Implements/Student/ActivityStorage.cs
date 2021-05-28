@@ -18,14 +18,19 @@ namespace SchoolDatabaseImplement.Implements.Student
 
         public ActivityViewModel GetElement(ActivityBindingModel model)
         {
-            throw new NotImplementedException();
+            using (var context = new SchoolDbContext())
+            {
+                var el = context.Activities.Include(rec => rec.ActivityElectives)
+                .ThenInclude(rec => rec.Elective).ToList().FirstOrDefault(rec => rec.Id == model.Id);
+                return CreateModel(el);
+            }
         }
 
         public List<ActivityViewModel> GetFilteredList(ActivityBindingModel model)
         {
             throw new NotImplementedException();
         }
-        
+
 
         public List<ActivityViewModel> GetFullList()
         {
@@ -34,7 +39,7 @@ namespace SchoolDatabaseImplement.Implements.Student
                 return context.Activities
                 .Include(rec => rec.ActivityElectives)
                 .ThenInclude(rec => rec.Elective).ToList()
-                .Select(CreateModel).ToList();
+                .Select(CreateModel)?.ToList();
             }
         }
 

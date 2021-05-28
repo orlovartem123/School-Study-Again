@@ -4,7 +4,6 @@ using SchoolBusinessLogic.ViewModels.StudentModels;
 using SchoolBusinessLogic.ViewModels.TeacherModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace SchoolStudyAgain.Controllers
 {
@@ -30,8 +29,9 @@ namespace SchoolStudyAgain.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(MaterialBindingModel model)
+        public void Create(MaterialBindingModel model)
         {
+            //if (Program.Teacher == null) { return Redirect("~/Home/Enter"); }
             model.TeacherId = Program.Teacher.Id;
             model.DateCreate = DateTime.Now;
             if (model.Price == 0)
@@ -39,7 +39,7 @@ namespace SchoolStudyAgain.Controllers
                 model.Price = 1;
             }
             APIClient.PostRequest("api/teacher/CreateOrUpdateMaterial", model);
-            return Json(new { result = "Redirect", url = Url.Action("List","Material") }); ;
+            Response.Redirect("List");
         }
 
         [HttpGet]
@@ -61,6 +61,7 @@ namespace SchoolStudyAgain.Controllers
 
         public void Delete(int materialId)
         {
+            //if (Program.Teacher == null) { return Redirect("~/Home/Enter"); }
             APIClient.PostRequest("api/teacher/DeleteMaterial", new MaterialBindingModel { Id = materialId });
             Response.Redirect("List");
         }
@@ -68,6 +69,7 @@ namespace SchoolStudyAgain.Controllers
         [HttpGet]
         public JsonResult GetElectives()
         {
+            //if (Program.Teacher == null) { return Redirect("~/Home/Enter"); }
             return Json(APIClient.GetRequest<List<ElectiveViewModel>>($"api/teacher/GetElectives?teacherId={Program.Teacher.Id}"));
         }
     }

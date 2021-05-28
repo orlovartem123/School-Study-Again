@@ -1,10 +1,10 @@
 ﻿@using SchoolBusinessLogic.ViewModels.TeacherModels
-@model List<MedalViewModel>
+@model List<ElectiveViewModel>
 @{
-    ViewData["Title"] = "MedalList";
+    ViewData["Title"] = "ElectiveList";
 }
 <div class="text-center">
-    <h1 class="display-4">Medals</h1>
+    <h1 class="display-4">Electives</h1>
 </div>
 <div class="text-center">
     @{
@@ -14,22 +14,25 @@
             return;
         }
         <p>
-            <a asp-action="CreateMedal">Create medal</a>
+            <a asp-action="Create">Create elective</a>
         </p>
         <table class="table">
             <thead>
                 <tr>
                     <th>
-                        Medal Id
+                        Id
                     </th>
                     <th>
-                        Medal name
+                        Name
                     </th>
                     <th>
-                        Value
+                        Price
                     </th>
                     <th>
-                        Elective
+                        Creation date
+                    </th>
+                    <th>
+                        Actions
                     </th>
                 </tr>
             </thead>
@@ -44,14 +47,14 @@
                             @Html.DisplayFor(modelItem => item.Name)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Value)
+                            @Html.DisplayFor(modelItem => item.Price)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.ElectiveName)
+                            @Html.DisplayFor(modelItem => item.DateCreate)
                         </td>
                         <td>
-                            <a asp-action="UpdateMedal" asp-route-id="@(item.Id)">Update</a>
-                            <a asp-action="DeleteMedal" asp-route-id="@(item.Id)">Delete</a>
+                            <a asp-action="Update" asp-route-electiveId="@(item.Id)">Update</a>
+                            <a asp-action="Delete" asp-route-electiveId="@(item.Id)">Delete</a>
                         </td>
                     </tr>
                 }

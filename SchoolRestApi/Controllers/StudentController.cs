@@ -27,16 +27,10 @@ namespace SchoolRestApi.Controllers
         public List<ActivityViewModel> GetActivityList() => _activity.Read(null)?.ToList();
 
         [HttpGet]
-        public List<ActivityViewModel> GetActivityList(int studentId) => _activity.Read(new ActivityBindingModel { StudentId = studentId })?.ToList();
-
-        [HttpGet]
         public ActivityViewModel GetActivity(int activityId) => _activity.Read(new ActivityBindingModel { Id = activityId })?[0];
 
         [HttpPost]
-        public void CreateActivity(ActivityBindingModel model) => _activity.CreateOrUpdate(model);
-
-        [HttpPost]
-        public void UpdateActivity(ActivityBindingModel model) => _activity.CreateOrUpdate(model);
+        public void CreateOrUpdateActivity(ActivityBindingModel model) => _activity.CreateOrUpdate(model);
 
         [HttpPost]
         public void DeleteActivity(ActivityBindingModel model) => _activity.Delete(model);

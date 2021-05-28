@@ -1,0 +1,48 @@
+﻿@model SchoolBusinessLogic.BindingModels.Report.PdfReportBindingModel
+
+@{ ViewData["Title"] = "Edit"; }
+
+<div class="text-center mt-5">
+    <h1>Get pdf report</h1>
+</div>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="DateFrom" class="control-label">From</label>
+                <input asp-for="DateFrom" class="form-control" />
+                <label asp-for="DateTo" class="control-label">to</label>
+                <input asp-for="DateTo" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" onclick="refresh()" asp-action="MakeReportPdf" class="btn btn-primary mt-5" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Send to mail" asp-action="SendMail" class="btn btn-primary mt-5" style="min-width"/>
+            </div>
+        </form>
+    </div>
+    <div class="embed-responsive embed-responsive-16by9 col-8">
+        <iframe class="embed-responsive-item w-100" hidden src="~/list/societiesList.pdf" allowfullscreen id="frame"></iframe>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<script>
+    function refresh() {
+        var frame = document.getElementById("frame");
+        frame.hidden = false;
+        frame.src = frame.src + "?unique=" + new Date().getTime();
+        frame.style.height = '700px';
+    }
+       @if (ViewBag.CheckingReport != null)
+       {
+          <text> window.onload = refresh; </text>
+       }
+</script> 

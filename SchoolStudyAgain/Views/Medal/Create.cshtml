@@ -6,23 +6,8 @@
 <div class="text-center">
     <h2 class="display-4">Create medal</h2>
 </div>
-@*<form class="container-fluid" style="max-width: 480px;" method="post">
-        <div class="form-group">
-            <label for="InputEmail">Email address</label>
-            <input type="email" name="email" class="form-control" id="InputEmail" aria-describedby="emailHelp" placeholder="Enter email">
-        </div>
-        <div class="form-group">
-            <label for="InputEmail">Login</label>
-            <input type="text" name="login" class="form-control" id="InputLogin" aria-describedby="emailHelp" placeholder="Enter login">
-        </div>
-        <div class="form-group">
-            <label for="InputPassword">Password</label>
-            <input type="password" name="password" class="form-control" id="InputPassword" placeholder="Password">
-        </div>
-        <button type="submit" style="min-width: 100px" class="btn btn-primary">Login</button>
-    </form>*@
 
-﻿<form class="container-fluid" style="max-width: 580px;" asp-action="CreateMedal">
+﻿<form class="container-fluid" style="max-width: 580px;" asp-action="Create">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-group">
         <div class="row justify-content-between">
@@ -31,6 +16,7 @@
             </label>
             <div class="col-lg-8">
                 <input asp-for="Name" type="text" name="name" required class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
         </div>
     </div>
@@ -38,10 +24,11 @@
     <div class="form-group">
         <div class="row">
             <label class="col-lg-4 justify-content-between">
-                Medal price
+                Value
             </label>
             <div class="col-lg-8">
                 <input asp-for="Value" type="number" name="value" required class="form-control" />
+                <span asp-validation-for="Value" class="text-danger"></span>
             </div>
         </div>
     </div>
@@ -52,10 +39,8 @@
                 Elective
             </label>
             <div class="col-lg-8">
-                @*<select id="car" name="material" required class="form-control" asp-items="@(new SelectList(@ViewBag.Materials,"Id", "Name"))"></select>*@
-                <select asp-for="ElectiveId" name="material" required class="form-control">
-                    <option>1</option>
-                    <option>2</option>
+                <select asp-for="ElectiveId" name="ElectiveId" class="form-control" asp-items="@(new SelectList(@ViewBag.Electives,"Id", "Name"))">
+                    <option selected value="-1">Not chosen</option>
                 </select>
             </div>
         </div>

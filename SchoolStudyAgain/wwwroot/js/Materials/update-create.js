@@ -83,7 +83,6 @@ function addElective() {
 };
 
 function deleteElective(number) {
-    alert(number);
     let parent = document.getElementById('electivesToMaterialsParent');
     let elem = document.getElementById(childIdPref + number);
     parent.removeChild(elem);

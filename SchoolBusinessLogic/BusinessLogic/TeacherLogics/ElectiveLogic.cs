@@ -57,5 +57,14 @@ namespace SchoolBusinessLogic.BusinessLogic.TeacherLogics
             }
             _electiveStorage.Delete(model);
         }
+
+        public void BindActivityWithElectives(BindActivityWithElectivesBindingModel model)
+        {
+            if (model.ActivityId == null || model.Electives == null)
+            {
+                return;
+            }
+            _electiveStorage.BindActivityWithElectives(model);
+        }
     }
 }
