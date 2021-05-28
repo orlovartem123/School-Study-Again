@@ -13,5 +13,7 @@ namespace SchoolBusinessLogic.ViewModels.Diagram
         public string Title { get; set; }
 
         public Dictionary<string,int> Data { get; set; }
+
+        public Dictionary<string, decimal> DataPrice { get; set; }
     }
 }

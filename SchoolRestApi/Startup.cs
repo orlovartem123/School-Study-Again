@@ -36,6 +36,7 @@ namespace SchoolRestApi
             services.AddTransient<IInterestStorage, InterestStorage>();
             services.AddTransient<IDiagramDataStorage, DiagramStorage>();
             services.AddTransient<MaterialLogic>();
+            services.AddTransient<TeacherLogic>();
             services.AddTransient<ReportLogic>();
             services.AddTransient<ElectiveLogic>();
             services.AddTransient<MedalLogic>();

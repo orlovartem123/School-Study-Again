@@ -17,7 +17,7 @@ namespace SchoolRestApi.Controllers
         }
 
         [HttpGet]
-        public TeacherViewModel Login(string login, string password) => _logic.Read(new TeacherBindingModel { Login = login, Password = password })?[0];
+        public TeacherViewModel Login(string login, string password,string email) => _logic.Read(new TeacherBindingModel { Login = login, Password = password, Email=email })?[0];
 
         [HttpPost]
         public void Register(TeacherBindingModel model) => _logic.CreateOrUpdate(model);

@@ -1,29 +1,80 @@
-﻿@using SchoolBusinessLogic.ViewModels.Diagram
+﻿@using System.Web
+@using SchoolBusinessLogic.ViewModels.Diagram
 
 @model List<DiagramDataViewModel>
 
-<div id="donutchart" style="width: 900px; height: 500px;"></div>
+<div class="text-center">
+    <h2 class="display-4">Diagrams</h2>
+    <div id="donutchart" style="width: 900px; height: 500px;"></div>
+    <div id="donutchart2" style="width: 900px; height: 500px;"></div>
+    <div id="rating"></div>
+</div>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
-      google.charts.load("current", {packages:["corechart"]});
-      google.charts.setOnLoadCallback(drawChart);
+    google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+    google.charts.setOnLoadCallback(drawChartElectives);
+    google.charts.setOnLoadCallback(drawChartRating);
       function drawChart() {
           var data = google.visualization.arrayToDataTable([
+              ['Task', 'Materials'],
             @foreach (var record in Model[0]?.Data)
             {
                 <text>
-              ['@(record.Key.Length)', @(record.Value)],
+              ['@Html.Raw(HttpUtility.JavaScriptStringEncode(record.Key))', @(record.Value)],
                 </text>
             }
-        ]);
+          ]);
+
+
 
         var options = {
           title: '@(Model[0]?.Title)',
-          pieHole: 0.4,
+            pieHole: 0.4,
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
         chart.draw(data, options);
       }
+
+        function drawChartElectives() {
+          var data = google.visualization.arrayToDataTable([
+              ['Task', 'Materials'],
+            @foreach (var record in Model[1]?.Data)
+            {
+                <text>
+              ['@Html.Raw(HttpUtility.JavaScriptStringEncode(record.Key))', @(record.Value)],
+                </text>
+            }
+          ]);
+
+
+
+        var options = {
+          title: '@(Model[1]?.Title)',
+            pieHole: 0.4,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart2'));
+        chart.draw(data, options);
+    }
+
+    function drawChartRating() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', '@Html.Raw(HttpUtility.JavaScriptStringEncode(Model[2].ColumnName))');
+            data.addColumn('number', '@Html.Raw(HttpUtility.JavaScriptStringEncode(Model[2].ValueName))');
+          @foreach (var row in Model[2].DataPrice) {
+          <text>
+        data.addRow(['@Html.Raw(HttpUtility.JavaScriptStringEncode(row.Key))', @row.Value.ToString().Replace(',','.')]);
+        </text>
+          }
+                    var options = {
+              'title': '@Html.Raw(HttpUtility.JavaScriptStringEncode(Model[2].Title))',
+                       'width':1200,
+                       'height':900};
+            var chart = new google.visualization.ColumnChart(document.getElementById('rating'));
+            chart.draw(data, options);
+        }
 </script>
+

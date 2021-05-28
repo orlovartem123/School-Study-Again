@@ -17,12 +17,14 @@ namespace SchoolStudyAgain.Controllers
 
         public IActionResult Index()
         {
+            if (Program.Teacher == null) { return Redirect("~/Home/Enter"); }
             ViewBag.Materials = APIClient.GetRequest<List<MaterialViewModel>>($"api/teacher/GetMaterials?teacherId={Program.Teacher.Id}");
             return View();
         }
 
         public IActionResult PdfReport()
         {
+            if (Program.Teacher == null) { return Redirect("~/Home/Enter"); }
             return View();
         }
 
@@ -30,6 +32,7 @@ namespace SchoolStudyAgain.Controllers
         [HttpPost]
         public IActionResult MakeReportWord(List<int> selectedMaterials)
         {
+            if (Program.Teacher == null) { return Redirect("~/Home/Enter"); }
             var toSave = @"..\SchoolStudyAgain\wwwroot\Reports\ActivityList.doc";
             APIClient.PostRequest("api/report/SaveToWord", new ReportBindingModel { Filename = toSave, SelectedMaterials = selectedMaterials });
 
@@ -41,6 +44,7 @@ namespace SchoolStudyAgain.Controllers
         [HttpPost]
         public IActionResult MakeReportXls(List<int> selectedMaterials)
         {
+            if (Program.Teacher == null) { return Redirect("~/Home/Enter"); }
             var toSave = @"..\SchoolStudyAgain\wwwroot\Reports\ActivityList.xls";
             APIClient.PostRequest("api/report/SaveToExcel", new ReportBindingModel { Filename = toSave, SelectedMaterials = selectedMaterials });
 
@@ -52,6 +56,7 @@ namespace SchoolStudyAgain.Controllers
         [HttpPost]
         public IActionResult MakeReportPdf(PdfReportBindingModel model)
         {
+            if (Program.Teacher == null) { return Redirect("~/Home/Enter"); }
             model.FileName = @"..\SchoolStudyAgain\wwwroot\Reports\ElectivesList.pdf";
             model.TeacherName = Program.Teacher?.Name;
             APIClient.PostRequest("api/report/SaveToPdf", model);
@@ -62,6 +67,7 @@ namespace SchoolStudyAgain.Controllers
         [HttpPost]
         public IActionResult SendMail(PdfReportBindingModel model)
         {
+            if (Program.Teacher == null) { return Redirect("~/Home/Enter"); }
             model.FileName = @"..\SchoolStudyAgain\wwwroot\Reports\ElectivesList.pdf";
             model.TeacherName = Program.Teacher?.Name;
             APIClient.PostRequest("api/report/SaveToPdf", model);

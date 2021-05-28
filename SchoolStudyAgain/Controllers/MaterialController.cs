@@ -15,14 +15,14 @@ namespace SchoolStudyAgain.Controllers
 
         public IActionResult List()
         {
-            //if (Program.Teacher == null) { return Redirect("~/Home/Enter"); }
+            if (Program.Teacher == null) { return Redirect("~/Home/Enter"); }
             return View(APIClient.GetRequest<List<MaterialViewModel>>($"api/teacher/getmaterials?teacherId={Program.Teacher.Id}"));
         }
 
         [HttpGet]
         public IActionResult Create()
         {
-            //if (Program.Teacher == null) { return Redirect("~/Home/Enter"); }
+            if (Program.Teacher == null) { return Redirect("~/Home/Enter"); }
             ViewBag.Electives = APIClient.GetRequest<List<ElectiveViewModel>>($"api/teacher/GetElectives?teacherId={Program.Teacher.Id}");
             ViewBag.Interests = APIClient.GetRequest<List<InterestViewModel>>($"api/student/GetInterestList");
             return View();
@@ -31,7 +31,7 @@ namespace SchoolStudyAgain.Controllers
         [HttpPost]
         public void Create(MaterialBindingModel model)
         {
-            //if (Program.Teacher == null) { return Redirect("~/Home/Enter"); }
+            if (Program.Teacher == null) {  Redirect("~/Home/Enter"); }
             model.TeacherId = Program.Teacher.Id;
             model.DateCreate = DateTime.Now;
             if (model.Price == 0)
@@ -45,7 +45,7 @@ namespace SchoolStudyAgain.Controllers
         [HttpGet]
         public IActionResult Update(int id)
         {
-            //if (Program.Teacher == null) { return Redirect("~/Home/Enter"); }
+            if (Program.Teacher == null) { return Redirect("~/Home/Enter"); }
             ViewBag.Interests = APIClient.GetRequest<List<InterestViewModel>>($"api/student/GetInterestList");
             ViewBag.Electives = APIClient.GetRequest<List<ElectiveViewModel>>($"api/teacher/GetElectives?teacherId={Program.Teacher.Id}");
             return View(APIClient.GetRequest<MaterialViewModel>($"api/teacher/getmaterial?materialId={id}"));
@@ -61,7 +61,7 @@ namespace SchoolStudyAgain.Controllers
 
         public void Delete(int materialId)
         {
-            //if (Program.Teacher == null) { return Redirect("~/Home/Enter"); }
+            if (Program.Teacher == null) {  Redirect("~/Home/Enter"); }
             APIClient.PostRequest("api/teacher/DeleteMaterial", new MaterialBindingModel { Id = materialId });
             Response.Redirect("List");
         }
@@ -69,7 +69,7 @@ namespace SchoolStudyAgain.Controllers
         [HttpGet]
         public JsonResult GetElectives()
         {
-            //if (Program.Teacher == null) { return Redirect("~/Home/Enter"); }
+            if (Program.Teacher == null) {  Redirect("~/Home/Enter"); }
             return Json(APIClient.GetRequest<List<ElectiveViewModel>>($"api/teacher/GetElectives?teacherId={Program.Teacher.Id}"));
         }
     }

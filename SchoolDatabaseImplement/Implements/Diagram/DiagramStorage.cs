@@ -29,7 +29,22 @@ namespace SchoolDatabaseImplement.Implements.Diagram
                         result[0].Data.Add(record.Material.Name, record.MaterialCount);
                     }
                 }
-                Console.WriteLine(result[0].Title);
+                result.Add(new DiagramDataViewModel());
+                result[1].Title = "Most popular electives";
+                result[1].Data = new Dictionary<string, int>();
+                foreach (var record in context.Electives.Include(rec => rec.ActivityElectives))
+                {
+                    result[1].Data.Add(record.Name, record.ActivityElectives.Count);
+                }
+                result.Add(new DiagramDataViewModel());
+                result[2].Title = "Material price rating";
+                result[2].DataPrice = new Dictionary<string, decimal>();
+                result[2].ValueName = "Cost";
+                result[2].ColumnName = "Material name";
+                foreach (var record in context.Materials)
+                {
+                    result[2].DataPrice.Add(record.Name,record.Price);
+                }
                 return result;
             }
         }
