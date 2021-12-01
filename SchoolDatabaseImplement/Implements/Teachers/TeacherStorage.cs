@@ -9,6 +9,13 @@ namespace SchoolDatabaseImplement.Implements.Teacher
 {
     public class TeacherStorage : ITeacherStorage
     {
+        private readonly SchoolDbContext context;
+
+        public TeacherStorage(SchoolDbContext db)
+        {
+            context = db;
+        }
+
         public void Delete(TeacherBindingModel model)
         {
             throw new NotImplementedException();
@@ -20,13 +27,10 @@ namespace SchoolDatabaseImplement.Implements.Teacher
             {
                 return null;
             }
-            using (var context = new SchoolDbContext())
-            {
-                var client = context.Teachers
-                .FirstOrDefault(rec => rec.Email.Equals(model.Email) || rec.Id == model.Id);
-                return client != null ?
-                new TeacherViewModel { Name = client.Name, Email = client.Email, Id = client.Id, Surname = client.Surname } : null;
-            }
+            var client = context.Teachers
+            .FirstOrDefault(rec => rec.Email.Equals(model.Email) || rec.Id == model.Id);
+            return client != null ?
+            new TeacherViewModel { Name = client.Name, Email = client.Email, Id = client.Id, Surname = client.Surname } : null;
         }
 
         public List<TeacherViewModel> GetFilteredList(TeacherBindingModel model)
@@ -35,13 +39,10 @@ namespace SchoolDatabaseImplement.Implements.Teacher
             {
                 return null;
             }
-            using (var context = new SchoolDbContext())
-            {
-                return context.Teachers
-                    .Where(rec =>
-                    rec.Name.Contains(model.Name) || (rec.Email.Equals(model.Email) && rec.Password.Equals(model.Password) && rec.Login.Equals(model.Login)))
-                    .Select(rec => new TeacherViewModel { Name = rec.Name, Email = rec.Email, Id = rec.Id, Surname = rec.Surname }).ToList();
-            }
+            return context.Teachers
+                .Where(rec =>
+                rec.Name.Contains(model.Name) || (rec.Email.Equals(model.Email) && rec.Password.Equals(model.Password) && rec.Login.Equals(model.Login)))
+                .Select(rec => new TeacherViewModel { Name = rec.Name, Email = rec.Email, Id = rec.Id, Surname = rec.Surname }).ToList();
         }
 
         public List<TeacherViewModel> GetFullList()
@@ -51,11 +52,8 @@ namespace SchoolDatabaseImplement.Implements.Teacher
 
         public void Insert(TeacherBindingModel model)
         {
-            using (var context = new SchoolDbContext())
-            {
-                context.Teachers.Add(CreateModel(model, new Models.Teacher()));
-                context.SaveChanges();
-            }
+            context.Teachers.Add(CreateModel(model, new Models.Teacher()));
+            context.SaveChanges();
         }
 
         public void Update(TeacherBindingModel model)

@@ -11,20 +11,24 @@ namespace SchoolDatabaseImplement.Implements.Teacher
 {
     public class ElectiveStorage : IElectiveStorage
     {
+        private readonly SchoolDbContext context;
+
+        public ElectiveStorage(SchoolDbContext db)
+        {
+            context = db;
+        }
+
         public void Delete(ElectiveBindingModel model)
         {
-            using (var context = new SchoolDbContext())
+            var element = context.Electives.FirstOrDefault(rec => rec.Id == model.Id);
+            if (element != null)
             {
-                var element = context.Electives.FirstOrDefault(rec => rec.Id == model.Id);
-                if (element != null)
-                {
-                    context.Electives.Remove(element);
-                    context.SaveChanges();
-                }
-                else
-                {
-                    throw new Exception("Elective not found");
-                }
+                context.Electives.Remove(element);
+                context.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("Elective not found");
             }
         }
 
@@ -34,92 +38,74 @@ namespace SchoolDatabaseImplement.Implements.Teacher
             {
                 return null;
             }
-            using (var context = new SchoolDbContext())
+            var elective = context.Electives
+            .Include(rec => rec.ElectiveMaterials)
+            .ThenInclude(rec => rec.Material)
+            .Include(rec => rec.ActivityElectives)
+            .ThenInclude(rec => rec.Activity)
+            .FirstOrDefault(rec => rec.Name == model.Name || rec.Id == model.Id);
+            return elective != null ?
+            new ElectiveViewModel
             {
-                var elective = context.Electives
-                .Include(rec => rec.ElectiveMaterials)
-                .ThenInclude(rec => rec.Material)
-                .Include(rec => rec.ActivityElectives)
-                .ThenInclude(rec => rec.Activity)
-                .FirstOrDefault(rec => rec.Name == model.Name || rec.Id == model.Id);
-                return elective != null ?
-                new ElectiveViewModel
-                {
-                    Id = elective.Id,
-                    Name = elective.Name,
-                    Price = elective.Price,
-                    ElectiveMaterials = elective.ElectiveMaterials.ToDictionary(recEM => recEM.MaterialId, recEM => (recEM.Material?.Name, recEM.MaterialCount))
-                } : null;
-            }
+                Id = elective.Id,
+                Name = elective.Name,
+                Price = elective.Price,
+                ElectiveMaterials = elective.ElectiveMaterials.ToDictionary(recEM => recEM.MaterialId, recEM => (recEM.Material?.Name, recEM.MaterialCount))
+            } : null;
         }
 
         public List<ElectiveViewModel> GetFilteredList(ElectiveBindingModel model)
         {
-            using (var context = new SchoolDbContext())
-            {
-                return context.Electives.Where(rec =>
-                    (model.TeacherId.HasValue && rec.TeacherId == model.TeacherId) ||
-                    (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo))
-                    .Include(rec => rec.ElectiveMaterials)
-                    .ThenInclude(rec => rec.Material)
-                    .Include(rec => rec.ActivityElectives)
-                    .ThenInclude(rec => rec.Activity)
-                    .Select(CreateModel).ToList();
-            }
+            return context.Electives.Where(rec =>
+                (model.TeacherId.HasValue && rec.TeacherId == model.TeacherId) ||
+                (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo))
+                .Include(rec => rec.ElectiveMaterials)
+                .ThenInclude(rec => rec.Material)
+                .Include(rec => rec.ActivityElectives)
+                .ThenInclude(rec => rec.Activity)
+                .Select(CreateModel).ToList();
         }
 
         public List<ElectiveViewModel> GetFullList()
         {
-            using (var context = new SchoolDbContext())
-            {
-                return context.Electives
-                .Include(rec => rec.ElectiveMaterials)
-                .ThenInclude(rec => rec.Material)
-                .Include(rec => rec.ActivityElectives)
-                .ThenInclude(rec => rec.Activity).ToList()
-                .Select(CreateModel).ToList();
-            }
+            return context.Electives
+            .Include(rec => rec.ElectiveMaterials)
+            .ThenInclude(rec => rec.Material)
+            .Include(rec => rec.ActivityElectives)
+            .ThenInclude(rec => rec.Activity).ToList()
+            .Select(CreateModel).ToList();
         }
 
         public void Insert(ElectiveBindingModel model)
         {
-            using (var context = new SchoolDbContext())
-            {
-                context.Electives.Add(CreateModel(model));
-                context.SaveChanges();
-            }
+            context.Electives.Add(CreateModel(model));
+            context.SaveChanges();
         }
 
         public void Update(ElectiveBindingModel model)
         {
-            using (var context = new SchoolDbContext())
-            {
-                var element = context.Electives.FirstOrDefault(rec => rec.Id == model.Id);
-                element.Name = model.Name;
-                element.Price = model.Price;
-                context.SaveChanges();
-            }
+            var element = context.Electives.FirstOrDefault(rec => rec.Id == model.Id);
+            element.Name = model.Name;
+            element.Price = model.Price;
+            context.SaveChanges();
         }
 
         public void BindActivityWithElectives(BindActivityWithElectivesBindingModel model)
         {
-            using (var context = new SchoolDbContext())
+            using (var transaction = context.Database.BeginTransaction())
             {
-                using (var transaction = context.Database.BeginTransaction())
+                try
                 {
-                    try
-                    {
-                        var toRemove = context.ActivityElectives.Where(rec => rec.ActivityId == model.ActivityId);
-                        context.ActivityElectives.RemoveRange(toRemove);
-                        context.SaveChanges();
-                        context.ActivityElectives.AddRange(CreateModels(model));
-                        context.SaveChanges();
-                        transaction.Commit();
-                    }
-                    catch (Exception)
-                    {
-                        transaction.Rollback();
-                    }
+                    var toRemove = context.ActivityElectives.Where(rec => rec.ActivityId == model.ActivityId);
+                    context.ActivityElectives.RemoveRange(toRemove);
+                    context.SaveChanges();
+                    context.ActivityElectives.AddRange(CreateModels(model));
+                    context.SaveChanges();
+                    transaction.Commit();
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
                 }
             }
         }

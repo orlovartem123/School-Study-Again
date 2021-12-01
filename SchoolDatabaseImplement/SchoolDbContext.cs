@@ -5,15 +5,6 @@ namespace SchoolDatabaseImplement
 {
     public class SchoolDbContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (optionsBuilder.IsConfigured == false)
-            {
-                optionsBuilder.UseSqlServer(@"data source='LAPTOP-4UI9Q996\SQLEXPRESS'; initial catalog='SchoolDatabase'; user id='sa'; password='123123'; Persist Security Info='True'; Connect Timeout='60';");
-            }
-            base.OnConfiguring(optionsBuilder);
-        }
-
         public virtual DbSet<Activity> Activities { set; get; }
         public virtual DbSet<ActivityElective> ActivityElectives { set; get; }
         public virtual DbSet<Elective> Electives { set; get; }
@@ -24,5 +15,11 @@ namespace SchoolDatabaseImplement
         public virtual DbSet<Medal> Medals { set; get; }
         public virtual DbSet<Student> Students { set; get; }
         public virtual DbSet<Teacher> Teachers { set; get; }
+
+        public SchoolDbContext(DbContextOptions<SchoolDbContext> options)
+            : base(options)
+        {
+        }
+
     }
 }

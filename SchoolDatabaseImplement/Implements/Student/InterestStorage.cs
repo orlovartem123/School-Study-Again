@@ -10,6 +10,13 @@ namespace SchoolDatabaseImplement.Implements.Student
 {
     public class InterestStorage : IInterestStorage
     {
+        private readonly SchoolDbContext context;
+
+        public InterestStorage(SchoolDbContext db)
+        {
+            context = db;
+        }
+
         public void Delete(InterestBindingModel model)
         {
             throw new NotImplementedException();
@@ -27,11 +34,8 @@ namespace SchoolDatabaseImplement.Implements.Student
 
         public List<InterestViewModel> GetFullList()
         {
-            using (var context = new SchoolDbContext())
-            {
-                return context.Interests
-                .Select(CreateModel).ToList();
-            }
+            return context.Interests
+            .Select(CreateModel).ToList();
         }
 
         public void Insert(InterestBindingModel model)

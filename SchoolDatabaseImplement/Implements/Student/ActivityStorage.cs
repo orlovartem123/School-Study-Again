@@ -11,6 +11,13 @@ namespace SchoolDatabaseImplement.Implements.Student
 {
     public class ActivityStorage : IActivityStorage
     {
+        private readonly SchoolDbContext context;
+
+        public ActivityStorage(SchoolDbContext db)
+        {
+            context = db;
+        }
+
         public void Delete(ActivityBindingModel model)
         {
             throw new NotImplementedException();
@@ -18,12 +25,9 @@ namespace SchoolDatabaseImplement.Implements.Student
 
         public ActivityViewModel GetElement(ActivityBindingModel model)
         {
-            using (var context = new SchoolDbContext())
-            {
-                var el = context.Activities.Include(rec => rec.ActivityElectives)
-                .ThenInclude(rec => rec.Elective).ToList().FirstOrDefault(rec => rec.Id == model.Id);
-                return CreateModel(el);
-            }
+            var el = context.Activities.Include(rec => rec.ActivityElectives)
+            .ThenInclude(rec => rec.Elective).ToList().FirstOrDefault(rec => rec.Id == model.Id);
+            return CreateModel(el);
         }
 
         public List<ActivityViewModel> GetFilteredList(ActivityBindingModel model)
@@ -34,13 +38,10 @@ namespace SchoolDatabaseImplement.Implements.Student
 
         public List<ActivityViewModel> GetFullList()
         {
-            using (var context = new SchoolDbContext())
-            {
-                return context.Activities
-                .Include(rec => rec.ActivityElectives)
-                .ThenInclude(rec => rec.Elective).ToList()
-                .Select(CreateModel)?.ToList();
-            }
+            return context.Activities
+            .Include(rec => rec.ActivityElectives)
+            .ThenInclude(rec => rec.Elective).ToList()
+            .Select(CreateModel)?.ToList();
         }
 
         public void Insert(ActivityBindingModel model)
