@@ -1,15 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31129.286
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolStudyAgain", "SchoolStudyAgain.csproj", "{64FC718B-BE67-4E29-8DE0-98A68DF23684}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolStudyAgain", "SchoolStudyAgain.csproj", "{64FC718B-BE67-4E29-8DE0-98A68DF23684}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolBusinessLogic", "..\SchoolBusinessLogic\SchoolBusinessLogic.csproj", "{374BD851-37D3-4CD4-83A8-74895AF60EAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolBusinessLogic", "..\SchoolBusinessLogic\SchoolBusinessLogic.csproj", "{374BD851-37D3-4CD4-83A8-74895AF60EAD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolDatabaseImplement", "..\SchoolDatabaseImplement\SchoolDatabaseImplement.csproj", "{063E266F-CFA4-44CB-9C21-2E84A8D775CC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolRestApi", "..\SchoolRestApi\SchoolRestApi.csproj", "{2B21AC5F-E43C-4D13-BC35-3EA1EC1C8C0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolDatabaseImplement", "..\SchoolDatabaseImplement\SchoolDatabaseImplement.csproj", "{063E266F-CFA4-44CB-9C21-2E84A8D775CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +27,6 @@ Global
 		{063E266F-CFA4-44CB-9C21-2E84A8D775CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{063E266F-CFA4-44CB-9C21-2E84A8D775CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{063E266F-CFA4-44CB-9C21-2E84A8D775CC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2B21AC5F-E43C-4D13-BC35-3EA1EC1C8C0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2B21AC5F-E43C-4D13-BC35-3EA1EC1C8C0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2B21AC5F-E43C-4D13-BC35-3EA1EC1C8C0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2B21AC5F-E43C-4D13-BC35-3EA1EC1C8C0E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

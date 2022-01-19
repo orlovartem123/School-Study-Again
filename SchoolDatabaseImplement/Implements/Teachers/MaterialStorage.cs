@@ -11,20 +11,24 @@ namespace SchoolDatabaseImplement.Implements.Teacher
 {
     public class MaterialStorage : IMaterialStorage
     {
+        private readonly SchoolDbContext context;
+
+        public MaterialStorage(SchoolDbContext db)
+        {
+            context = db;
+        }
+
         public void Delete(MaterialBindingModel model)
         {
-            using (var context = new SchoolDbContext())
+            var element = context.Materials.FirstOrDefault(rec => rec.Id == model.Id);
+            if (element != null)
             {
-                var element = context.Materials.FirstOrDefault(rec => rec.Id == model.Id);
-                if (element != null)
-                {
-                    context.Materials.Remove(element);
-                    context.SaveChanges();
-                }
-                else
-                {
-                    throw new Exception("Element not found");
-                }
+                context.Materials.Remove(element);
+                context.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("Element not found");
             }
         }
 
@@ -34,17 +38,14 @@ namespace SchoolDatabaseImplement.Implements.Teacher
             {
                 return null;
             }
-            using (var context = new SchoolDbContext())
-            {
-                var material = context.Materials
-                .Include(rec => rec.ElectiveMaterials)
-                .ThenInclude(rec => rec.Elective)
-                .Include(rec => rec.MaterialInterests)
-                .ThenInclude(rec => rec.Interest)
-                .FirstOrDefault(rec => rec.Id == model.Id);
-                return material != null ?
-                CreateModel(material) : null;
-            }
+            var material = context.Materials
+            .Include(rec => rec.ElectiveMaterials)
+            .ThenInclude(rec => rec.Elective)
+            .Include(rec => rec.MaterialInterests)
+            .ThenInclude(rec => rec.Interest)
+            .FirstOrDefault(rec => rec.Id == model.Id);
+            return material != null ?
+            CreateModel(material) : null;
         }
 
         public List<MaterialViewModel> GetFilteredList(MaterialBindingModel model)
@@ -53,56 +54,47 @@ namespace SchoolDatabaseImplement.Implements.Teacher
             {
                 return null;
             }
-            using (var context = new SchoolDbContext())
-            {
-                return context.Materials
-                    .Include(rec => rec.ElectiveMaterials)
-                    .ThenInclude(rec => rec.Elective)
-                    .Include(rec => rec.MaterialInterests)
-                    .ThenInclude(rec => rec.Interest)
-                    .Where(rec =>
-                    (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date >=
-                    model.DateFrom.Value.Date && rec.DateCreate.Date <= model.DateTo.Value.Date) ||
-                    model.TeacherId.HasValue && rec.TeacherId == model.TeacherId)
-                    .Select(CreateModel).ToList();
-            }
+            return context.Materials
+                .Include(rec => rec.ElectiveMaterials)
+                .ThenInclude(rec => rec.Elective)
+                .Include(rec => rec.MaterialInterests)
+                .ThenInclude(rec => rec.Interest)
+                .Where(rec =>
+                (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date >=
+                model.DateFrom.Value.Date && rec.DateCreate.Date <= model.DateTo.Value.Date) ||
+                model.TeacherId.HasValue && rec.TeacherId == model.TeacherId)
+                .Select(CreateModel).ToList();
         }
 
         public List<MaterialViewModel> GetFullList()
         {
-            using (var context = new SchoolDbContext())
-            {
-                return context.Materials
-                .Include(rec => rec.ElectiveMaterials)
-                .ThenInclude(rec => rec.Elective)
-                .Include(rec => rec.MaterialInterests)
-                .ThenInclude(rec => rec.Interest).ToList()
-                .Select(CreateModel).ToList();
-            }
+            return context.Materials
+            .Include(rec => rec.ElectiveMaterials)
+            .ThenInclude(rec => rec.Elective)
+            .Include(rec => rec.MaterialInterests)
+            .ThenInclude(rec => rec.Interest).ToList()
+            .Select(CreateModel).ToList();
         }
 
         public void Insert(MaterialBindingModel model)
         {
             if (model != null)
             {
-                using (var context = new SchoolDbContext())
+                using (var transaction = context.Database.BeginTransaction())
                 {
-                    using (var transaction = context.Database.BeginTransaction())
+                    try
                     {
-                        try
-                        {
-                            context.Materials.Add(CreateModel(model));
-                            context.SaveChanges();
-                            var newId = context.Materials.FirstOrDefault(rec => rec.Name == model.Name).Id;
-                            context.MaterialInterests.AddRange(InsertMaterialInterests(model, newId));
-                            context.ElectiveMaterials.AddRange(InsertElectiveMaterials(model, newId));
-                            context.SaveChanges();
-                            transaction.Commit();
-                        }
-                        catch (Exception)
-                        {
-                            transaction.Rollback();
-                        }
+                        context.Materials.Add(CreateModel(model));
+                        context.SaveChanges();
+                        var newId = context.Materials.FirstOrDefault(rec => rec.Name == model.Name).Id;
+                        context.MaterialInterests.AddRange(InsertMaterialInterests(model, newId));
+                        context.ElectiveMaterials.AddRange(InsertElectiveMaterials(model, newId));
+                        context.SaveChanges();
+                        transaction.Commit();
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
                     }
                 }
             }
@@ -112,39 +104,36 @@ namespace SchoolDatabaseImplement.Implements.Teacher
         {
             if (model != null)
             {
-                using (var context = new SchoolDbContext())
+                using (var transaction = context.Database.BeginTransaction())
                 {
-                    using (var transaction = context.Database.BeginTransaction())
+                    try
                     {
-                        try
+                        var element = context.Materials
+                        .Include(rec => rec.MaterialInterests)
+                        .Include(rec => rec.ElectiveMaterials)
+                        .FirstOrDefault(rec => rec.Id == model.Id);
+                        if (element == null)
                         {
-                            var element = context.Materials
-                            .Include(rec => rec.MaterialInterests)
-                            .Include(rec => rec.ElectiveMaterials)
-                            .FirstOrDefault(rec => rec.Id == model.Id);
-                            if (element == null)
-                            {
-                                throw new Exception("Elem not found");
-                            }
-                            element.Name = model.Name;
-                            element.Price = model.Price;
-                            var interestsToRm = context.MaterialInterests.Where(rec => rec.MaterialId == model.Id);
-                            context.MaterialInterests.RemoveRange(interestsToRm);
-                            context.SaveChanges();
-                            var electviesToRm = context.ElectiveMaterials.Where(rec => rec.MaterialId == model.Id);
-                            context.ElectiveMaterials.RemoveRange(electviesToRm);
-                            context.SaveChanges();
-                            context.MaterialInterests.AddRange(InsertMaterialInterests(model, (int)model.Id));
-                            context.ElectiveMaterials.AddRange(InsertElectiveMaterials(model, (int)model.Id));
-                            var material = context.Materials.FirstOrDefault(rec => rec.Id == model.Id);
-                            UpdateMaterial(material, model);
-                            context.SaveChanges();
-                            transaction.Commit();
+                            throw new Exception("Elem not found");
                         }
-                        catch (Exception)
-                        {
-                            transaction.Rollback();
-                        }
+                        element.Name = model.Name;
+                        element.Price = model.Price;
+                        var interestsToRm = context.MaterialInterests.Where(rec => rec.MaterialId == model.Id);
+                        context.MaterialInterests.RemoveRange(interestsToRm);
+                        context.SaveChanges();
+                        var electviesToRm = context.ElectiveMaterials.Where(rec => rec.MaterialId == model.Id);
+                        context.ElectiveMaterials.RemoveRange(electviesToRm);
+                        context.SaveChanges();
+                        context.MaterialInterests.AddRange(InsertMaterialInterests(model, (int)model.Id));
+                        context.ElectiveMaterials.AddRange(InsertElectiveMaterials(model, (int)model.Id));
+                        var material = context.Materials.FirstOrDefault(rec => rec.Id == model.Id);
+                        UpdateMaterial(material, model);
+                        context.SaveChanges();
+                        transaction.Commit();
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
                     }
                 }
             }
