@@ -1,8 +1,6 @@
 ﻿using MobileClient.Services;
 using MobileClient.Views;
-using System;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace MobileClient
 {
@@ -12,9 +10,10 @@ namespace MobileClient
         public App()
         {
             InitializeComponent();
-
             DependencyService.Register<MockDataStore>();
-            MainPage = new AppShell();
+            ApiClient.Connect();
+
+            MainPage=new AppShell();
         }
 
         protected override void OnStart()

@@ -1,19 +1,18 @@
-﻿using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 
-namespace SchoolStudyAgain
+namespace MobileClient.Services
 {
-    public static class APIClient
+    public class ApiClient
     {
         private static readonly HttpClient client = new HttpClient();
 
-        public static void Connect(IConfiguration configuration)
+        public static void Connect()
         {
-            client.BaseAddress = new Uri(configuration["IPAddress"]);
+            client.BaseAddress = new Uri(Settings.ApiBaseAddress);
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }

@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using MobileClient.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace MobileClient.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginPage : ContentView
+    public partial class EnterPage : ContentPage
     {
-        public LoginPage()
+        public EnterPage()
         {
             InitializeComponent();
+            this.BindingContext = new EnterViewModel();
         }
     }
 }

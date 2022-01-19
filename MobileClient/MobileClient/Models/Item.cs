@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MobileClient.Models
+﻿namespace MobileClient.Models
 {
     public class Item
     {
