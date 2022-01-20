@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MobileClient.Localization;assembly=MobileClient"
+             x:Class="MobileClient.Views.Auth.RegisterPage">
+    <ContentPage.Content>
+        <StackLayout Spacing="3" Padding="15">
+            <Label Text="{local:Translate InputLoginLabelText}" FontSize="Medium" />
+            <Entry Text="{Binding Text, Mode=OneWay}" FontSize="Medium" />
+            <Label Text="{local:Translate InputPasswordLabelText}" FontSize="Medium" />
+            <Entry IsPassword="True" Text="{Binding Text, Mode=OneWay}" FontSize="Medium" />
+            <Label Text="{local:Translate ConfirmPasswordText}" FontSize="Medium" />
+            <Entry IsPassword="True" Text="{Binding Text, Mode=OneWay}" FontSize="Medium" />
+            <Button Margin="0,20,0,0" VerticalOptions="Center" Text="{local:Translate RegisterButtonText}" Clicked="ToShell" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

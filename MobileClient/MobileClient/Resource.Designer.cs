@@ -61,6 +61,33 @@ namespace MobileClient {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Confirm password.
+        /// </summary>
+        internal static string ConfirmPasswordText {
+            get {
+                return ResourceManager.GetString("ConfirmPasswordText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Login.
+        /// </summary>
+        internal static string InputLoginLabelText {
+            get {
+                return ResourceManager.GetString("InputLoginLabelText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Password.
+        /// </summary>
+        internal static string InputPasswordLabelText {
+            get {
+                return ResourceManager.GetString("InputPasswordLabelText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Login.
         /// </summary>
         internal static string LoginButtonText {

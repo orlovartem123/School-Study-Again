@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace MobileClient.Views
+namespace MobileClient.Views.Auth
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginPage : ContentView
+    public partial class LoginPage : ContentPage
     {
         public LoginPage()
         {

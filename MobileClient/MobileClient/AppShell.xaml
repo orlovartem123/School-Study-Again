@@ -2,6 +2,7 @@
 <Shell xmlns="http://xamarin.com/schemas/2014/forms" 
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:MobileClient.Views"
+       xmlns:auth="clr-namespace:MobileClient.Views.Auth"
        Title="MobileClient"
        x:Class="MobileClient.AppShell">
 
@@ -97,7 +98,7 @@
         await Shell.Current.GoToAsync("//LoginPage");
     -->
     <TabBar>
-        <ShellContent Route="EnterPage" ContentTemplate="{DataTemplate local:EnterPage}" />
+        <ShellContent Route="EnterPage" ContentTemplate="{DataTemplate auth:EnterPage}" />
     </TabBar>
 
     <!-- Optional Templates 

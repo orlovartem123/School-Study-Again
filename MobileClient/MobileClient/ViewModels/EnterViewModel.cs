@@ -1,4 +1,5 @@
 ﻿using MobileClient.Views;
+using MobileClient.Views.Auth;
 using Xamarin.Forms;
 
 namespace MobileClient.ViewModels

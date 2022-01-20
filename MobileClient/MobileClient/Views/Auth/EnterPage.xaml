@@ -4,13 +4,13 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="MobileClient.Views.EnterPage"
+             x:Class="MobileClient.Views.Auth.EnterPage"
              Shell.NavBarIsVisible="False"
              xmlns:local="clr-namespace:MobileClient.Localization;assembly=MobileClient">
     <ContentPage.Content>
         <StackLayout Padding="10,0,10,0" VerticalOptions="Center">
-            <Button VerticalOptions="Center" Text="{local:Translate LoginButtonText}" Command="{Binding LoginCommand}"/>
-            <Button VerticalOptions="Center" Margin="0,25,0,0" Text="{local:Translate RegisterButtonText}" Command="{Binding RegisterCommand}"/>
+            <Button VerticalOptions="Center" Text="{local:Translate LoginButtonText}" Clicked="ToLoginPage" />
+            <Button VerticalOptions="Center" Margin="0,25,0,0" Text="{local:Translate RegisterButtonText}" Clicked="ToRegisterPage" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

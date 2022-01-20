@@ -20,7 +20,7 @@ namespace SchoolStudyAgainApi
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseKestrel().UseUrls("http://192.168.1.112:5001").UseIISIntegration().UseStartup<Startup>();
+                    webBuilder.UseKestrel().UseUrls("http://192.168.31.104:5001").UseIISIntegration().UseStartup<Startup>();
                 });
     }
 }
