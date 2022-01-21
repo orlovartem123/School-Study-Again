@@ -1,6 +1,7 @@
 ﻿using MobileClient.Views;
 using MobileClient.Views.Auth;
 using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace MobileClient
@@ -12,28 +13,23 @@ namespace MobileClient
             InitializeComponent();
             Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
             Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
-            Routing.RegisterRoute(nameof(EnterPage), typeof(EnterPage));
+            Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
+            Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
+            Routing.RegisterRoute(nameof(AboutPage), typeof(AboutPage));
         }
 
-        private async void OnMenuItemClicked(object sender, EventArgs e)
+        public void InitLocation()
         {
-            //if (!Application.Current.Properties.ContainsKey("login"))
-            //{
-            //    Application.Current.Properties.Add("authToken", string.Empty);
-            //    Application.Current.Properties.Add("login", false);
-                await Current.GoToAsync($"//{nameof(EnterPage)}");
-            //}
-            //else
-            //{
-            //    if ((bool)Application.Current.Properties["login"])
-            //    {
-            //        await Current.GoToAsync("//AboutPage");
-            //    }
-            //    else
-            //    {
-            //        await Current.GoToAsync($"//{nameof(EnterPage)}");
-            //    }
-            //}
+            if ((bool)Application.Current.Properties["login"])
+                Current.GoToAsync($"//{nameof(LoginPage)}");
+        }
+
+        private async void OnLogOutItemClicked(object sender, EventArgs e)
+        {
+            Application.Current.Properties["login"] = false;
+            Application.Current.Properties["authToken"] = string.Empty;
+
+            await Current.GoToAsync($"//{nameof(LoginPage)}");
         }
     }
 }

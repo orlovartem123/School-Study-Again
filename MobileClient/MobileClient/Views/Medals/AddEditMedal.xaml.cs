@@ -7,19 +7,14 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace MobileClient.Views.Auth
+namespace MobileClient.Views.Medals
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginPage : ContentPage
+    public partial class AddEditMedal : ContentPage
     {
-        public LoginPage()
+        public AddEditMedal()
         {
             InitializeComponent();
-        }
-
-        private async void Button_Clicked(object sender, EventArgs e)
-        {
-            await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
         }
     }
 }

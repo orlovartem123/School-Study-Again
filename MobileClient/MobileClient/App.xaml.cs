@@ -14,23 +14,16 @@ namespace MobileClient
             DependencyService.Register<MockDataStore>();
             ApiClient.Connect();
 
-            if (!Application.Current.Properties.ContainsKey("login"))
+            if (!Current.Properties.ContainsKey("login"))
             {
-                Application.Current.Properties.Add("authToken", string.Empty);
-                Application.Current.Properties.Add("login", false);
-                MainPage = new NavigationPage(new EnterPage());
+                Current.Properties.Add("authToken", string.Empty);
+                Current.Properties.Add("login", false);
             }
-            else
-            {
-                if ((bool)Application.Current.Properties["login"])
-                {
-                    MainPage = new AppShell();
-                }
-                else
-                {
-                    MainPage = new NavigationPage(new EnterPage());
-                }
-            }
+
+            var shell = new AppShell();
+            MainPage = shell;
+
+            shell.InitLocation();
         }
 
         protected override void OnStart()

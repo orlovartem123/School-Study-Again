@@ -15,14 +15,14 @@ namespace MobileClient.Views.Auth
 
         private async void ToLoginPage(object sender, EventArgs e)
         {
-            //await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
-            await Navigation.PushAsync(new LoginPage());
+            await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
+            //await Navigation.PushAsync(new LoginPage());
         }
 
         private async void ToRegisterPage(object sender, EventArgs e)
         {
-            //await Shell.Current.GoToAsync($"//{nameof(RegisterPage)}");
-            await Navigation.PushAsync(new RegisterPage());
+            await Shell.Current.GoToAsync($"//{nameof(RegisterPage)}");
+            //await Navigation.PushAsync(new RegisterPage());
         }
     }
 }

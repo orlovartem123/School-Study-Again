@@ -7,7 +7,37 @@
     -->
     <Application.Resources>
         <ResourceDictionary>
-            <Color x:Key="Primary">#9acd32</Color>
+            <Color x:Key="Primary_d">#274e13</Color>
+            <Color x:Key="Primary_l">#000000</Color>
+            <Color x:Key="Background_d">#1d1d1d</Color>
+            <Color x:Key="Background_l">WhiteSmoke</Color>
+            <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource Background_d}, Light={StaticResource Background_l}}"></Setter>
+            </Style>
+
+            <Style TargetType="Grid">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource Background_d}, Light={StaticResource Background_l}}"></Setter>
+            </Style>
+
+            <Style TargetType="Shell" ApplyToDerivedTypes="True">
+                <Setter Property="FlyoutBackgroundColor" Value="{AppThemeBinding Dark={StaticResource Background_d}, Light={StaticResource Background_l}}"></Setter>
+            </Style>
+            
+            <Style x:Key="ShellStyle" TargetType="Element">
+                <Setter Property="Shell.ForegroundColor" Value="{StaticResource Background_l}" />
+                <Setter Property="Shell.TitleColor" Value="{StaticResource Background_l}" />
+                <Setter Property="Shell.DisabledColor" Value="{AppThemeBinding Dark={StaticResource Background_d}, Light={StaticResource Background_l}}" />
+                <Setter Property="Shell.UnselectedColor" Value="{AppThemeBinding Dark={StaticResource Background_d}, Light={StaticResource Background_l}}" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="{AppThemeBinding Dark={StaticResource Background_d}, Light={StaticResource Background_l}}"/>
+                <Setter Property="Shell.TabBarUnselectedColor" Value="{StaticResource Background_l}"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="{StaticResource Background_l}"/>
+                <Setter Property="Shell.BackgroundColor" Value="{AppThemeBinding Dark={StaticResource Primary_d}, Light={StaticResource Primary_l}}"></Setter>
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{AppThemeBinding Dark={StaticResource Primary_d}, Light={StaticResource Primary_l}}"></Setter>
+            </Style>
+
+            <Style TargetType="TabBar" BasedOn="{StaticResource ShellStyle}" />
+            <Style TargetType="FlyoutItem" BasedOn="{StaticResource ShellStyle}" />
+
             <Style TargetType="Button">
                 <Setter Property="TextColor" Value="White"></Setter>
                 <Setter Property="VisualStateManager.VisualStateGroups">
@@ -15,17 +45,22 @@
                         <VisualStateGroup x:Name="CommonStates">
                             <VisualState x:Name="Normal">
                                 <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                                    <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource Primary_d}, Light={StaticResource Primary_l}}" />
                                 </VisualState.Setters>
                             </VisualState>
                             <VisualState x:Name="Disabled">
                                 <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="#332196F3" />
+                                    <Setter Property="BackgroundColor" Value="#8e8e8e" />
                                 </VisualState.Setters>
                             </VisualState>
                         </VisualStateGroup>
                     </VisualStateGroupList>
                 </Setter>
+            </Style>
+            
+            <Style TargetType="Entry">
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource Background_d}, Light={StaticResource Background_l}}"></Setter>
+                <Setter Property="PlaceholderColor" Value="{AppThemeBinding Dark={StaticResource Background_d}, Light={StaticResource Background_l}}"></Setter>
             </Style>
         </ResourceDictionary>        
     </Application.Resources>

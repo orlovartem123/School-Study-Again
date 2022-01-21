@@ -20,7 +20,7 @@ namespace MobileClient.Views.Auth
         private async void ToShell(object sender, EventArgs e)
         {
             //await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
-            await Navigation.PushAsync(new AppShell());
+            //await Navigation.PushAsync(new AppShell());
         }
     }
 }

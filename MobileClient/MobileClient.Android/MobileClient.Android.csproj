@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Localize.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="CustomRenderers\MyEntryRenderer.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -96,6 +97,12 @@
       <Project>{9B886375-61B2-441D-A494-E04F80861F1E}</Project>
       <Name>MobileClient</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\reg_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\login_icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
