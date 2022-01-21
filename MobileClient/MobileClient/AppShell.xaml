@@ -3,13 +3,16 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:MobileClient.Views"
        xmlns:auth="clr-namespace:MobileClient.Views.Auth"
+       xmlns:materials="clr-namespace:MobileClient.Views.Materials"
+       xmlns:electives="clr-namespace:MobileClient.Views.Electives"
+       xmlns:medals="clr-namespace:MobileClient.Views.Medals"
        Title="MobileClient"
        x:Class="MobileClient.AppShell">
 
     <Shell.Resources>
         <ResourceDictionary>
             <Style Class="FlyoutItemLabelStyle" TargetType="Label">
-                <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource Background_d}, Light={StaticResource Background_l}}"></Setter>
             </Style>
             <Style Class="FlyoutItemLayoutStyle" TargetType="Layout" ApplyToDerivedTypes="True">
                 <Setter Property="VisualStateManager.VisualStateGroups">
@@ -18,7 +21,7 @@
                             <VisualState x:Name="Normal">
                                 <VisualState.Setters>
                                     <Setter Property="BackgroundColor" Value="{x:OnPlatform UWP=Transparent, iOS=White}" />
-                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource Background_l}" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource Background_d}" />
                                 </VisualState.Setters>
                             </VisualState>
                             <VisualState x:Name="Selected">
@@ -47,14 +50,17 @@
         </ResourceDictionary>
     </Shell.Resources>
 
-    <FlyoutItem Title="About" Icon="icon_about.png">
-        <ShellContent Route="Materials" ContentTemplate="{DataTemplate local:AboutPage}" />
+    <FlyoutItem Title="About" Icon="about.png">
+        <ShellContent Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="About" Icon="icon_about.png">
-        <ShellContent Route="Electives" ContentTemplate="{DataTemplate local:AboutPage}" />
+    <FlyoutItem Title="Materials" Icon="materials.png">
+        <ShellContent Route="MaterialsList" ContentTemplate="{DataTemplate materials:MaterialsList}" />
     </FlyoutItem>
-    <FlyoutItem Title="About" Icon="icon_about.png">
-        <ShellContent Route="Medals" ContentTemplate="{DataTemplate local:AboutPage}" />
+    <FlyoutItem Title="Electives" Icon="electives.png">
+        <ShellContent Route="ElectivesList" ContentTemplate="{DataTemplate electives:ElectivesList}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Medals" Icon="medals.png">
+        <ShellContent Route="MedalsList" ContentTemplate="{DataTemplate medals:MedalsList}" />
     </FlyoutItem>
 
     <MenuItem Text="Logout" StyleClass="MenuItemLayoutStyle" Clicked="OnLogOutItemClicked">
