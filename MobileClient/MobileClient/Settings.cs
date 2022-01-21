@@ -2,6 +2,6 @@
 {
     internal class Settings
     {
-        public static readonly string ApiBaseAddress = "http://192.168.1.112";
+        public static readonly string ApiBaseAddress = "http://192.168.7.105";
     }
 }
