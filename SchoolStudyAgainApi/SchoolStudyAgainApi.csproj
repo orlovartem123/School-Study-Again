@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SchoolDatabaseImplement\SchoolDatabaseImplement.csproj" />
+    <ProjectReference Include="..\SchoolStudyAgain.Interface\SchoolStudyAgain.Interface.csproj" />
   </ItemGroup>
 
 </Project>

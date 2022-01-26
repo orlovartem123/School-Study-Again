@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileClient.Android", "Mob
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MobileClient", "MobileClient\MobileClient.csproj", "{4FFD7E58-AA4A-43F8-AF90-E6FD3A3290F6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolStudyAgain.Interface", "..\SchoolStudyAgain.Interface\SchoolStudyAgain.Interface.csproj", "{38B396CE-1054-478A-A9BA-9B7C5873190A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,10 +25,6 @@ Global
 		{4FFD7E58-AA4A-43F8-AF90-E6FD3A3290F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4FFD7E58-AA4A-43F8-AF90-E6FD3A3290F6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4FFD7E58-AA4A-43F8-AF90-E6FD3A3290F6}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{38B396CE-1054-478A-A9BA-9B7C5873190A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{38B396CE-1054-478A-A9BA-9B7C5873190A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{38B396CE-1054-478A-A9BA-9B7C5873190A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{38B396CE-1054-478A-A9BA-9B7C5873190A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

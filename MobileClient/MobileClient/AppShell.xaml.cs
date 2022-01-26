@@ -30,7 +30,7 @@ namespace MobileClient
 
         public void InitLocation()
         {
-            if ((bool)Application.Current.Properties["login"])
+            if (!(bool)Application.Current.Properties["login"])
                 Current.GoToAsync($"//{nameof(LoginPage)}");
         }
 

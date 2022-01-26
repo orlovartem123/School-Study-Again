@@ -1,5 +1,7 @@
-﻿using System;
+﻿using MobileClient.Services.Auth;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +21,17 @@ namespace MobileClient.Views.Auth
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
+            var result = await AuthService.TrySignIn(new Models.Auth.SignInModel
+            {
+                Login = entryLogin.Text,
+                Password = entryPassword.Text
+            });
+
+            if (result.Equals(string.Empty))
+                await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
+
+            errorField.IsVisible = true;
+            errorField.Text = result;
         }
     }
 }

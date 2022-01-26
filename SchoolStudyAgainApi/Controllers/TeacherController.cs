@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SchoolBusinessLogic.BindingModels.TeacherModels;
 using SchoolBusinessLogic.BusinessLogic.TeacherLogics;
 using SchoolBusinessLogic.ViewModels.TeacherModels;
+using SchoolStudyAgain.Interface;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace SchoolStudyAgainApi.Controllers
 {
+    [Authorize(Roles = "admin,teacher")]
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class TeacherController : ControllerBase
@@ -24,6 +27,12 @@ namespace SchoolStudyAgainApi.Controllers
             _material = material;
             _elective = elective;
             _medal = medal;
+        }
+
+        [HttpGet]
+        public CustomHttpResponse Ping()
+        {
+            return new CustomHttpResponse { Data = "Pong" };
         }
 
         #region Materials

@@ -5,10 +5,11 @@
              x:Class="MobileClient.Views.Auth.LoginPage">
     <ContentPage.Content>
         <StackLayout Spacing="3" Padding="15">
-            <Label Text="{local:Translate InputLoginLabelText}" FontSize="Medium" />
-            <Entry Text="{Binding Text, Mode=OneWay}" FontSize="Medium" />
-            <Label Text="{local:Translate InputPasswordLabelText}" FontSize="Medium" />
-            <Entry IsPassword="True" Text="{Binding Text, Mode=OneWay}" FontSize="Medium" />
+            <Label x:Name="errorField" FontSize="Small" IsVisible="false" TextColor="Red" Margin="0,0,0,15"></Label>
+            <Label Text="{local:Translate InputLoginLabelText}" TextColor="{AppThemeBinding Dark={StaticResource Background_l}, Light={StaticResource Background_d}}" FontSize="Medium" />
+            <Entry x:Name="entryLogin" Text="{Binding Text, Mode=OneWay}" TextColor="{AppThemeBinding Dark={StaticResource Background_l}, Light={StaticResource Background_d}}" FontSize="Medium" />
+            <Label Text="{local:Translate InputPasswordLabelText}" TextColor="{AppThemeBinding Dark={StaticResource Background_l}, Light={StaticResource Background_d}}" FontSize="Medium" />
+            <Entry x:Name="entryPassword" IsPassword="True" Text="{Binding Text, Mode=OneWay}" TextColor="{AppThemeBinding Dark={StaticResource Background_l}, Light={StaticResource Background_d}}" FontSize="Medium" />
             <Button Margin="0,20,0,0" VerticalOptions="Center" Text="{local:Translate LoginButtonText}" Clicked="Button_Clicked" />
         </StackLayout>
     </ContentPage.Content>

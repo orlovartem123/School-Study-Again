@@ -12,7 +12,6 @@ namespace MobileClient
         {
             InitializeComponent();
             DependencyService.Register<MockDataStore>();
-            ApiClient.Connect();
 
             if (!Current.Properties.ContainsKey("login"))
             {
