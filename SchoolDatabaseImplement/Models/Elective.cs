@@ -9,7 +9,7 @@ namespace SchoolDatabaseImplement.Models
     {
         public int Id { get; set; }
 
-        public int TeacherId { get; set; }
+        public string TeacherId { get; set; }
 
         [Required]
         public string Name { get; set; }

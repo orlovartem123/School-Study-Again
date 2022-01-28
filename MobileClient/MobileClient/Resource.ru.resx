@@ -144,4 +144,7 @@
   <data name="RegisterButtonText" xml:space="preserve">
     <value>Регистрация</value>
   </data>
+  <data name="ToolBarItemAdd" xml:space="preserve">
+    <value>Добавить</value>
+  </data>
 </root>

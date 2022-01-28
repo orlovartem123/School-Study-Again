@@ -140,5 +140,14 @@ namespace MobileClient {
                 return ResourceManager.GetString("RegisterButtonText", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Add.
+        /// </summary>
+        internal static string ToolBarItemAdd {
+            get {
+                return ResourceManager.GetString("ToolBarItemAdd", resourceCulture);
+            }
+        }
     }
 }

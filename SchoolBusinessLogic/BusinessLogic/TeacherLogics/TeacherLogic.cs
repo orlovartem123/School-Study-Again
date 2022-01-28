@@ -21,7 +21,7 @@ namespace SchoolBusinessLogic.BusinessLogic.TeacherLogics
             {
                 return _teacherStorage.GetFullList();
             }
-            if (model.Id.HasValue)
+            if (model.Id != null)
             {
                 return new List<TeacherViewModel> { _teacherStorage.GetElement(model) };
             }
@@ -39,7 +39,7 @@ namespace SchoolBusinessLogic.BusinessLogic.TeacherLogics
             {
                 throw new Exception("There is already a teacher with the same email or login");
             }
-            if (model.Id.HasValue)
+            if (model.Id != null)
             {
                 _teacherStorage.Update(model);
             }

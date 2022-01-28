@@ -57,7 +57,7 @@ namespace SchoolDatabaseImplement.Implements.Teacher
         public List<ElectiveViewModel> GetFilteredList(ElectiveBindingModel model)
         {
             return context.Electives.Where(rec =>
-                (model.TeacherId.HasValue && rec.TeacherId == model.TeacherId) ||
+                (model.TeacherId != null && rec.TeacherId == model.TeacherId) ||
                 (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo))
                 .Include(rec => rec.ElectiveMaterials)
                 .ThenInclude(rec => rec.Material)
@@ -131,7 +131,7 @@ namespace SchoolDatabaseImplement.Implements.Teacher
             {
                 Name = model.Name,
                 Price = model.Price,
-                TeacherId = (int)model.TeacherId,
+                TeacherId = model.TeacherId,
                 DateCreate = model.DateCreate
             };
         }

@@ -12,19 +12,19 @@ namespace MobileClient.Views.Electives
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ElectivesList : ContentPage
     {
-        public ObservableCollection<string> Items { get; set; }
+        public ObservableCollection<Class1> Items { get; set; }
 
         public ElectivesList()
         {
             InitializeComponent();
 
-            Items = new ObservableCollection<string>
+            Items = new ObservableCollection<Class1>
             {
-                "Item 1",
-                "Item 2",
-                "Item 3",
-                "Item 4",
-                "Item 5"
+                new Class1{Name="fff",Age=5},
+                new Class1{Name="s",Age=5},
+                new Class1{Name="3",Age=2},
+                new Class1{Name="f",Age=1},
+               new Class1{Name="hfg",Age=5},
             };
 
             MyListView.ItemsSource = Items;
@@ -40,5 +40,17 @@ namespace MobileClient.Views.Electives
             //Deselect Item
             ((ListView)sender).SelectedItem = null;
         }
+
+        private void ToolbarItem_Clicked(object sender, EventArgs e)
+        {
+
+        }
+    }
+
+    public class Class1
+    {
+        public string Name { get; set; }
+
+        public int Age { get; set; }
     }
 }

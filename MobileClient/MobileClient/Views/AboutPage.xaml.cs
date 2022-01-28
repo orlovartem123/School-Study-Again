@@ -17,6 +17,8 @@ namespace MobileClient.Views
         {
             ApiClient.ConnectApi(LocalPropsProviderService.AuthToken);
 
+            var teacherId = LocalPropsProviderService.TeacherId;
+
             var result = await ApiClient.GetRequest("api/Teacher/Ping");
         }
     }

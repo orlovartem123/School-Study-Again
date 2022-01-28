@@ -5,6 +5,7 @@ using MobileClient.Services.Settings;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -57,8 +58,10 @@ namespace MobileClient.Services.Auth
             if (result.StatusCode == System.Net.HttpStatusCode.NoContent)
             {
                 result = await ApiClient.GetRequest("MobileAccount/Token");
+                var obj = JsonSerializer.Deserialize<TokenResponseContent>(result.Data.ToString());
                 LocalPropsProviderService.Login = true;
-                LocalPropsProviderService.AuthToken = result.Data.ToString();
+                LocalPropsProviderService.AuthToken = obj.Token;
+                LocalPropsProviderService.TeacherId = obj.TeacherId;
                 return string.Empty;
             }
 

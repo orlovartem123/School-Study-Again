@@ -14,5 +14,7 @@ namespace MobileClient.Models.SqlLite
         public bool Login { get; set; }
 
         public string AuthToken { get; set; }
+
+        public string TeacherId { get; set; }
     }
 }

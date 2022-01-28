@@ -6,7 +6,7 @@ namespace SchoolDatabaseImplement.Models
     {
         public int Id { get; set; }
 
-        public int TeacherId { get; set; }
+        public string TeacherId { get; set; }
 
         public int? ElectiveId { get; set; }
 

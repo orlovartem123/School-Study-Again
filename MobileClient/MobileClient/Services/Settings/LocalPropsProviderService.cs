@@ -27,5 +27,16 @@ namespace MobileClient.Services.Settings
                 App.Database.ApplySettings(settings);
             }
         }
+
+        public static string TeacherId
+        {
+            get => App.Database.GetProps().TeacherId;
+            set
+            {
+                var settings = App.Database.GetProps();
+                settings.TeacherId = value;
+                App.Database.ApplySettings(settings);
+            }
+        }
     }
 }

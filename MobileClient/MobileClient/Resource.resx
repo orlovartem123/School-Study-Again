@@ -144,4 +144,7 @@
   <data name="RegisterButtonText" xml:space="preserve">
     <value>Register</value>
   </data>
+  <data name="ToolBarItemAdd" xml:space="preserve">
+    <value>Add</value>
+  </data>
 </root>

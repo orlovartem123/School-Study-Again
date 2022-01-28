@@ -48,7 +48,7 @@ namespace SchoolDatabaseImplement.Implements.Teacher
         public List<MedalViewModel> GetFilteredList(MedalBindingModel model)
         {
             return context.Medals.Where(rec =>
-                (model.TeacherId.HasValue && rec.TeacherId == model.TeacherId))
+                (model.TeacherId!=null && rec.TeacherId == model.TeacherId))
                 .Include(rec => rec.Elective)
                 .Select(CreateModel).ToList();
         }
@@ -100,7 +100,7 @@ namespace SchoolDatabaseImplement.Implements.Teacher
             return new Medal
             {
                 Name = model.Name,
-                TeacherId = (int)model.TeacherId,
+                TeacherId = model.TeacherId,
                 Value = model.Value,
                 ElectiveId = model.ElectiveId == -1 ? null : model.ElectiveId
             };

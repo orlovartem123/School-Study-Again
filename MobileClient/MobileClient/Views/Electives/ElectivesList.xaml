@@ -1,32 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage Title="electives list" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MobileClient.Localization;assembly=MobileClient"
              x:Class="MobileClient.Views.Electives.ElectivesList">
-  <ListView x:Name="MyListView"
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{local:Translate ToolBarItemAdd}" Clicked="ToolbarItem_Clicked" />
+    </ContentPage.ToolbarItems>
+
+    <ListView x:Name="MyListView"
             ItemsSource="{Binding Items}"
             ItemTapped="Handle_ItemTapped"
+            RowHeight="60"
             CachingStrategy="RecycleElement">
-    <!--Built in Cells-->
-    <ListView.ItemTemplate>
-        <DataTemplate>
-            <TextCell Text="{Binding .}" />
-        </DataTemplate>
-    </ListView.ItemTemplate>
-    
-    <!--Custom View Cells-->
-    <!--
-    <ListView.ItemTemplate>
-      <DataTemplate>
-        <ViewCell>
-          <StackLayout>
-            <Label Text="{Binding Text}" 
-                   Style="{DynamicResource ListItemTextStyle}" />
-            <Label Text="{Binding Detail}" 
-                   Style="{DynamicResource ListItemDetailTextStyle}"/>
-          </StackLayout>
-        </ViewCell>
-      </DataTemplate>
-    </ListView.ItemTemplate>
-    -->
-  </ListView>
+
+        <!--Custom View Cells-->
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout>
+                        <Label FontSize="Default" Text="{Binding Name}" Style="{DynamicResource ListItemTextStyle}" />
+                        <Label Text="{Binding Age}" Style="{DynamicResource ListItemDetailTextStyle}"/>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+        
+    </ListView>
 </ContentPage>

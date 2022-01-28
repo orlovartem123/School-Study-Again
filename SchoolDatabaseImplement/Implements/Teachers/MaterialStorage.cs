@@ -62,7 +62,7 @@ namespace SchoolDatabaseImplement.Implements.Teacher
                 .Where(rec =>
                 (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date >=
                 model.DateFrom.Value.Date && rec.DateCreate.Date <= model.DateTo.Value.Date) ||
-                model.TeacherId.HasValue && rec.TeacherId == model.TeacherId)
+                model.TeacherId != null && rec.TeacherId == model.TeacherId)
                 .Select(CreateModel).ToList();
         }
 
@@ -161,7 +161,7 @@ namespace SchoolDatabaseImplement.Implements.Teacher
                 Name = model.Name,
                 Price = model.Price,
                 DateCreate = model.DateCreate,
-                TeacherId = (int)model.TeacherId
+                TeacherId = model.TeacherId
             };
         }
 

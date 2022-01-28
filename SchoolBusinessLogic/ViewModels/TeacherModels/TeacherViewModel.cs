@@ -6,7 +6,7 @@ namespace SchoolBusinessLogic.ViewModels.TeacherModels
     public class TeacherViewModel
     {
         [DataMember]
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         [DataMember]
         public string Name { get; set; }
