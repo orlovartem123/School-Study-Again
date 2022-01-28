@@ -17,21 +17,32 @@ namespace MobileClient.Views.Auth
         public LoginPage()
         {
             InitializeComponent();
+
+            entryLogin.Text = "admin@gmail.com";
+            entryPassword.Text = "Aa123!";
         }
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
-            var result = await AuthService.TrySignIn(new Models.Auth.SignInModel
+            var errors = new StringBuilder();
+
+            var model = new Models.Auth.SignInModel
             {
                 Login = entryLogin.Text,
                 Password = entryPassword.Text
-            });
+            };
 
-            if (result.Equals(string.Empty))
-                await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
+            errors.Append(model.Validate());
+
+            if (string.IsNullOrEmpty(errors.ToString()))
+            {
+                errors.Append(await AuthService.TrySignInAsync(model));
+                if (string.IsNullOrEmpty(errors.ToString()))
+                    await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
+            }
 
             errorField.IsVisible = true;
-            errorField.Text = result;
+            errorField.Text = errors.ToString();
         }
     }
 }

@@ -70,6 +70,33 @@ namespace MobileClient {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Unknown error.
+        /// </summary>
+        internal static string DefaultErrorMessage {
+            get {
+                return ResourceManager.GetString("DefaultErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Login is null or empty.
+        /// </summary>
+        internal static string EmptyLoginError {
+            get {
+                return ResourceManager.GetString("EmptyLoginError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Password is null or empty.
+        /// </summary>
+        internal static string EmptyPasswordError {
+            get {
+                return ResourceManager.GetString("EmptyPasswordError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Login.
         /// </summary>
         internal static string InputLoginLabelText {
@@ -93,6 +120,15 @@ namespace MobileClient {
         internal static string LoginButtonText {
             get {
                 return ResourceManager.GetString("LoginButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Passwords are not equals.
+        /// </summary>
+        internal static string PasswordConfirmError {
+            get {
+                return ResourceManager.GetString("PasswordConfirmError", resourceCulture);
             }
         }
         

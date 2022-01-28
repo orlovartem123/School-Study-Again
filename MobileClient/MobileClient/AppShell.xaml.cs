@@ -1,4 +1,6 @@
-﻿using MobileClient.Views;
+﻿using MobileClient.Services.Auth;
+using MobileClient.Services.Settings;
+using MobileClient.Views;
 using MobileClient.Views.Auth;
 using MobileClient.Views.Electives;
 using MobileClient.Views.Materials;
@@ -28,16 +30,18 @@ namespace MobileClient
             Routing.RegisterRoute(nameof(BindActivityWithElectives), typeof(BindActivityWithElectives));
         }
 
-        public void InitLocation()
+        public async Task InitLocationAsync()
         {
-            if (!(bool)Application.Current.Properties["login"])
-                Current.GoToAsync($"//{nameof(LoginPage)}");
+            var authToken = LocalPropsProviderService.AuthToken;
+
+            if (authToken.Equals(string.Empty) ||
+                !(LocalPropsProviderService.Login = await AuthService.IsAuthenticatedAsync(authToken)))
+                await Current.GoToAsync($"//{nameof(LoginPage)}");
         }
 
         private async void OnLogOutItemClicked(object sender, EventArgs e)
         {
-            Application.Current.Properties["login"] = false;
-            Application.Current.Properties["authToken"] = string.Empty;
+            await AuthService.Logout();
 
             await Current.GoToAsync($"//{nameof(LoginPage)}");
         }

@@ -11,7 +11,6 @@ namespace MobileClient.Localization
     public class TranslateExtension : IMarkupExtension
     {
         readonly CultureInfo ci;
-        const string ResourceId = "MobileClient.Resource";
 
         public TranslateExtension()
         {
@@ -25,7 +24,7 @@ namespace MobileClient.Localization
             if (Text == null)
                 return "";
 
-            ResourceManager resmgr = new ResourceManager(ResourceId,
+            ResourceManager resmgr = new ResourceManager(GlobalSettings.ResourceId,
                         typeof(TranslateExtension).GetTypeInfo().Assembly);
 
             var translation = resmgr.GetString(Text, ci);

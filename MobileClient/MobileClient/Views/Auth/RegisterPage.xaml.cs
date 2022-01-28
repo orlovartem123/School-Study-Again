@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MobileClient.Services.Auth;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,10 +18,28 @@ namespace MobileClient.Views.Auth
             InitializeComponent();
         }
 
-        private async void ToShell(object sender, EventArgs e)
+        private async void OnRegisterButton_Clicked(object sender, EventArgs e)
         {
-            //await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
-            //await Navigation.PushAsync(new AppShell());
+            var errors = new StringBuilder();
+
+            var model = new Models.Auth.SignUpModel
+            {
+                Login = entryLogin.Text,
+                Password = entryPassword.Text,
+                ConfirmPassword = entryPasswordConfirm.Text,
+            };
+
+            errors.Append(model.Validate());
+
+            if (string.IsNullOrEmpty(errors.ToString()))
+            {
+                errors.Append(await AuthService.TrySignUp(model));
+                if (string.IsNullOrEmpty(errors.ToString()))
+                    await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
+            }
+
+            errorField.IsVisible = true;
+            errorField.Text = errors.ToString();
         }
     }
 }

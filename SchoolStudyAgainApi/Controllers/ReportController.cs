@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SchoolBusinessLogic.BindingModels.Report;
 using SchoolBusinessLogic.BusinessLogic.DocumentLogics;
 using System.Collections.Generic;
 
 namespace SchoolStudyAgainApi.Controllers
 {
+    [Authorize(Roles = "admin,teacher,student")]
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class ReportController : Controller

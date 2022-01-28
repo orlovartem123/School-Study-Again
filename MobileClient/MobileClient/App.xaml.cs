@@ -1,28 +1,45 @@
-﻿using MobileClient.Services;
+﻿using MobileClient.Repos;
+using MobileClient.Services;
+using MobileClient.Services.Auth;
+using MobileClient.Services.Settings;
 using MobileClient.Views;
 using MobileClient.Views.Auth;
+using System;
+using System.IO;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace MobileClient
 {
     public partial class App : Application
     {
+        private static AppLocalPropsRepository database;
 
+        public static AppLocalPropsRepository Database
+        {
+            get
+            {
+                if (database == null)
+                {
+                    database = new AppLocalPropsRepository(
+                        Path.Combine(
+                            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), GlobalSettings.DATABASE_NAME));
+
+                    database.InitDb();
+                }
+                return database;
+            }
+
+        }
         public App()
         {
             InitializeComponent();
             DependencyService.Register<MockDataStore>();
 
-            if (!Current.Properties.ContainsKey("login"))
-            {
-                Current.Properties.Add("authToken", string.Empty);
-                Current.Properties.Add("login", false);
-            }
-
             var shell = new AppShell();
             MainPage = shell;
 
-            shell.InitLocation();
+            Task.Run(() => shell.InitLocationAsync());
         }
 
         protected override void OnStart()

@@ -120,6 +120,15 @@
   <data name="ConfirmPasswordText" xml:space="preserve">
     <value>Confirm password</value>
   </data>
+  <data name="DefaultErrorMessage" xml:space="preserve">
+    <value>Unknown error</value>
+  </data>
+  <data name="EmptyLoginError" xml:space="preserve">
+    <value>Login is null or empty</value>
+  </data>
+  <data name="EmptyPasswordError" xml:space="preserve">
+    <value>Password is null or empty</value>
+  </data>
   <data name="InputLoginLabelText" xml:space="preserve">
     <value>Login</value>
   </data>
@@ -128,6 +137,9 @@
   </data>
   <data name="LoginButtonText" xml:space="preserve">
     <value>Login</value>
+  </data>
+  <data name="PasswordConfirmError" xml:space="preserve">
+    <value>Passwords are not equals</value>
   </data>
   <data name="RegisterButtonText" xml:space="preserve">
     <value>Register</value>

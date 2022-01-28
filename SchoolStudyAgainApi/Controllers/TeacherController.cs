@@ -32,7 +32,7 @@ namespace SchoolStudyAgainApi.Controllers
         [HttpGet]
         public CustomHttpResponse Ping()
         {
-            return new CustomHttpResponse { Data = "Pong" };
+            return new CustomHttpResponse { StatusCode = System.Net.HttpStatusCode.OK, Data = "Pong" };
         }
 
         #region Materials

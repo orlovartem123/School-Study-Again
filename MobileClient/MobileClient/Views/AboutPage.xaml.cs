@@ -1,5 +1,6 @@
 ﻿using MobileClient.DataContracts;
 using MobileClient.Services;
+using MobileClient.Services.Settings;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -14,9 +15,9 @@ namespace MobileClient.Views
 
         private async void Button_Clicked(object sender, System.EventArgs e)
         {
-            ApiClient.ConnectApi((string)Application.Current.Properties["authToken"]);
+            ApiClient.ConnectApi(LocalPropsProviderService.AuthToken);
 
-            var result = await ApiClient.GetRequest<CustomHttpResponse>("Teacher/Ping");
+            var result = await ApiClient.GetRequest("api/Teacher/Ping");
         }
     }
 }

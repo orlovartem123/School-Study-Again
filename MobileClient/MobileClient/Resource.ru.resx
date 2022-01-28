@@ -120,6 +120,15 @@
   <data name="ConfirmPasswordText" xml:space="preserve">
     <value>Подтвердите пароль</value>
   </data>
+  <data name="DefaultErrorMessage" xml:space="preserve">
+    <value>Неизвестная ошибка</value>
+  </data>
+  <data name="EmptyLoginError" xml:space="preserve">
+    <value>Введите логин</value>
+  </data>
+  <data name="EmptyPasswordError" xml:space="preserve">
+    <value>Введите пароль</value>
+  </data>
   <data name="InputLoginLabelText" xml:space="preserve">
     <value>Логин</value>
   </data>
@@ -128,6 +137,9 @@
   </data>
   <data name="LoginButtonText" xml:space="preserve">
     <value>Войти</value>
+  </data>
+  <data name="PasswordConfirmError" xml:space="preserve">
+    <value>Пароли не совпадают</value>
   </data>
   <data name="RegisterButtonText" xml:space="preserve">
     <value>Регистрация</value>

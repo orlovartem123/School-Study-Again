@@ -11,7 +11,7 @@ namespace MobileClient.Services
 {
     public class ApiClient
     {
-        private static readonly HttpClient client = new HttpClient();
+        private static HttpClient client = new HttpClient();
 
         static JsonSerializerOptions options = new JsonSerializerOptions
         {
@@ -20,25 +20,34 @@ namespace MobileClient.Services
 
         public static void ConnectAuth()
         {
-            client.BaseAddress = new Uri(Settings.AuthBaseAddress);
+            client = new HttpClient();
+            client.BaseAddress = new Uri(GlobalSettings.AuthBaseAddress);
+            client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         public static void ConnectApi(string token)
         {
-            client.BaseAddress = new Uri(Settings.ApiBaseAddress);
+            client = new HttpClient();
+            client.BaseAddress = new Uri(GlobalSettings.ApiBaseAddress);
+            client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Add("Authorization", token);
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token);
         }
 
-        public static async Task<CustomHttpResponse> GetRequest<T>(string requestUrl)
+        public static async Task<CustomHttpResponse> GetRequest(string requestUrl)
         {
             var response = await client.GetAsync(requestUrl);
 
-            var result = JsonSerializer.Deserialize<CustomHttpResponse>(await response.Content.ReadAsStringAsync(), options);
-            return result;
+            if (response.IsSuccessStatusCode)
+            {
+                var result = JsonSerializer.Deserialize<CustomHttpResponse>(await response.Content.ReadAsStringAsync(), options);
+                return result;
+            }
+
+            return new CustomHttpResponse { StatusCode = response.StatusCode };
         }
 
         public static async Task<CustomHttpResponse> PostRequest<T>(string requestUrl, T model)
@@ -47,8 +56,13 @@ namespace MobileClient.Services
             var data = new StringContent(json, Encoding.UTF8, "application/json");
             var response = await client.PostAsync(requestUrl, data);
 
-            var result = JsonSerializer.Deserialize<CustomHttpResponse>(await response.Content.ReadAsStringAsync(), options);
-            return result;
+            if (response.IsSuccessStatusCode)
+            {
+                var result = JsonSerializer.Deserialize<CustomHttpResponse>(await response.Content.ReadAsStringAsync(), options);
+                return result;
+            }
+
+            return new CustomHttpResponse { StatusCode = response.StatusCode };
         }
     }
 }
