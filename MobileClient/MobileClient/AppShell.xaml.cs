@@ -30,13 +30,13 @@ namespace MobileClient
             Routing.RegisterRoute(nameof(BindActivityWithElectives), typeof(BindActivityWithElectives));
         }
 
-        public async Task InitLocationAsync()
+        public async Task InitLocationAsync(string authToken)
         {
-            var authToken = LocalPropsProviderService.AuthToken;
-
             if (authToken.Equals(string.Empty) ||
-                !(LocalPropsProviderService.Login = await AuthService.IsAuthenticatedAsync(authToken)))
+                !LocalPropsProviderService.Login)
+            {
                 await Current.GoToAsync($"//{nameof(LoginPage)}");
+            }
         }
 
         private async void OnLogOutItemClicked(object sender, EventArgs e)

@@ -18,28 +18,30 @@ namespace MobileClient.Services
             PropertyNameCaseInsensitive = true,
         };
 
-        public static void ConnectAuth()
+        private static void DefaultConnectAction(string baseAddress, double requestTimeout)
         {
             client = new HttpClient();
-            client.BaseAddress = new Uri(GlobalSettings.AuthBaseAddress);
+            client.BaseAddress = new Uri(baseAddress);
+            client.Timeout = TimeSpan.FromSeconds(requestTimeout);
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public static void ConnectApi(string token)
+        public static void ConnectAuth(double requestTimeout = GlobalSettings.DefaultRequestTimeout)
         {
-            client = new HttpClient();
-            client.BaseAddress = new Uri(GlobalSettings.ApiBaseAddress);
-            client.DefaultRequestHeaders.Clear();
-            client.DefaultRequestHeaders.Accept.Clear();
+            DefaultConnectAction(GlobalSettings.AuthBaseAddress, requestTimeout);
+        }
+
+        public static void ConnectApi(string token, double requestTimeout = GlobalSettings.DefaultRequestTimeout)
+        {
+            DefaultConnectAction(GlobalSettings.ApiBaseAddress, requestTimeout);
             client.DefaultRequestHeaders.Add("Authorization", token);
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         public static async Task<CustomHttpResponse> GetRequest(string requestUrl)
         {
-            var response = await client.GetAsync(requestUrl);
+            var response = client.GetAsync(requestUrl).Result;
 
             if (response.IsSuccessStatusCode)
             {

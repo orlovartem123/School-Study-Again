@@ -10,6 +10,8 @@ namespace MobileClient
 
         public const string ResourceId = "MobileClient.Resource";
 
+        public const double DefaultRequestTimeout = 10;
+
         public static string AuthBaseAddress { get => $"http://{ServerIp}:5002"; }
 
         public static string ApiBaseAddress { get => $"http://{ServerIp}:5001"; }

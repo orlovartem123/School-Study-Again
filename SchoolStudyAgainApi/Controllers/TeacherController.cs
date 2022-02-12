@@ -6,10 +6,11 @@ using SchoolBusinessLogic.ViewModels.TeacherModels;
 using SchoolStudyAgain.Interface;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SchoolStudyAgainApi.Controllers
 {
-    //[Authorize(Roles = "admin,teacher")]
+    [Authorize(Roles = "admin,teacher")]
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class TeacherController : ControllerBase
@@ -30,7 +31,7 @@ namespace SchoolStudyAgainApi.Controllers
         }
 
         [HttpGet]
-        public CustomHttpResponse Ping()
+        public async Task<CustomHttpResponse> Ping()
         {
             return new CustomHttpResponse { StatusCode = System.Net.HttpStatusCode.OK, Data = "Pong" };
         }

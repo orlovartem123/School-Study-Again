@@ -36,10 +36,12 @@ namespace MobileClient
             InitializeComponent();
             DependencyService.Register<MockDataStore>();
 
+            var authToken = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"; //LocalPropsProviderService.AuthToken;
+            LocalPropsProviderService.Login = AuthService.IsAuthenticatedAsync(authToken).Result;
             var shell = new AppShell();
             MainPage = shell;
 
-            Task.Run(() => shell.InitLocationAsync());
+            Task.Run(() => shell.InitLocationAsync(authToken));
         }
 
         protected override void OnStart()
