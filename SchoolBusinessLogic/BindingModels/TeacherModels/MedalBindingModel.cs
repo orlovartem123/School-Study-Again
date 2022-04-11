@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 
 namespace SchoolBusinessLogic.BindingModels.TeacherModels
 {
@@ -9,7 +10,7 @@ namespace SchoolBusinessLogic.BindingModels.TeacherModels
         public int? Id { get; set; }
 
         [DataMember]
-        public string TeacherId { get; set; }
+        public int? TeacherId { get; set; }
 
         [DataMember]
         public int? ElectiveId { get; set; }

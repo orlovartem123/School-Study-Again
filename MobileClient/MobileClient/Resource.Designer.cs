@@ -142,11 +142,47 @@ namespace MobileClient {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Cancel.
+        /// </summary>
+        internal static string SettingsPageCancel {
+            get {
+                return ResourceManager.GetString("SettingsPageCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Server ip.
+        /// </summary>
+        internal static string SettingsPageIp {
+            get {
+                return ResourceManager.GetString("SettingsPageIp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Save.
+        /// </summary>
+        internal static string SettingsPageSave {
+            get {
+                return ResourceManager.GetString("SettingsPageSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Add.
         /// </summary>
         internal static string ToolBarItemAdd {
             get {
                 return ResourceManager.GetString("ToolBarItemAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Settings.
+        /// </summary>
+        internal static string ToolBarItemSettings {
+            get {
+                return ResourceManager.GetString("ToolBarItemSettings", resourceCulture);
             }
         }
     }

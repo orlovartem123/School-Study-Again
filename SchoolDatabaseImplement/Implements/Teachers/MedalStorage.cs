@@ -100,7 +100,7 @@ namespace SchoolDatabaseImplement.Implements.Teacher
             return new Medal
             {
                 Name = model.Name,
-                TeacherId = model.TeacherId,
+                TeacherId = model.TeacherId.Value,
                 Value = model.Value,
                 ElectiveId = model.ElectiveId == -1 ? null : model.ElectiveId
             };

@@ -4,7 +4,7 @@ namespace MobileClient
 {
     internal class GlobalSettings
     {
-        private static string ServerIp = "192.168.1.112";
+        public static string ServerIp = "192.168.1.112";
 
         public const string DATABASE_NAME = "localProps.db";
 

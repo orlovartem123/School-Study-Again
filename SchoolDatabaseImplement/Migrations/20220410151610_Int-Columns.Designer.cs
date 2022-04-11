@@ -10,8 +10,8 @@ using SchoolDatabaseImplement;
 namespace SchoolDatabaseImplement.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    [Migration("20211201190315_Initial")]
-    partial class Initial
+    [Migration("20220410151610_Int-Columns")]
+    partial class IntColumns
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

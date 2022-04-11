@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace SchoolDatabaseImplement.Models
 {
@@ -6,7 +7,7 @@ namespace SchoolDatabaseImplement.Models
     {
         public int Id { get; set; }
 
-        public string TeacherId { get; set; }
+        public int TeacherId { get; set; }
 
         public int? ElectiveId { get; set; }
 

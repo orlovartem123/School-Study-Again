@@ -144,7 +144,19 @@
   <data name="RegisterButtonText" xml:space="preserve">
     <value>Register</value>
   </data>
+  <data name="SettingsPageCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="SettingsPageIp" xml:space="preserve">
+    <value>Server ip</value>
+  </data>
+  <data name="SettingsPageSave" xml:space="preserve">
+    <value>Save</value>
+  </data>
   <data name="ToolBarItemAdd" xml:space="preserve">
     <value>Add</value>
+  </data>
+  <data name="ToolBarItemSettings" xml:space="preserve">
+    <value>Settings</value>
   </data>
 </root>

@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace SchoolDatabaseImplement.Migrations
 {
-    public partial class Initial : Migration
+    public partial class IntColumns : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

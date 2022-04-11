@@ -3,6 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:MobileClient.Localization;assembly=MobileClient"
              x:Class="MobileClient.Views.Auth.RegisterPage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="setting.png" Clicked="ToolbarItem_Clicked" />
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
         <StackLayout Spacing="3" Padding="15">
             <Label x:Name="errorField" FontSize="Small" IsVisible="false" TextColor="Red" Margin="0,0,0,15"></Label>

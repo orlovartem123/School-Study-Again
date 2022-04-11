@@ -30,7 +30,17 @@ namespace MobileClient.Services.Settings
 
         public static string TeacherId
         {
-            get => App.Database.GetProps().TeacherId;
+            get
+            {
+                var result = App.Database.GetProps().TeacherId;
+
+                if (int.TryParse(result, out int resultInt))
+                {
+                    return resultInt.ToString();
+                }
+
+                return "-900";
+            }
             set
             {
                 var settings = App.Database.GetProps();

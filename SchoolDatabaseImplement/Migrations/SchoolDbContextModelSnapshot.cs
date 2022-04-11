@@ -79,8 +79,8 @@ namespace SchoolDatabaseImplement.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric");
 
-                    b.Property<string>("TeacherId")
-                        .HasColumnType("text");
+                    b.Property<int>("TeacherId")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -152,8 +152,8 @@ namespace SchoolDatabaseImplement.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric");
 
-                    b.Property<string>("TeacherId")
-                        .HasColumnType("text");
+                    b.Property<int>("TeacherId")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -198,8 +198,8 @@ namespace SchoolDatabaseImplement.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("TeacherId")
-                        .HasColumnType("text");
+                    b.Property<int>("TeacherId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("Value")
                         .HasColumnType("integer");
@@ -248,8 +248,10 @@ namespace SchoolDatabaseImplement.Migrations
 
             modelBuilder.Entity("SchoolDatabaseImplement.Models.Teacher", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -311,7 +313,9 @@ namespace SchoolDatabaseImplement.Migrations
                 {
                     b.HasOne("SchoolDatabaseImplement.Models.Teacher", "Teacher")
                         .WithMany("Electives")
-                        .HasForeignKey("TeacherId");
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Teacher");
                 });
@@ -350,7 +354,9 @@ namespace SchoolDatabaseImplement.Migrations
                 {
                     b.HasOne("SchoolDatabaseImplement.Models.Teacher", "Teacher")
                         .WithMany("Materials")
-                        .HasForeignKey("TeacherId");
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Teacher");
                 });
@@ -382,7 +388,9 @@ namespace SchoolDatabaseImplement.Migrations
 
                     b.HasOne("SchoolDatabaseImplement.Models.Teacher", "Teacher")
                         .WithMany("Medals")
-                        .HasForeignKey("TeacherId");
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Elective");
 

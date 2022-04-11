@@ -53,7 +53,7 @@
     <FlyoutItem Title="About" Icon="about.png">
         <ShellContent Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Materials" Icon="materials.png">
+    <FlyoutItem Title="Materials" FlyoutIcon="materials.png">
         <ShellContent Route="MaterialsList" ContentTemplate="{DataTemplate materials:MaterialsList}" />
     </FlyoutItem>
     <FlyoutItem Title="Electives" Icon="electives.png">

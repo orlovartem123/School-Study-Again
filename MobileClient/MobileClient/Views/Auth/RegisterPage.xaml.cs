@@ -1,4 +1,5 @@
 ﻿using MobileClient.Services.Auth;
+using MobileClient.Views.Settings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,6 +41,12 @@ namespace MobileClient.Views.Auth
 
             errorField.IsVisible = true;
             errorField.Text = errors.ToString();
+        }
+
+        private async void ToolbarItem_Clicked(object sender, EventArgs e)
+        {
+            var settings = new SettingsPage();
+            await Navigation.PushAsync(settings);
         }
     }
 }

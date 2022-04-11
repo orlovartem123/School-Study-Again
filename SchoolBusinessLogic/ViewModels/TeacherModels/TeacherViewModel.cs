@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 
 namespace SchoolBusinessLogic.ViewModels.TeacherModels
 {
@@ -6,7 +7,7 @@ namespace SchoolBusinessLogic.ViewModels.TeacherModels
     public class TeacherViewModel
     {
         [DataMember]
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         [DataMember]
         public string Name { get; set; }

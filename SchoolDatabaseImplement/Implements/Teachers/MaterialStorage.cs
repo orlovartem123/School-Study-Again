@@ -161,7 +161,7 @@ namespace SchoolDatabaseImplement.Implements.Teacher
                 Name = model.Name,
                 Price = model.Price,
                 DateCreate = model.DateCreate,
-                TeacherId = model.TeacherId
+                TeacherId = model.TeacherId.Value
             };
         }
 

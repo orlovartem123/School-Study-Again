@@ -20,7 +20,7 @@
                 <ViewCell>
                     <StackLayout>
                         <Label FontSize="Default" Text="{Binding Name}" Style="{DynamicResource ListItemTextStyle}" />
-                        <Label Text="{Binding Age}" Style="{DynamicResource ListItemDetailTextStyle}"/>
+                        <Label Text="{Binding DateCreate}" Style="{DynamicResource ListItemDetailTextStyle}"/>
                     </StackLayout>
                 </ViewCell>
             </DataTemplate>

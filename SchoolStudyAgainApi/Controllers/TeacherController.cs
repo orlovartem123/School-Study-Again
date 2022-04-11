@@ -21,7 +21,7 @@ namespace SchoolStudyAgainApi.Controllers
 
         private readonly MedalLogic _medal;
 
-        private readonly int onPage = 30;
+        private readonly int onPage = 130;
 
         public TeacherController(MaterialLogic material, ElectiveLogic elective, MedalLogic medal)
         {
@@ -39,13 +39,13 @@ namespace SchoolStudyAgainApi.Controllers
         #region Materials
 
         [HttpGet]
-        public List<MaterialViewModel> GetMaterials(string teacherId) => _material.Read(new MaterialBindingModel { TeacherId = teacherId })?.ToList();
+        public List<MaterialViewModel> GetMaterials(int teacherId) => _material.Read(new MaterialBindingModel { TeacherId = teacherId })?.ToList();
 
         [HttpGet]
         public MaterialViewModel GetMaterial(int materialId) => _material.Read(new MaterialBindingModel { Id = materialId })?[0];
 
         [HttpGet]
-        public List<MaterialViewModel> GetMaterialPaging(string teacherId, int page) => _material.Read(new MaterialBindingModel { TeacherId = teacherId, ToTake = onPage, ToSkip = (page - 1) * onPage }).ToList();
+        public List<MaterialViewModel> GetMaterialPaging(int teacherId, int page = 1) => _material.Read(new MaterialBindingModel { TeacherId = teacherId, ToTake = onPage, ToSkip = (page - 1) * onPage }).ToList();
 
         [HttpPost]
         public void CreateOrUpdateMaterial(MaterialBindingModel model) => _material.CreateOrUpdate(model);
@@ -58,7 +58,7 @@ namespace SchoolStudyAgainApi.Controllers
         #region Electives
 
         [HttpGet]
-        public List<ElectiveViewModel> GetElectives(string teacherId) => _elective.Read(new ElectiveBindingModel { TeacherId = teacherId })?.ToList();
+        public List<ElectiveViewModel> GetElectives(int teacherId) => _elective.Read(new ElectiveBindingModel { TeacherId = teacherId })?.ToList();
 
         [HttpGet]
         public ElectiveViewModel GetElective(int electiveId) => _elective.Read(new ElectiveBindingModel { Id = electiveId })?[0];
@@ -77,7 +77,7 @@ namespace SchoolStudyAgainApi.Controllers
         #region Medals
 
         [HttpGet]
-        public List<MedalViewModel> GetMedals(string teacherId) => _medal.Read(new MedalBindingModel { TeacherId = teacherId })?.ToList();
+        public List<MedalViewModel> GetMedals(int teacherId) => _medal.Read(new MedalBindingModel { TeacherId = teacherId })?.ToList();
 
         [HttpGet]
         public MedalViewModel GetMedal(int medalId) => _medal.Read(new MedalBindingModel { Id = medalId })?[0];

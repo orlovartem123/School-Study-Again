@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MobileClient.Models.Electives;
+using MobileClient.Services.Electives;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -12,21 +14,18 @@ namespace MobileClient.Views.Electives
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ElectivesList : ContentPage
     {
-        public ObservableCollection<Class1> Items { get; set; }
+        public ObservableCollection<ElectiveViewModel> Items { get; set; }
 
         public ElectivesList()
         {
             InitializeComponent();
 
-            Items = new ObservableCollection<Class1>
+            Items = new ObservableCollection<ElectiveViewModel>();
+            var electives = ElectivesService.GetElectivesAsync().Result;
+            foreach (var elem in electives)
             {
-                new Class1{Name="fff",Age=5},
-                new Class1{Name="s",Age=5},
-                new Class1{Name="3",Age=2},
-                new Class1{Name="f",Age=1},
-               new Class1{Name="hfg",Age=5},
-            };
-
+                electives.Add(elem);
+            }
             MyListView.ItemsSource = Items;
         }
 
