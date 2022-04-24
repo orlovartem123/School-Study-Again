@@ -19,8 +19,8 @@
             <DataTemplate>
                 <ViewCell>
                     <StackLayout>
-                        <Label FontSize="Default" Text="{Binding Name}" Style="{DynamicResource ListItemTextStyle}" />
-                        <Label Text="{Binding DateCreate}" Style="{DynamicResource ListItemDetailTextStyle}"/>
+                        <Label FontSize="Default" Text="{Binding DateCreate}" Style="{DynamicResource ListItemTextStyle}" />
+                        <Label Text="{Binding Name}" Style="{DynamicResource ListItemDetailTextStyle}"/>
                     </StackLayout>
                 </ViewCell>
             </DataTemplate>

@@ -4,6 +4,7 @@ using SchoolBusinessLogic.BindingModels.TeacherModels;
 using SchoolBusinessLogic.BusinessLogic.TeacherLogics;
 using SchoolBusinessLogic.ViewModels.TeacherModels;
 using SchoolStudyAgain.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -58,19 +59,114 @@ namespace SchoolStudyAgainApi.Controllers
         #region Electives
 
         [HttpGet]
-        public List<ElectiveViewModel> GetElectives(int teacherId) => _elective.Read(new ElectiveBindingModel { TeacherId = teacherId })?.ToList();
+        public CustomHttpResponse GetElectives(int teacherId)
+        {
+            try
+            {
+                var result = new CustomHttpResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.OK,
+                    Data = _elective.Read(new ElectiveBindingModel { TeacherId = teacherId })
+                };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return new CustomHttpResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.InternalServerError,
+                    Errors = new string[] { ex.Message }
+                };
+            }
+        }
 
         [HttpGet]
-        public ElectiveViewModel GetElective(int electiveId) => _elective.Read(new ElectiveBindingModel { Id = electiveId })?[0];
+        public CustomHttpResponse GetElective(int electiveId)
+        {
+            try
+            {
+                var result = new CustomHttpResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.OK,
+                    Data = _elective.Read(new ElectiveBindingModel { Id = electiveId })?[0]
+                };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return new CustomHttpResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.InternalServerError,
+                    Errors = new string[] { ex.Message }
+                };
+            }
+        }
 
         [HttpPost]
-        public void CreateOrUpdateElective(ElectiveBindingModel model) => _elective.CreateOrUpdate(model);
+        public CustomHttpResponse CreateOrUpdateElective(ElectiveBindingModel model)
+        {
+            try
+            {
+                _elective.CreateOrUpdate(model);
+                var result = new CustomHttpResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.OK
+                };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return new CustomHttpResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.InternalServerError,
+                    Errors = new string[] { ex.Message }
+                };
+            }
+        }
 
         [HttpPost]
-        public void DeleteElective(ElectiveBindingModel model) => _elective.Delete(model);
+        public CustomHttpResponse DeleteElective(ElectiveBindingModel model)
+        {
+            try
+            {
+                _elective.Delete(model);
+                var result = new CustomHttpResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.OK
+                };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return new CustomHttpResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.InternalServerError,
+                    Errors = new string[] { ex.Message }
+                };
+            }
+        }
 
         [HttpPost]
-        public void BindActivityWithElectives(BindActivityWithElectivesBindingModel model) => _elective.BindActivityWithElectives(model);
+        public CustomHttpResponse BindActivityWithElectives(BindActivityWithElectivesBindingModel model)
+        {
+            try
+            {
+                _elective.BindActivityWithElectives(model);
+                var result = new CustomHttpResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.OK
+                };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return new CustomHttpResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.InternalServerError,
+                    Errors = new string[] { ex.Message }
+                };
+            }
+        }
 
         #endregion
 

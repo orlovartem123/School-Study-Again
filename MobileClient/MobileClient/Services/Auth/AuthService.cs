@@ -37,10 +37,14 @@ namespace MobileClient.Services.Auth
 
             ApiClient.ConnectApi(token);
 
-            var result = await ApiClient.GetRequest("api/Teacher/Ping");
+            try
+            {
+                var result = await ApiClient.GetRequest("api/Teacher/Ping");
 
-            if (result.StatusCode == System.Net.HttpStatusCode.OK)
-                return true;
+                if (result.StatusCode == System.Net.HttpStatusCode.OK)
+                    return true;
+            }
+            catch { }
 
             return false;
         }

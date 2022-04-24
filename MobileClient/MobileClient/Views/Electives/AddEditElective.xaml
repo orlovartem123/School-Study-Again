@@ -1,12 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage Title="Add edit elective" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MobileClient.Localization;assembly=MobileClient"
              x:Class="MobileClient.Views.Electives.AddEditElective">
+    
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Spacing="3" Padding="15">
+            
+            <Label Text="{local:Translate ElectiveName}" TextColor="{AppThemeBinding Dark={StaticResource Background_l}, Light={StaticResource Background_d}}" FontSize="Medium" />
+            <Entry x:Name="entryElectiveName" Text="{Binding Text, Mode=OneWay}" TextColor="{AppThemeBinding Dark={StaticResource Background_l}, Light={StaticResource Background_d}}" FontSize="Medium" />
+
+            <Label Text="{local:Translate ElectivePrice}" TextColor="{AppThemeBinding Dark={StaticResource Background_l}, Light={StaticResource Background_d}}" FontSize="Medium" />
+            <Entry x:Name="entryElectiveName" Text="{Binding Text, Mode=OneWay}" TextColor="{AppThemeBinding Dark={StaticResource Background_l}, Light={StaticResource Background_d}}" FontSize="Medium" />
+
+            <Button Margin="0,20,0,0" VerticalOptions="Center" Text="{local:Translate SettingsPageSave}" Clicked="ButtonSave_Clicked" />
+            <Button Margin="0,20,0,0" VerticalOptions="Center" Text="{local:Translate SettingsPageCancel}" Clicked="ButtonCancel_Clicked" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
