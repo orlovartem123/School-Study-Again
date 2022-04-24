@@ -123,6 +123,12 @@
   <data name="DefaultErrorMessage" xml:space="preserve">
     <value>Unknown error</value>
   </data>
+  <data name="ElectiveName" xml:space="preserve">
+    <value>Elective name</value>
+  </data>
+  <data name="ElectivePrice" xml:space="preserve">
+    <value>Elective price</value>
+  </data>
   <data name="EmptyLoginError" xml:space="preserve">
     <value>Login is null or empty</value>
   </data>
@@ -155,6 +161,9 @@
   </data>
   <data name="ToolBarItemAdd" xml:space="preserve">
     <value>Add</value>
+  </data>
+  <data name="ToolBarItemEdit" xml:space="preserve">
+    <value>Edit</value>
   </data>
   <data name="ToolBarItemSettings" xml:space="preserve">
     <value>Settings</value>

@@ -58,6 +58,11 @@ namespace SchoolBusinessLogic.BusinessLogic.TeacherLogics
             _electiveStorage.Delete(model);
         }
 
+        public void DeleteMany(IList<int> ids)
+        {
+            _electiveStorage.DeleteMany(ids);
+        }
+
         public void BindActivityWithElectives(BindActivityWithElectivesBindingModel model)
         {
             if (model.ActivityId == null || model.Electives == null)

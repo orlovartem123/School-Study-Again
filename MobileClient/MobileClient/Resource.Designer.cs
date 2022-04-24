@@ -79,6 +79,24 @@ namespace MobileClient {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Elective name.
+        /// </summary>
+        internal static string ElectiveName {
+            get {
+                return ResourceManager.GetString("ElectiveName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Elective price.
+        /// </summary>
+        internal static string ElectivePrice {
+            get {
+                return ResourceManager.GetString("ElectivePrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Login is null or empty.
         /// </summary>
         internal static string EmptyLoginError {
@@ -174,6 +192,15 @@ namespace MobileClient {
         internal static string ToolBarItemAdd {
             get {
                 return ResourceManager.GetString("ToolBarItemAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Edit.
+        /// </summary>
+        internal static string ToolBarItemEdit {
+            get {
+                return ResourceManager.GetString("ToolBarItemEdit", resourceCulture);
             }
         }
         

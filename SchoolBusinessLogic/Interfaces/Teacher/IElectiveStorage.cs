@@ -12,6 +12,7 @@ namespace SchoolBusinessLogic.Interfaces.Teacher
         void Insert(ElectiveBindingModel model);
         void Update(ElectiveBindingModel model);
         void Delete(ElectiveBindingModel model);
+        void DeleteMany(IList<int> ids);
         void BindActivityWithElectives(BindActivityWithElectivesBindingModel model);
     }
 }

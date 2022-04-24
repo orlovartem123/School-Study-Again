@@ -32,6 +32,17 @@ namespace SchoolDatabaseImplement.Implements.Teacher
             }
         }
 
+        public void DeleteMany(IList<int> ids)
+        {
+            var forDel = context.Electives.Where(x => ids.Contains(x.Id)).ToArray();
+
+            if (forDel.Length > 0)
+            {
+                context.Electives.RemoveRange(forDel);
+                context.SaveChanges();
+            }
+        }
+
         public ElectiveViewModel GetElement(ElectiveBindingModel model)
         {
             if (model == null)

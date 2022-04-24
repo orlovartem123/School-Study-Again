@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MobileClient.Models.Electives
 {
-    public class ElectiveViewModel
+    public class Elective
     {
         public int Id { get; set; }
 

@@ -2,19 +2,22 @@
 <ContentPage Title="electives list" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:MobileClient.Localization;assembly=MobileClient"
-             x:Class="MobileClient.Views.Electives.ElectivesList">
+             x:Class="MobileClient.Views.Electives.ElectivesList"
+             xmlns:lv="clr-namespace:Xamarin.Forms.MultiSelectListView;assembly=Xamarin.Forms.MultiSelectListView" Padding="0,20,0,0">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="{local:Translate ToolBarItemAdd}" Clicked="ToolbarItem_Clicked" />
+        <ToolbarItem IconImageSource="edit.png" Command="{Binding AddElectiveCommand}" />
+        <ToolbarItem IconImageSource="add.png" Command="{Binding AddElectiveCommand}" />
+        <ToolbarItem IconImageSource="delete.png" Command="{Binding DeleteElectiveCommand}" />
     </ContentPage.ToolbarItems>
 
-    <ListView x:Name="MyListView"
+    <!--<ListView x:Name="MyListView"
             ItemsSource="{Binding Items}"
             ItemTapped="Handle_ItemTapped"
             RowHeight="60"
             CachingStrategy="RecycleElement">
 
-        <!--Custom View Cells-->
+        <!-Custom View Cells->
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
@@ -26,5 +29,40 @@
             </DataTemplate>
         </ListView.ItemTemplate>
         
-    </ListView>
+    </ListView>-->
+
+    <StackLayout>
+        <ListView x:Name="lvwUsers" 
+            HasUnevenRows="true"
+            SeparatorVisibility="Default" 
+            ItemsSource="{Binding Electives}"
+                  lv:MultiSelect.Enable="true">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <lv:SelectableCell x:Name="SelectableCell">
+
+                        <lv:SelectableCell.CheckView>
+                            <Image Source="check.png" WidthRequest="30" HeightRequest="30"></Image>
+                        </lv:SelectableCell.CheckView>
+
+                        <lv:SelectableCell.DataView>
+                            <StackLayout Orientation="Vertical" Padding="20,0,20,0">
+                                <Label Text="{Binding Name}" FontSize="17" ></Label>
+                                <Label Text="{Binding Price}" FontSize="17" ></Label>
+                            </StackLayout>
+                        </lv:SelectableCell.DataView>
+
+                    </lv:SelectableCell>
+
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+            <ListView.Behaviors>
+                <!--  <lv:SelectedItemBehavior Command="{Binding DisplayNameCommand}" PropertyName="Name"/>-->
+                <!--<lv:SelectedItemBehavior Command="{Binding EditElectiveCommand}"/>-->
+            </ListView.Behaviors>
+
+        </ListView>
+    </StackLayout>
+
 </ContentPage>

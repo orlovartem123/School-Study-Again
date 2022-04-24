@@ -147,6 +147,28 @@ namespace SchoolStudyAgainApi.Controllers
         }
 
         [HttpPost]
+        public CustomHttpResponse DeleteElectives(IList<int> ids)
+        {
+            try
+            {
+                _elective.DeleteMany(ids);
+                var result = new CustomHttpResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.OK
+                };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return new CustomHttpResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.InternalServerError,
+                    Errors = new string[] { ex.Message }
+                };
+            }
+        }
+
+        [HttpPost]
         public CustomHttpResponse BindActivityWithElectives(BindActivityWithElectivesBindingModel model)
         {
             try

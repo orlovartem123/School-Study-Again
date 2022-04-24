@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MobileClient.Models.Electives
 {
-    public class ElectiveBindingModel
+    public class ElectiveContract
     {
         public int? Id { get; set; }
 
