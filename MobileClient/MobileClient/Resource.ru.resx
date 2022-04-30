@@ -132,11 +132,17 @@
   <data name="DefaultErrorMessage" xml:space="preserve">
     <value>Неизвестная ошибка</value>
   </data>
+  <data name="Elective" xml:space="preserve">
+    <value>Занятие</value>
+  </data>
   <data name="ElectiveName" xml:space="preserve">
     <value>Название</value>
   </data>
   <data name="ElectivePrice" xml:space="preserve">
     <value>Стоимость</value>
+  </data>
+  <data name="Electives" xml:space="preserve">
+    <value>Занятия</value>
   </data>
   <data name="EmptyLoginError" xml:space="preserve">
     <value>Введите логин</value>
@@ -150,8 +156,17 @@
   <data name="InputPasswordLabelText" xml:space="preserve">
     <value>Пароль</value>
   </data>
+  <data name="Interests" xml:space="preserve">
+    <value>Интересы</value>
+  </data>
   <data name="LoginButtonText" xml:space="preserve">
     <value>Войти</value>
+  </data>
+  <data name="MaterialName" xml:space="preserve">
+    <value>Название материала</value>
+  </data>
+  <data name="MaterialPrice" xml:space="preserve">
+    <value>Стоимость</value>
   </data>
   <data name="MedalName" xml:space="preserve">
     <value>Название медали</value>

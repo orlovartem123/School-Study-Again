@@ -1,6 +1,4 @@
-﻿using MobileClient.Models.Electives;
-using MobileClient.ViewModels.Electives;
-using System;
+﻿using MobileClient.ViewModels.Electives;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

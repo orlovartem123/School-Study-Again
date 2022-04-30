@@ -1,12 +1,78 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage Title="Add edit material" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MobileClient.Views.Materials.AddEditMaterial">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+             xmlns:local="clr-namespace:MobileClient.Localization;assembly=MobileClient"
+             x:Class="MobileClient.Views.Materials.AddEditMaterial"
+             xmlns:lv="clr-namespace:Xamarin.Forms.MultiSelectListView;assembly=Xamarin.Forms.MultiSelectListView" Padding="0,20,0,0">
+
+    <ScrollView Padding="1">
+
+        <StackLayout Spacing="1" Padding="15">
+            <Label x:Name="errorField" FontSize="Small" IsVisible="false" TextColor="Red" Margin="0,0,0,15"></Label>
+
+            <Label Text="{local:Translate MaterialName}" TextColor="{AppThemeBinding Dark={StaticResource Background_l}, Light={StaticResource Background_d}}" FontSize="Large" />
+            <Entry x:Name="entryMaterialName" TextColor="{AppThemeBinding Dark={StaticResource Background_l}, Light={StaticResource Background_d}}" FontSize="Medium" />
+
+            <Label Text="{local:Translate MaterialPrice}" TextColor="{AppThemeBinding Dark={StaticResource Background_l}, Light={StaticResource Background_d}}" FontSize="Large" />
+            <Entry x:Name="entryMaterialPrice" TextColor="{AppThemeBinding Dark={StaticResource Background_l}, Light={StaticResource Background_d}}" FontSize="Medium" />
+
+            <Label Margin="0,20,0,0" Text="{local:Translate Electives}" TextColor="{AppThemeBinding Dark={StaticResource Background_l}, Light={StaticResource Background_d}}" FontSize="Large" />
+            <StackLayout x:Name="container" Spacing="3">
+
+                <FlexLayout JustifyContent="SpaceBetween">
+
+                    <Picker x:Name="electivePicker" 
+                            Title="{local:Translate SelectElective}" 
+                            ItemsSource="{Binding ElectiveList}"
+                            ItemDisplayBinding="{Binding Name}"
+                            SelectedItem="{Binding SelectedElective}"
+                            WidthRequest="200"/>
+
+                    <Entry Text="1" WidthRequest="80" x:Name="entryElectiveCount" TextColor="{AppThemeBinding Dark={StaticResource Background_l}, Light={StaticResource Background_d}}" FontSize="Medium" />
+
+                    <Button WidthRequest="45" HeightRequest="45" CornerRadius="10" Margin="0,20,0,0" VerticalOptions="Center" Text="+" Clicked="ButtonAddElective_Clicked" />
+
+                </FlexLayout>
+
+            </StackLayout>
+
+            <Label Margin="0,20,0,0" Text="{local:Translate Interests}" TextColor="{AppThemeBinding Dark={StaticResource Background_l}, Light={StaticResource Background_d}}" FontSize="Large" />
+            
+            <ListView x:Name="interestsList" 
+                      HasUnevenRows="true"
+                      SeparatorVisibility="Default" 
+                      ItemsSource="{Binding Interests}"
+                      Margin="0,20,0,0"
+                      HeightRequest="260"
+                      lv:MultiSelect.Enable="true">
+                
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <lv:SelectableCell x:Name="SelectableCell">
+
+                            <lv:SelectableCell.CheckView>
+                                <Image Source="check.png" WidthRequest="30" HeightRequest="30"></Image>
+                            </lv:SelectableCell.CheckView>
+
+                            <lv:SelectableCell.DataView>
+                                <StackLayout Orientation="Vertical" Padding="0,0,0,0">
+                                    <Label Text="{Binding Name}" FontSize="17" ></Label>
+                                </StackLayout>
+                            </lv:SelectableCell.DataView>
+
+                        </lv:SelectableCell>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+
+            <Button Margin="0,20,0,0" CornerRadius="10" VerticalOptions="Center" Text="{local:Translate SettingsPageSave}" Clicked="ButtonSave_Clicked" />
+            <Button Margin="0,20,0,0" CornerRadius="10" VerticalOptions="Center" Text="{local:Translate SettingsPageCancel}" Clicked="ButtonCancel_Clicked" />
+
+            <Label HeightRequest="60"></Label>
         </StackLayout>
-    </ContentPage.Content>
+ 
+    </ScrollView>
+
 </ContentPage>

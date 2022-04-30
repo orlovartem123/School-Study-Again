@@ -6,10 +6,10 @@
 
     <ContentPage.Content>
         <StackLayout Spacing="3" Padding="15">
-            <Label Text="{local:Translate SettingsPageIp}" TextColor="{AppThemeBinding Dark={StaticResource Background_l}, Light={StaticResource Background_d}}" FontSize="Medium" />
+            <Label Text="{local:Translate SettingsPageIp}" TextColor="{AppThemeBinding Dark={StaticResource Background_l}, Light={StaticResource Background_d}}" FontSize="Large" />
             <Entry x:Name="entryIp" Text="{Binding Text, Mode=OneWay}" TextColor="{AppThemeBinding Dark={StaticResource Background_l}, Light={StaticResource Background_d}}" FontSize="Medium" />
-            <Button Margin="0,20,0,0" VerticalOptions="Center" Text="{local:Translate SettingsPageSave}" Clicked="ButtonSave_Clicked" />
-            <Button Margin="0,20,0,0" VerticalOptions="Center" Text="{local:Translate SettingsPageCancel}" Clicked="ButtonCancel_Clicked" />
+            <Button CornerRadius="10" Margin="0,20,0,0" VerticalOptions="Center" Text="{local:Translate SettingsPageSave}" Clicked="ButtonSave_Clicked" />
+            <Button CornerRadius="10" Margin="0,20,0,0" VerticalOptions="Center" Text="{local:Translate SettingsPageCancel}" Clicked="ButtonCancel_Clicked" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

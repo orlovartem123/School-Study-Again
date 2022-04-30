@@ -10,8 +10,8 @@
 
     <ContentPage.Content>
         <StackLayout Padding="10,0,10,0" VerticalOptions="Center">
-            <Button VerticalOptions="Center" Text="{local:Translate LoginButtonText}" Clicked="ToLoginPage" />
-            <Button VerticalOptions="Center" Margin="0,25,0,0" Text="{local:Translate RegisterButtonText}" Clicked="ToRegisterPage" />
+            <Button VerticalOptions="Center" CornerRadius="10" Text="{local:Translate LoginButtonText}" Clicked="ToLoginPage" />
+            <Button VerticalOptions="Center" CornerRadius="10" Margin="0,25,0,0" Text="{local:Translate RegisterButtonText}" Clicked="ToRegisterPage" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

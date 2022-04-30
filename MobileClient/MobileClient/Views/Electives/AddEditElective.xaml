@@ -8,14 +8,14 @@
         <StackLayout Spacing="3" Padding="15">
             <Label x:Name="errorField" FontSize="Small" IsVisible="false" TextColor="Red" Margin="0,0,0,15"></Label>
 
-            <Label Text="{local:Translate ElectiveName}" TextColor="{AppThemeBinding Dark={StaticResource Background_l}, Light={StaticResource Background_d}}" FontSize="Medium" />
+            <Label Text="{local:Translate ElectiveName}" TextColor="{AppThemeBinding Dark={StaticResource Background_l}, Light={StaticResource Background_d}}" FontSize="Large" />
             <Entry x:Name="entryElectiveName" TextColor="{AppThemeBinding Dark={StaticResource Background_l}, Light={StaticResource Background_d}}" FontSize="Medium" />
 
-            <Label Text="{local:Translate ElectivePrice}" TextColor="{AppThemeBinding Dark={StaticResource Background_l}, Light={StaticResource Background_d}}" FontSize="Medium" />
+            <Label Text="{local:Translate ElectivePrice}" TextColor="{AppThemeBinding Dark={StaticResource Background_l}, Light={StaticResource Background_d}}" FontSize="Large" />
             <Entry x:Name="entryElectivePrice" TextColor="{AppThemeBinding Dark={StaticResource Background_l}, Light={StaticResource Background_d}}" FontSize="Medium" />
 
-            <Button Margin="0,20,0,0" VerticalOptions="Center" Text="{local:Translate SettingsPageSave}" Clicked="ButtonSave_Clicked" />
-            <Button Margin="0,20,0,0" VerticalOptions="Center" Text="{local:Translate SettingsPageCancel}" Clicked="ButtonCancel_Clicked" />
+            <Button Margin="0,20,0,0" CornerRadius="10" VerticalOptions="Center" Text="{local:Translate SettingsPageSave}" Clicked="ButtonSave_Clicked" />
+            <Button Margin="0,20,0,0" CornerRadius="10" VerticalOptions="Center" Text="{local:Translate SettingsPageCancel}" Clicked="ButtonCancel_Clicked" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

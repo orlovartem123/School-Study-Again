@@ -8,20 +8,22 @@
         <StackLayout Spacing="3" Padding="15">
             <Label x:Name="errorField" FontSize="Small" IsVisible="false" TextColor="Red" Margin="0,0,0,15"></Label>
 
-            <Label Text="{local:Translate MedalName}" TextColor="{AppThemeBinding Dark={StaticResource Background_l}, Light={StaticResource Background_d}}" FontSize="Medium" />
+            <Label Text="{local:Translate MedalName}" TextColor="{AppThemeBinding Dark={StaticResource Background_l}, Light={StaticResource Background_d}}" FontSize="Large" />
             <Entry x:Name="entryMedalName" TextColor="{AppThemeBinding Dark={StaticResource Background_l}, Light={StaticResource Background_d}}" FontSize="Medium" />
 
-            <Label Text="{local:Translate MedalValue}" TextColor="{AppThemeBinding Dark={StaticResource Background_l}, Light={StaticResource Background_d}}" FontSize="Medium" />
+            <Label Text="{local:Translate MedalValue}" TextColor="{AppThemeBinding Dark={StaticResource Background_l}, Light={StaticResource Background_d}}" FontSize="Large" />
             <Entry x:Name="entryMedalPrice" TextColor="{AppThemeBinding Dark={StaticResource Background_l}, Light={StaticResource Background_d}}" FontSize="Medium" />
 
+            <Label Margin="0,20,0,0" Text="{local:Translate Elective}" TextColor="{AppThemeBinding Dark={StaticResource Background_l}, Light={StaticResource Background_d}}" FontSize="Large" />
             <Picker x:Name="electivePicker" 
                     Title="{local:Translate SelectElective}" 
                     ItemsSource="{Binding ElectiveList}"
                     ItemDisplayBinding="{Binding Name}"
+                    Margin="0,20,0,0"
                     SelectedItem="{Binding SelectedElective}"/>
 
-            <Button Margin="0,20,0,0" VerticalOptions="Center" Text="{local:Translate SettingsPageSave}" Clicked="ButtonSave_Clicked" />
-            <Button Margin="0,20,0,0" VerticalOptions="Center" Text="{local:Translate SettingsPageCancel}" Clicked="ButtonCancel_Clicked" />
+            <Button Margin="0,20,0,0" CornerRadius="10" VerticalOptions="Center" Text="{local:Translate SettingsPageSave}" Clicked="ButtonSave_Clicked" />
+            <Button Margin="0,20,0,0" CornerRadius="10" VerticalOptions="Center" Text="{local:Translate SettingsPageCancel}" Clicked="ButtonCancel_Clicked" />
         </StackLayout>
     </ContentPage.Content>
 

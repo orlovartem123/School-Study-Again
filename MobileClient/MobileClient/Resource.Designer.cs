@@ -106,6 +106,15 @@ namespace MobileClient {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Elective.
+        /// </summary>
+        internal static string Elective {
+            get {
+                return ResourceManager.GetString("Elective", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Elective name.
         /// </summary>
         internal static string ElectiveName {
@@ -120,6 +129,15 @@ namespace MobileClient {
         internal static string ElectivePrice {
             get {
                 return ResourceManager.GetString("ElectivePrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Electives.
+        /// </summary>
+        internal static string Electives {
+            get {
+                return ResourceManager.GetString("Electives", resourceCulture);
             }
         }
         
@@ -160,11 +178,38 @@ namespace MobileClient {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Interests.
+        /// </summary>
+        internal static string Interests {
+            get {
+                return ResourceManager.GetString("Interests", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Login.
         /// </summary>
         internal static string LoginButtonText {
             get {
                 return ResourceManager.GetString("LoginButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Material name.
+        /// </summary>
+        internal static string MaterialName {
+            get {
+                return ResourceManager.GetString("MaterialName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Material price.
+        /// </summary>
+        internal static string MaterialPrice {
+            get {
+                return ResourceManager.GetString("MaterialPrice", resourceCulture);
             }
         }
         

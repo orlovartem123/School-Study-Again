@@ -11,11 +11,11 @@
     <ContentPage.Content>
         <StackLayout Spacing="3" Padding="15">
             <Label x:Name="errorField" FontSize="Small" IsVisible="false" TextColor="Red" Margin="0,0,0,15"></Label>
-            <Label Text="{local:Translate InputLoginLabelText}" TextColor="{AppThemeBinding Dark={StaticResource Background_l}, Light={StaticResource Background_d}}" FontSize="Medium" />
+            <Label Text="{local:Translate InputLoginLabelText}" TextColor="{AppThemeBinding Dark={StaticResource Background_l}, Light={StaticResource Background_d}}" FontSize="Large" />
             <Entry x:Name="entryLogin" Text="{Binding Text, Mode=OneWay}" TextColor="{AppThemeBinding Dark={StaticResource Background_l}, Light={StaticResource Background_d}}" FontSize="Medium" />
-            <Label Text="{local:Translate InputPasswordLabelText}" TextColor="{AppThemeBinding Dark={StaticResource Background_l}, Light={StaticResource Background_d}}" FontSize="Medium" />
+            <Label Margin="0,20,0,0" Text="{local:Translate InputPasswordLabelText}" TextColor="{AppThemeBinding Dark={StaticResource Background_l}, Light={StaticResource Background_d}}" FontSize="Large" />
             <Entry x:Name="entryPassword" IsPassword="True" Text="{Binding Text, Mode=OneWay}" TextColor="{AppThemeBinding Dark={StaticResource Background_l}, Light={StaticResource Background_d}}" FontSize="Medium" />
-            <Button Margin="0,20,0,0" VerticalOptions="Center" Text="{local:Translate LoginButtonText}" Clicked="Button_Clicked" />
+            <Button Margin="0,20,0,0" CornerRadius="10" VerticalOptions="Center" Text="{local:Translate LoginButtonText}" Clicked="Button_Clicked" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

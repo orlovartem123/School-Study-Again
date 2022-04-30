@@ -16,8 +16,6 @@ namespace MobileClient
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
-            Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
 
             Routing.RegisterRoute(nameof(AboutPage), typeof(AboutPage));
             Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
@@ -27,7 +25,6 @@ namespace MobileClient
             Routing.RegisterRoute(nameof(AddEditMedal), typeof(AddEditMedal));
             Routing.RegisterRoute(nameof(AddEditMaterial), typeof(AddEditMaterial));
             Routing.RegisterRoute(nameof(AddEditElective), typeof(AddEditElective));
-            Routing.RegisterRoute(nameof(BindActivityWithElectives), typeof(BindActivityWithElectives));
         }
 
         public async Task InitLocationAsync(string authToken)

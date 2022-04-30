@@ -132,11 +132,17 @@
   <data name="DefaultErrorMessage" xml:space="preserve">
     <value>Unknown error</value>
   </data>
+  <data name="Elective" xml:space="preserve">
+    <value>Elective</value>
+  </data>
   <data name="ElectiveName" xml:space="preserve">
     <value>Elective name</value>
   </data>
   <data name="ElectivePrice" xml:space="preserve">
     <value>Elective price</value>
+  </data>
+  <data name="Electives" xml:space="preserve">
+    <value>Electives</value>
   </data>
   <data name="EmptyLoginError" xml:space="preserve">
     <value>Login is null or empty</value>
@@ -150,8 +156,17 @@
   <data name="InputPasswordLabelText" xml:space="preserve">
     <value>Password</value>
   </data>
+  <data name="Interests" xml:space="preserve">
+    <value>Interests</value>
+  </data>
   <data name="LoginButtonText" xml:space="preserve">
     <value>Login</value>
+  </data>
+  <data name="MaterialName" xml:space="preserve">
+    <value>Material name</value>
+  </data>
+  <data name="MaterialPrice" xml:space="preserve">
+    <value>Material price</value>
   </data>
   <data name="MedalName" xml:space="preserve">
     <value>Medal name</value>

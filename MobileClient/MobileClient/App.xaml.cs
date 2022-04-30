@@ -1,5 +1,4 @@
 ﻿using MobileClient.Repos;
-using MobileClient.Services;
 using MobileClient.Services.Auth;
 using MobileClient.Services.Settings;
 using System;
@@ -32,7 +31,6 @@ namespace MobileClient
         public App()
         {
             InitializeComponent();
-            DependencyService.Register<MockDataStore>();
 
             var authToken = /*LocalPropsProviderService.AuthToken ??*/ GlobalSettings.ExampleBearer;
             LocalPropsProviderService.Login = AuthService.IsAuthenticatedAsync(authToken).Result;

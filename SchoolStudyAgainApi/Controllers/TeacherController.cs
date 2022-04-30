@@ -40,19 +40,95 @@ namespace SchoolStudyAgainApi.Controllers
         #region Materials
 
         [HttpGet]
-        public List<MaterialViewModel> GetMaterials(int teacherId) => _material.Read(new MaterialBindingModel { TeacherId = teacherId })?.ToList();
+        public CustomHttpResponse GetMaterials(int teacherId)
+        {
+            try
+            {
+                var result = new CustomHttpResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.OK,
+                    Data = _material.Read(new MaterialBindingModel { TeacherId = teacherId })
+                };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return new CustomHttpResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.InternalServerError,
+                    Errors = new string[] { ex.Message }
+                };
+            }
+        }
 
         [HttpGet]
-        public MaterialViewModel GetMaterial(int materialId) => _material.Read(new MaterialBindingModel { Id = materialId })?[0];
+        public CustomHttpResponse GetMaterial(int materialId)
+        {
+            try
+            {
+                var result = new CustomHttpResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.OK,
+                    Data = _material.Read(new MaterialBindingModel { Id = materialId })?[0]
+                };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return new CustomHttpResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.InternalServerError,
+                    Errors = new string[] { ex.Message }
+                };
+            }
+        }
 
         [HttpGet]
         public List<MaterialViewModel> GetMaterialPaging(int teacherId, int page = 1) => _material.Read(new MaterialBindingModel { TeacherId = teacherId, ToTake = onPage, ToSkip = (page - 1) * onPage }).ToList();
 
         [HttpPost]
-        public void CreateOrUpdateMaterial(MaterialBindingModel model) => _material.CreateOrUpdate(model);
+        public CustomHttpResponse CreateOrUpdateMaterial(MaterialBindingModel model)
+        {
+            try
+            {
+                _material.CreateOrUpdate(model);
+                var result = new CustomHttpResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.OK
+                };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return new CustomHttpResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.InternalServerError,
+                    Errors = new string[] { ex.Message }
+                };
+            }
+        }
 
         [HttpPost]
-        public void DeleteMaterial(MaterialBindingModel model) => _material.Delete(model);
+        public CustomHttpResponse DeleteMaterials(IList<int> ids)
+        {
+            try
+            {
+                _material.DeleteMany(ids);
+                var result = new CustomHttpResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.OK
+                };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return new CustomHttpResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.InternalServerError,
+                    Errors = new string[] { ex.Message }
+                };
+            }
+        }
 
         #endregion
 

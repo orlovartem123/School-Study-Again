@@ -1,5 +1,4 @@
-﻿
-using MobileClient.DataContracts;
+﻿using MobileClient.DataContracts;
 using MobileClient.Extensions;
 using MobileClient.Models.Medals;
 using MobileClient.Services.Electives;

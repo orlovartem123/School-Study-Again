@@ -1,12 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SchoolBusinessLogic.BindingModels.StudentModels;
 using SchoolBusinessLogic.BusinessLogic.StudentLogics;
 using SchoolBusinessLogic.ViewModels.StudentModels;
+using SchoolStudyAgain.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace SchoolStudyAgainApi.Controllers
 {
+    [Authorize(Roles = "admin,teacher,student")]
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class StudentController : ControllerBase
@@ -40,7 +44,26 @@ namespace SchoolStudyAgainApi.Controllers
         #region Interest
 
         [HttpGet]
-        public List<InterestViewModel> GetInterestList() => _interest.Read(null)?.ToList();
+        public CustomHttpResponse GetInterests()
+        {
+            try
+            {
+                var result = new CustomHttpResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.OK,
+                    Data = _interest.Read(null)
+                };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return new CustomHttpResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.InternalServerError,
+                    Errors = new string[] { ex.Message }
+                };
+            }
+        }
 
         [HttpGet]
         public InterestViewModel GetInterest(int interestId) => _interest.Read(new InterestBindingModel())?[0];

@@ -12,5 +12,6 @@ namespace SchoolBusinessLogic.Interfaces.Teacher
         void Insert(MaterialBindingModel model);
         void Update(MaterialBindingModel model);
         void Delete(MaterialBindingModel model);
+        void DeleteMany(IList<int> ids);
     }
 }

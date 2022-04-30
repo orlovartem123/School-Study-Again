@@ -32,6 +32,17 @@ namespace SchoolDatabaseImplement.Implements.Teacher
             }
         }
 
+        public void DeleteMany(IList<int> ids)
+        {
+            var forDel = context.Materials.Where(x => ids.Contains(x.Id)).ToArray();
+
+            if (forDel.Length > 0)
+            {
+                context.Materials.RemoveRange(forDel);
+                context.SaveChanges();
+            }
+        }
+
         public MaterialViewModel GetElement(MaterialBindingModel model)
         {
             if (model == null)
