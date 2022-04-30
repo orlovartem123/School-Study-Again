@@ -61,6 +61,33 @@ namespace MobileClient {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Delete.
+        /// </summary>
+        internal static string AlertDelete {
+            get {
+                return ResourceManager.GetString("AlertDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на item(s).
+        /// </summary>
+        internal static string AlertDeletePost {
+            get {
+                return ResourceManager.GetString("AlertDeletePost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Delete.
+        /// </summary>
+        internal static string AlertDeletePref {
+            get {
+                return ResourceManager.GetString("AlertDeletePref", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Confirm password.
         /// </summary>
         internal static string ConfirmPasswordText {
@@ -142,6 +169,33 @@ namespace MobileClient {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Medal name.
+        /// </summary>
+        internal static string MedalName {
+            get {
+                return ResourceManager.GetString("MedalName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Value.
+        /// </summary>
+        internal static string MedalValue {
+            get {
+                return ResourceManager.GetString("MedalValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на No.
+        /// </summary>
+        internal static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Passwords are not equals.
         /// </summary>
         internal static string PasswordConfirmError {
@@ -156,6 +210,15 @@ namespace MobileClient {
         internal static string RegisterButtonText {
             get {
                 return ResourceManager.GetString("RegisterButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Select elective.
+        /// </summary>
+        internal static string SelectElective {
+            get {
+                return ResourceManager.GetString("SelectElective", resourceCulture);
             }
         }
         
@@ -210,6 +273,15 @@ namespace MobileClient {
         internal static string ToolBarItemSettings {
             get {
                 return ResourceManager.GetString("ToolBarItemSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Yes.
+        /// </summary>
+        internal static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
     }

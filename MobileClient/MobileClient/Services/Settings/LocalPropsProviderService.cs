@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MobileClient.Services.Settings
+﻿namespace MobileClient.Services.Settings
 {
     public class LocalPropsProviderService
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MobileClient.Models.Electives
+namespace MobileClient.DataContracts
 {
     public class ElectiveContract
     {

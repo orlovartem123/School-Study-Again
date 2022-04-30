@@ -12,5 +12,6 @@ namespace SchoolBusinessLogic.Interfaces.Teacher
         void Insert(MedalBindingModel model);
         void Update(MedalBindingModel model);
         void Delete(MedalBindingModel model);
+        void DeleteMany(IList<int> ids);
     }
 }

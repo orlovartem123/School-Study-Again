@@ -1,7 +1,7 @@
 ﻿using MobileClient.Extensions;
-using MobileClient.Models.Electives;
-using MobileClient.Services.Electives;
-using MobileClient.Views.Electives;
+using MobileClient.Models.Medals;
+using MobileClient.Services.Medals;
+using MobileClient.Views.Medals;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -10,9 +10,9 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.MultiSelectListView;
 
-namespace MobileClient.ViewModels.Electives
+namespace MobileClient.ViewModels.Medals
 {
-    public class ElectiveViewModel : INotifyPropertyChanged
+    public class MedalViewModel : INotifyPropertyChanged
     {
         #region Property
 
@@ -37,37 +37,37 @@ namespace MobileClient.ViewModels.Electives
 
         #endregion
 
-        public MultiSelectObservableCollection<Elective> Electives { get; }
+        public MultiSelectObservableCollection<Medal> Medals { get; }
 
-        public ElectiveViewModel()
+        public MedalViewModel()
         {
-            Electives = new MultiSelectObservableCollection<Elective>();
-            var fromApi = ElectivesService.GetElectivesAsync().GetAwaiter().GetResult();
+            Medals = new MultiSelectObservableCollection<Medal>();
+            var fromApi = MedalsService.GetMedalsAsync().GetAwaiter().GetResult();
             foreach (var elem in fromApi)
             {
-                Electives.Add(elem);
+                Medals.Add(elem);
             }
         }
 
-        public ICommand EditElectiveCommand => new Command(async () =>
+        public ICommand EditMedalCommand => new Command(async () =>
         {
-            var selected = Electives.SelectedItems.FirstOrDefault();
+            var selected = Medals.SelectedItems.FirstOrDefault();
 
             if (selected == null) return;
 
-            var editPage = new AddEditElective(selected, Electives);
+            var editPage = new AddEditMedal(selected, Medals);
             await Application.Current.MainPage.Navigation.PushAsync(editPage);
         });
 
-        public ICommand AddElectiveCommand => new Command<Elective>(async elective =>
+        public ICommand AddMedalCommand => new Command<Medal>(async elective =>
         {
-            var addPage = new AddEditElective(null, Electives);
+            var addPage = new AddEditMedal(null, Medals);
             await Application.Current.MainPage.Navigation.PushAsync(addPage);
         });
 
-        public ICommand DeleteElectiveCommand => new Command<Elective>(async elective =>
+        public ICommand DeleteMedalCommand => new Command<Medal>(async elective =>
         {
-            var idsForDelete = Electives.SelectedItems.Select(e => e.Id).ToList();
+            var idsForDelete = Medals.SelectedItems.Select(e => e.Id).ToList();
             if (idsForDelete.Count == 0)
                 return;
 
@@ -75,10 +75,10 @@ namespace MobileClient.ViewModels.Electives
                 $"{Resource.AlertDeletePref} {idsForDelete.Count} {Resource.AlertDeletePost}", Resource.Yes, Resource.No);
             if (delete)
             {
-                await ElectivesService.DeleteElectivesAsync(idsForDelete);
+                await MedalsService.DeleteMedalsAsync(idsForDelete);
             }
 
-            await Electives.RefreshAsync(() => ElectivesService.GetElectivesAsync());
+            await Medals.RefreshAsync(() => MedalsService.GetMedalsAsync());
         });
     }
 }

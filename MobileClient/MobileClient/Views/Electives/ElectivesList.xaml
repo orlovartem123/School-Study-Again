@@ -6,30 +6,10 @@
              xmlns:lv="clr-namespace:Xamarin.Forms.MultiSelectListView;assembly=Xamarin.Forms.MultiSelectListView" Padding="0,20,0,0">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="edit.png" Command="{Binding AddElectiveCommand}" />
+        <ToolbarItem IconImageSource="edit.png" Command="{Binding EditElectiveCommand}" />
         <ToolbarItem IconImageSource="add.png" Command="{Binding AddElectiveCommand}" />
         <ToolbarItem IconImageSource="delete.png" Command="{Binding DeleteElectiveCommand}" />
     </ContentPage.ToolbarItems>
-
-    <!--<ListView x:Name="MyListView"
-            ItemsSource="{Binding Items}"
-            ItemTapped="Handle_ItemTapped"
-            RowHeight="60"
-            CachingStrategy="RecycleElement">
-
-        <!-Custom View Cells->
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <ViewCell>
-                    <StackLayout>
-                        <Label FontSize="Default" Text="{Binding DateCreate}" Style="{DynamicResource ListItemTextStyle}" />
-                        <Label Text="{Binding Name}" Style="{DynamicResource ListItemDetailTextStyle}"/>
-                    </StackLayout>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-        
-    </ListView>-->
 
     <StackLayout>
         <ListView x:Name="lvwUsers" 

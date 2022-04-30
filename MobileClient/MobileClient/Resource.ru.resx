@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AlertDelete" xml:space="preserve">
+    <value>Удаление</value>
+  </data>
+  <data name="AlertDeletePost" xml:space="preserve">
+    <value>элемент(ов)</value>
+  </data>
+  <data name="AlertDeletePref" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
   <data name="ConfirmPasswordText" xml:space="preserve">
     <value>Подтвердите пароль</value>
   </data>
@@ -144,11 +153,23 @@
   <data name="LoginButtonText" xml:space="preserve">
     <value>Войти</value>
   </data>
+  <data name="MedalName" xml:space="preserve">
+    <value>Название медали</value>
+  </data>
+  <data name="MedalValue" xml:space="preserve">
+    <value>Ценность</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Нет</value>
+  </data>
   <data name="PasswordConfirmError" xml:space="preserve">
     <value>Пароли не совпадают</value>
   </data>
   <data name="RegisterButtonText" xml:space="preserve">
     <value>Регистрация</value>
+  </data>
+  <data name="SelectElective" xml:space="preserve">
+    <value>Выберите кружок</value>
   </data>
   <data name="SettingsPageCancel" xml:space="preserve">
     <value>Отмена</value>
@@ -167,5 +188,8 @@
   </data>
   <data name="ToolBarItemSettings" xml:space="preserve">
     <value>Настройки</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Да</value>
   </data>
 </root>

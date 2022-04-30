@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Resources;
-using System.Text;
 using Xamarin.Forms;
 
 namespace MobileClient.Localization

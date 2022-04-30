@@ -2,8 +2,6 @@
 using MobileClient.Services;
 using MobileClient.Services.Auth;
 using MobileClient.Services.Settings;
-using MobileClient.Views;
-using MobileClient.Views.Auth;
 using System;
 using System.IO;
 using System.Threading.Tasks;

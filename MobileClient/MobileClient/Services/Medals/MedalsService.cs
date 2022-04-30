@@ -1,49 +1,49 @@
 ﻿using MobileClient.DataContracts;
-using MobileClient.Models.Electives;
+using MobileClient.Models.Medals;
 using MobileClient.Services.Settings;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace MobileClient.Services.Electives
+namespace MobileClient.Services.Medals
 {
-    public class ElectivesService
+    public class MedalsService
     {
         private static readonly JsonSerializerOptions _jsonOptions = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 
-        public static async Task<List<Elective>> GetElectivesAsync()
+        public static async Task<List<Medal>> GetMedalsAsync()
         {
             ApiClient.ConnectApi(LocalPropsProviderService.AuthToken);
 
-            var result = await ApiClient.GetRequest($"api/Teacher/GetElectives?teacherId={LocalPropsProviderService.TeacherId}");
+            var result = await ApiClient.GetRequest($"api/Teacher/GetMedals?teacherId={LocalPropsProviderService.TeacherId}");
 
             if (result.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                return JsonSerializer.Deserialize<List<Elective>>(result.Data.ToString(), _jsonOptions);
+                return JsonSerializer.Deserialize<List<Medal>>(result.Data.ToString(), _jsonOptions);
             }
 
             return null;
         }
 
-        public static async Task<Elective> GetElectiveAsync(int electiveId)
+        public static async Task<Medal> GetMedalAsync(int medalId)
         {
             ApiClient.ConnectApi(LocalPropsProviderService.AuthToken);
 
-            var result = await ApiClient.GetRequest($"api/Teacher/GetElective?electiveId={electiveId}");
+            var result = await ApiClient.GetRequest($"api/Teacher/GetMedal?medalId={medalId}");
 
             if (result.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                return JsonSerializer.Deserialize<Elective>(result.Data.ToString(), _jsonOptions);
+                return JsonSerializer.Deserialize<Medal>(result.Data.ToString(), _jsonOptions);
             }
 
             return null;
         }
 
-        public static async Task<string[]> AddEditElectiveAsync(ElectiveContract elective)
+        public static async Task<string[]> AddEditMedalAsync(MedalContract medal)
         {
             ApiClient.ConnectApi(LocalPropsProviderService.AuthToken);
 
-            var result = await ApiClient.PostRequest($"api/Teacher/CreateOrUpdateElective", elective);
+            var result = await ApiClient.PostRequest($"api/Teacher/CreateOrUpdateMedal", medal);
 
             if (result.StatusCode == System.Net.HttpStatusCode.OK)
             {
@@ -53,11 +53,11 @@ namespace MobileClient.Services.Electives
             return result.Errors;
         }
 
-        public static async Task<string[]> DeleteElectivesAsync(IList<int> ids)
+        public static async Task<string[]> DeleteMedalsAsync(IList<int> ids)
         {
             ApiClient.ConnectApi(LocalPropsProviderService.AuthToken);
 
-            var result = await ApiClient.PostRequest($"api/Teacher/DeleteElectives", ids);
+            var result = await ApiClient.PostRequest($"api/Teacher/DeleteMedals", ids);
 
             if (result.StatusCode == System.Net.HttpStatusCode.OK)
             {

@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-
-namespace MobileClient
+﻿namespace MobileClient
 {
     internal class GlobalSettings
     {

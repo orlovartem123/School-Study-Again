@@ -57,5 +57,10 @@ namespace SchoolBusinessLogic.BusinessLogic.TeacherLogics
             }
             _medalStorage.Delete(model);
         }
+
+        public void DeleteMany(IList<int> ids)
+        {
+            _medalStorage.DeleteMany(ids);
+        }
     }
 }

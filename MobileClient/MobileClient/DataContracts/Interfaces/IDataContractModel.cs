@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MobileClient.DataContracts.Interfaces
+﻿namespace MobileClient.DataContracts.Interfaces
 {
     internal interface IDataContractModel
     {

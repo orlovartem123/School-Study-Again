@@ -2,12 +2,8 @@
 using MobileClient.Extensions;
 using MobileClient.Models.Auth;
 using MobileClient.Services.Settings;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 
 namespace MobileClient.Services.Auth
 {

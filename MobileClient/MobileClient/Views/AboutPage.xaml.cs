@@ -1,7 +1,5 @@
-﻿using MobileClient.DataContracts;
-using MobileClient.Services;
+﻿using MobileClient.Services;
 using MobileClient.Services.Settings;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace MobileClient.Views

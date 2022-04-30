@@ -1,32 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage Title="medals list" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MobileClient.Views.Medals.MedalsList">
-  <ListView x:Name="MyListView"
-            ItemsSource="{Binding Items}"
-            ItemTapped="Handle_ItemTapped"
-            CachingStrategy="RecycleElement">
-    <!--Built in Cells-->
-    <ListView.ItemTemplate>
-        <DataTemplate>
-            <TextCell Text="{Binding .}" />
-        </DataTemplate>
-    </ListView.ItemTemplate>
+             xmlns:local="clr-namespace:MobileClient.Localization;assembly=MobileClient"
+             x:Class="MobileClient.Views.Medals.MedalsList"
+             xmlns:lv="clr-namespace:Xamarin.Forms.MultiSelectListView;assembly=Xamarin.Forms.MultiSelectListView" Padding="0,20,0,0">
     
-    <!--Custom View Cells-->
-    <!--
-    <ListView.ItemTemplate>
-      <DataTemplate>
-        <ViewCell>
-          <StackLayout>
-            <Label Text="{Binding Text}" 
-                   Style="{DynamicResource ListItemTextStyle}" />
-            <Label Text="{Binding Detail}" 
-                   Style="{DynamicResource ListItemDetailTextStyle}"/>
-          </StackLayout>
-        </ViewCell>
-      </DataTemplate>
-    </ListView.ItemTemplate>
-    -->
-  </ListView>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="edit.png" Command="{Binding EditMedalCommand}" />
+        <ToolbarItem IconImageSource="add.png" Command="{Binding AddMedalCommand}" />
+        <ToolbarItem IconImageSource="delete.png" Command="{Binding DeleteMedalCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <StackLayout>
+        <ListView x:Name="lvwUsers" 
+            HasUnevenRows="true"
+            SeparatorVisibility="Default" 
+            ItemsSource="{Binding Medals}"
+                  lv:MultiSelect.Enable="true">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <lv:SelectableCell x:Name="SelectableCell">
+
+                        <lv:SelectableCell.CheckView>
+                            <Image Source="check.png" WidthRequest="30" HeightRequest="30"></Image>
+                        </lv:SelectableCell.CheckView>
+
+                        <lv:SelectableCell.DataView>
+                            <StackLayout Orientation="Vertical" Padding="20,0,20,0">
+                                <Label Text="{Binding Name}" FontSize="17" ></Label>
+                                <Label Text="{Binding Value}" FontSize="17" ></Label>
+                            </StackLayout>
+                        </lv:SelectableCell.DataView>
+
+                    </lv:SelectableCell>
+
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+    </StackLayout>
+    
 </ContentPage>

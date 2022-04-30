@@ -1,12 +1,10 @@
-﻿using MobileClient.Extensions;
+﻿using MobileClient.DataContracts;
+using MobileClient.Extensions;
 using MobileClient.Models.Electives;
 using MobileClient.Services.Electives;
 using MobileClient.Services.Settings;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.MultiSelectListView;
@@ -69,7 +67,10 @@ namespace MobileClient.Views.Electives
                     DateCreate = DateTime.Now
                 };
 
-                var result = await ElectivesService.AddElectiveAsync(elective);
+                if (_isEditing)
+                    elective.Id = Elective.Id;
+
+                var result = await ElectivesService.AddEditElectiveAsync(elective);
                 if (result != null)
                 {
                     foreach (var el in result)

@@ -195,16 +195,92 @@ namespace SchoolStudyAgainApi.Controllers
         #region Medals
 
         [HttpGet]
-        public List<MedalViewModel> GetMedals(int teacherId) => _medal.Read(new MedalBindingModel { TeacherId = teacherId })?.ToList();
+        public CustomHttpResponse GetMedals(int teacherId)
+        {
+            try
+            {
+                var result = new CustomHttpResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.OK,
+                    Data = _medal.Read(new MedalBindingModel { TeacherId = teacherId })
+                };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return new CustomHttpResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.InternalServerError,
+                    Errors = new string[] { ex.Message }
+                };
+            }
+        }
 
         [HttpGet]
-        public MedalViewModel GetMedal(int medalId) => _medal.Read(new MedalBindingModel { Id = medalId })?[0];
+        public CustomHttpResponse GetMedal(int medalId)
+        {
+            try
+            {
+                var result = new CustomHttpResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.OK,
+                    Data = _medal.Read(new MedalBindingModel { Id = medalId })?[0]
+                };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return new CustomHttpResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.InternalServerError,
+                    Errors = new string[] { ex.Message }
+                };
+            }
+        }
 
         [HttpPost]
-        public void CreateOrUpdateMedal(MedalBindingModel model) => _medal.CreateOrUpdate(model);
+        public CustomHttpResponse CreateOrUpdateMedal(MedalBindingModel model)
+        {
+            try
+            {
+                _medal.CreateOrUpdate(model);
+                var result = new CustomHttpResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.OK
+                };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return new CustomHttpResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.InternalServerError,
+                    Errors = new string[] { ex.Message }
+                };
+            }
+        }
 
         [HttpPost]
-        public void DeleteMedal(MedalBindingModel model) => _medal.Delete(model);
+        public CustomHttpResponse DeleteMedals(IList<int> ids)
+        {
+            try
+            {
+                _medal.DeleteMany(ids);
+                var result = new CustomHttpResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.OK
+                };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return new CustomHttpResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.InternalServerError,
+                    Errors = new string[] { ex.Message }
+                };
+            }
+        }
 
         #endregion
     }

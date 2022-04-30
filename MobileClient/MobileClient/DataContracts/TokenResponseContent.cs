@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MobileClient.DataContracts
+﻿namespace MobileClient.DataContracts
 {
     internal class TokenResponseContent
     {

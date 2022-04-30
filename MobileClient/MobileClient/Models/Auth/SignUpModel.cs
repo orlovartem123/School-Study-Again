@@ -1,7 +1,5 @@
 ﻿using MobileClient.DataContracts.Interfaces;
 using MobileClient.Localization;
-using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace MobileClient.Models.Auth

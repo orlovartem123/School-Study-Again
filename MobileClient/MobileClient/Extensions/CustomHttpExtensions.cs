@@ -1,7 +1,5 @@
 ﻿using MobileClient.DataContracts;
 using MobileClient.Localization;
-using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace MobileClient.Extensions
