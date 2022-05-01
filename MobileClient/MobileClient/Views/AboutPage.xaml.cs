@@ -1,5 +1,4 @@
-﻿using MobileClient.Services;
-using MobileClient.Services.Settings;
+﻿using MobileClient.ViewModels.About;
 using Xamarin.Forms;
 
 namespace MobileClient.Views
@@ -9,15 +8,7 @@ namespace MobileClient.Views
         public AboutPage()
         {
             InitializeComponent();
-        }
-
-        private async void Button_Clicked(object sender, System.EventArgs e)
-        {
-            ApiClient.ConnectApi(LocalPropsProviderService.AuthToken);
-
-            var teacherId = LocalPropsProviderService.TeacherId;
-
-            var result = await ApiClient.GetRequest("api/Teacher/Ping");
+            BindingContext = new AboutViewModel();
         }
     }
 }

@@ -2,13 +2,14 @@
 using MobileClient.ViewModels.Electives;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Xamarin.Forms;
 
 namespace MobileClient.Services
 {
     public class ContentGenerator
     {
-        public static FlexLayout GetAddMaterialsToElectivesBlock(List<Elective> itemsSource)
+        public static FlexLayout GetAddMaterialsToElectivesBlock(List<Elective> itemsSource, int? selectedElectiveId = null, int? materialCount = null)
         {
             FlexLayout flexLayout = new FlexLayout();
             flexLayout.JustifyContent = FlexJustify.SpaceBetween;
@@ -23,15 +24,19 @@ namespace MobileClient.Services
             var pickerBindingForItemDisplayBinding = new Binding { Source = pickerBinding.SelectedElective, Path = "Name" };
 
             var picker = new Picker();
-            picker.BindingContext = pickerBinding;
             picker.Title = Resource.SelectElective;
             picker.SetBinding(Picker.ItemsSourceProperty, pickerBindingForItemSource);
             picker.SetBinding(Picker.SelectedItemProperty, pickerBindingForSelectedItem);
             picker.ItemDisplayBinding = pickerBindingForItemDisplayBinding;
             picker.WidthRequest = 200;
 
+            if (selectedElectiveId.HasValue)
+                pickerBinding.SelectedElective = pickerBinding.ElectiveList.Where(x => x.Id == selectedElectiveId.Value).FirstOrDefault();
+
+            picker.BindingContext = pickerBinding;
+
             var entry = new Entry();
-            entry.Text = "1";
+            entry.Text = materialCount.HasValue ? materialCount.ToString() : "1";
             entry.WidthRequest = 80;
             entry.SetOnAppTheme(Entry.TextColorProperty,
                 (Color)Application.Current.Resources["Background_d"], (Color)Application.Current.Resources["Background_l"]);

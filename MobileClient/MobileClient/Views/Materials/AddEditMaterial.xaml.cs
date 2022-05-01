@@ -39,7 +39,9 @@ namespace MobileClient.Views.Materials
             {
                 ElectiveList = Electives
             };
+            electivePicker.BindingContext = binding;
 
+            interestsList.BindingContext = new InterestViewModel();
             MaterialsFromModel = electivesFromModel;
 
             if (material != default)
@@ -49,10 +51,34 @@ namespace MobileClient.Views.Materials
 
                 entryMaterialName.Text = Material.Name;
                 entryMaterialPrice.Text = Material.Price.ToString();
-            }
 
-            electivePicker.BindingContext = binding;
-            interestsList.BindingContext = new InterestViewModel();
+                if (material.MaterialElectives != null && material.MaterialElectives.Count > 0)
+                {
+                    var first = material.MaterialElectives.First();
+                    var selected = Electives.Where(x => x.Id == first.Key).FirstOrDefault();
+                    if (selected != null)
+                    {
+                        (electivePicker.BindingContext as ElectiveDropDownViewModel)
+                            .SelectedElective = selected;
+                        entryElectiveCount.Text = first.Value.Item2.ToString();
+                    }
+
+                    foreach (var el in material.MaterialElectives.Skip(1))
+                    {
+                        if (Electives.Where(x => x.Id == el.Key).FirstOrDefault() != null)
+                            container.Children.Add(ContentGenerator.GetAddMaterialsToElectivesBlock(Electives, el.Key, el.Value.Item2));
+                    }
+                }
+
+                if (material.Interests != null && material.Interests.Count > 0)
+                {
+                    var selectedIds = material.Interests.Select(x => x.Item1);
+                    foreach (var el in (interestsList.BindingContext as InterestViewModel).Interests.Where(x => selectedIds.Contains(x.Data.Id)))
+                    {
+                        el.IsSelected = true;
+                    }
+                }
+            }
         }
 
         private async void ButtonSave_Clicked(object sender, EventArgs e)
@@ -106,8 +132,11 @@ namespace MobileClient.Views.Materials
                     ElectiveMaterials = electiveDict
                 };
 
+
                 if (_isEditing)
                     material.Id = Material.Id;
+                else
+                    material.DateCreate = DateTime.Now;
 
                 var result = await MaterialsService.AddEditMaterialAsync(material);
                 if (result != null)

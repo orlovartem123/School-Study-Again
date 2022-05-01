@@ -28,7 +28,7 @@ namespace SchoolDatabaseImplement.Implements.Teacher
                 return null;
             }
             var client = context.Teachers
-            .FirstOrDefault(rec => rec.Email.Equals(model.Email) || rec.Id == model.Id);
+            .FirstOrDefault(rec => (rec.Email.Equals(model.Email) && rec.Password.Equals(model.Password)) || rec.Id == model.Id);
             return client != null ?
             new TeacherViewModel { Name = client.Name, Email = client.Email, Id = client.Id, Surname = client.Surname } : null;
         }
@@ -54,6 +54,13 @@ namespace SchoolDatabaseImplement.Implements.Teacher
         {
             context.Teachers.Add(CreateModel(model, new Models.Teacher()));
             context.SaveChanges();
+        }
+
+        public int InsertWithId(TeacherBindingModel model)
+        {
+            var result = context.Teachers.Add(CreateModel(model, new Models.Teacher()));
+            context.SaveChanges();
+            return result.Entity.Id;
         }
 
         public void Update(TeacherBindingModel model)

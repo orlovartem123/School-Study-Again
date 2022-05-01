@@ -49,6 +49,21 @@ namespace SchoolBusinessLogic.BusinessLogic.TeacherLogics
             }
         }
 
+        public int CreateWithId(TeacherBindingModel model)
+        {
+            var element = _teacherStorage.GetElement(new TeacherBindingModel
+            {
+                Email = model.Email,
+                Login = model.Login
+            });
+            if (element != null && element.Id != model.Id)
+            {
+                throw new Exception("There is already a teacher with the same email or login");
+            }
+            var result = _teacherStorage.InsertWithId(model);
+            return result;
+        }
+
         public void Delete(TeacherBindingModel model)
         {
             var element = _teacherStorage.GetElement(new TeacherBindingModel { Id = model.Id });

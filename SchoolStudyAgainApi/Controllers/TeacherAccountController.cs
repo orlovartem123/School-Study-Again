@@ -1,10 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SchoolBusinessLogic.BindingModels.TeacherModels;
 using SchoolBusinessLogic.BusinessLogic.TeacherLogics;
 using SchoolBusinessLogic.ViewModels.TeacherModels;
+using SchoolStudyAgain.Interface;
+using System;
 
 namespace SchoolStudyAgainApi.Controllers
 {
+    [Authorize(Roles = "admin,teacher")]
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class TeacherAccountController : ControllerBase
@@ -17,7 +21,47 @@ namespace SchoolStudyAgainApi.Controllers
         }
 
         [HttpGet]
-        public TeacherViewModel Login(string login, string password,string email) => _logic.Read(new TeacherBindingModel { Login = login, Password = password, Email=email })?[0];
+        public CustomHttpResponse GetInfo(string login, string password)
+        {
+            try
+            {
+                var result = new CustomHttpResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.OK,
+                    Data = _logic.Read(new TeacherBindingModel { Login = login, Password = password })?[0]
+                };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return new CustomHttpResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.InternalServerError,
+                    Errors = new string[] { ex.Message }
+                };
+            }
+        }
+
+        [HttpGet]
+        public TeacherViewModel Login(string login, string password, string email) => _logic.Read(new TeacherBindingModel { Login = login, Password = password, Email = email })?[0];
+
+        [HttpPost]
+        public CustomHttpResponse CreateTeacher(TeacherBindingModel model)
+        {
+            try
+            {
+                var result = _logic.CreateWithId(model);
+                return new CustomHttpResponse { StatusCode = System.Net.HttpStatusCode.NoContent, Data = result };
+            }
+            catch (Exception ex)
+            {
+                return new CustomHttpResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.InternalServerError,
+                    Errors = new string[] { ex.Message }
+                };
+            }
+        }
 
         [HttpPost]
         public void Register(TeacherBindingModel model) => _logic.CreateOrUpdate(model);

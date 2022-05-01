@@ -158,10 +158,10 @@ namespace SchoolDatabaseImplement.Implements.Teacher
                 Name = material.Name,
                 Price = material.Price,
                 DateCreate = material.DateCreate,
-                Interests = material.MaterialInterests.Select(rec => (rec.InterestId, rec.Interest.Name)).ToList(),
+                Interests = material.MaterialInterests.Select(rec => Tuple.Create(rec.InterestId, rec.Interest.Name)).ToList(),
                 MaterialElectives = material.ElectiveMaterials
                 .ToDictionary(recME => recME.ElectiveId, recME =>
-                (recME.Elective?.Name, recME.MaterialCount))
+                Tuple.Create(recME.Elective?.Name, recME.MaterialCount))
             };
         }
 

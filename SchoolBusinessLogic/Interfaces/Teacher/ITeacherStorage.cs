@@ -12,5 +12,6 @@ namespace SchoolBusinessLogic.Interfaces.Teacher
         void Insert(TeacherBindingModel model);
         void Update(TeacherBindingModel model);
         void Delete(TeacherBindingModel model);
+        int InsertWithId(TeacherBindingModel model);
     }
 }

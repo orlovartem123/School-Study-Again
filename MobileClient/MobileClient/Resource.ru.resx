@@ -147,8 +147,14 @@
   <data name="EmptyLoginError" xml:space="preserve">
     <value>Введите логин</value>
   </data>
+  <data name="EmptyNameError" xml:space="preserve">
+    <value>Поле Имя обязательно к заполнению</value>
+  </data>
   <data name="EmptyPasswordError" xml:space="preserve">
     <value>Введите пароль</value>
+  </data>
+  <data name="EmptySurNameError" xml:space="preserve">
+    <value>Поле Фамилия обязательно к заполнению</value>
   </data>
   <data name="InputLoginLabelText" xml:space="preserve">
     <value>Логин</value>
@@ -174,6 +180,9 @@
   <data name="MedalValue" xml:space="preserve">
     <value>Ценность</value>
   </data>
+  <data name="Name" xml:space="preserve">
+    <value>Имя</value>
+  </data>
   <data name="No" xml:space="preserve">
     <value>Нет</value>
   </data>
@@ -195,6 +204,9 @@
   <data name="SettingsPageSave" xml:space="preserve">
     <value>Сохранить</value>
   </data>
+  <data name="SurName" xml:space="preserve">
+    <value>Фамилия</value>
+  </data>
   <data name="ToolBarItemAdd" xml:space="preserve">
     <value>Добавить</value>
   </data>
@@ -203,6 +215,9 @@
   </data>
   <data name="ToolBarItemSettings" xml:space="preserve">
     <value>Настройки</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Добро пожаловать</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Да</value>

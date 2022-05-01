@@ -2,6 +2,7 @@
 using MobileClient.Extensions;
 using MobileClient.Models.Auth;
 using MobileClient.Services.Settings;
+using System;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -9,6 +10,8 @@ namespace MobileClient.Services.Auth
 {
     internal class AuthService
     {
+        private static readonly JsonSerializerOptions _jsonOptions = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+
         /// <summary>
         /// Logout method
         /// </summary>
@@ -59,9 +62,11 @@ namespace MobileClient.Services.Auth
             {
                 result = await ApiClient.GetRequest("MobileAccount/Token");
                 var obj = JsonSerializer.Deserialize<TokenResponseContent>(result.Data.ToString());
-                LocalPropsProviderService.Login = true;
                 LocalPropsProviderService.AuthToken = obj.Token;
-                LocalPropsProviderService.TeacherId = obj.TeacherId;
+                var info = await GetTeacherInfo(signIn.Login, signIn.Password);
+                LocalPropsProviderService.Login = true;
+                LocalPropsProviderService.TeacherId = info.Id.ToString();
+                LocalPropsProviderService.UserName = $"{info.Name} {info.Surname}";
                 return string.Empty;
             }
 
@@ -81,12 +86,53 @@ namespace MobileClient.Services.Auth
             if (result.StatusCode == System.Net.HttpStatusCode.NoContent)
             {
                 result = await ApiClient.GetRequest("MobileAccount/Token");
+                var obj = JsonSerializer.Deserialize<TokenResponseContent>(result.Data.ToString());
+                LocalPropsProviderService.AuthToken = obj.Token;
+                var contract = new TeacherContract
+                {
+                    Name = obj.Name.Split('1')[0],
+                    Surname = obj.Name.Split('1')[1],
+                    Position = "teacher",
+                    Email = signUp.Login,
+                    Login = signUp.Login,
+                    Password = signUp.Password
+                };
+                var result2 = await CreateTeacher(contract);
                 LocalPropsProviderService.Login = true;
-                LocalPropsProviderService.AuthToken = result.Data.ToString();
+                LocalPropsProviderService.TeacherId = result2.ToString();
+                LocalPropsProviderService.UserName = obj.Name.Replace('1', ' ');
                 return string.Empty;
             }
 
             return result.GetErrors();
+        }
+
+        public static async Task<Teacher> GetTeacherInfo(string login, string password)
+        {
+            ApiClient.ConnectApi(LocalPropsProviderService.AuthToken);
+
+            var result = await ApiClient.GetRequest($"api/TeacherAccount/GetInfo?login={login}&password={password}");
+
+            if (result.StatusCode == System.Net.HttpStatusCode.NoContent)
+            {
+                return JsonSerializer.Deserialize<Teacher>(result.Data.ToString(), _jsonOptions);
+            }
+
+            throw new Exception("Cant get teacher");
+        }
+
+        public static async Task<int> CreateTeacher(TeacherContract contract)
+        {
+            ApiClient.ConnectApi(LocalPropsProviderService.AuthToken);
+
+            var result = await ApiClient.PostRequest($"api/TeacherAccount/CreateTeacher", contract);
+
+            if (result.StatusCode == System.Net.HttpStatusCode.NoContent)
+            {
+                return JsonSerializer.Deserialize<int>(result.Data.ToString());
+            }
+
+            throw new Exception("Cant create teacher");
         }
     }
 }

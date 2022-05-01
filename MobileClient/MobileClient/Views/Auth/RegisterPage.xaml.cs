@@ -25,6 +25,8 @@ namespace MobileClient.Views.Auth
                 Login = entryLogin.Text,
                 Password = entryPassword.Text,
                 ConfirmPassword = entryPasswordConfirm.Text,
+                Name = entryName.Text,
+                SurName = entrySurName.Text
             };
 
             errors.Append(model.Validate());

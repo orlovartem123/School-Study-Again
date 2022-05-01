@@ -40,7 +40,7 @@
                         <VisualStateGroup x:Name="CommonStates">
                             <VisualState x:Name="Normal">
                                 <VisualState.Setters>
-                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource Background_l}" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{AppThemeBinding Dark={StaticResource Background_d}, Light={StaticResource Background_l}}" />
                                 </VisualState.Setters>
                             </VisualState>
                         </VisualStateGroup>
@@ -50,20 +50,20 @@
         </ResourceDictionary>
     </Shell.Resources>
 
-    <FlyoutItem Title="About" Icon="about.png">
+    <FlyoutItem Title="About" Icon="{AppThemeBinding Dark=about_light.png, Light=about_dark.png}">
         <ShellContent Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Materials" FlyoutIcon="materials.png">
+    <FlyoutItem Title="Materials" Icon="{AppThemeBinding Dark=materials_light.png, Light=materials_dark.png}">
         <ShellContent Route="MaterialsList" ContentTemplate="{DataTemplate materials:MaterialsList}" />
     </FlyoutItem>
-    <FlyoutItem Title="Electives" Icon="electives.png">
+    <FlyoutItem Title="Electives" Icon="{AppThemeBinding Dark=electives_light.png, Light=electives_dark.png}">
         <ShellContent Route="ElectivesList" ContentTemplate="{DataTemplate electives:ElectivesList}" />
     </FlyoutItem>
-    <FlyoutItem Title="Medals" Icon="medals.png">
+    <FlyoutItem Title="Medals" Icon="{AppThemeBinding Dark=medals_light.png, Light=medals_dark.png}">
         <ShellContent Route="MedalsList" ContentTemplate="{DataTemplate medals:MedalsList}" />
     </FlyoutItem>
 
-    <MenuItem Text="Logout" StyleClass="MenuItemLayoutStyle" Clicked="OnLogOutItemClicked">
+    <MenuItem Text="Logout" Clicked="OnLogOutItemClicked">
     </MenuItem>
 
     <TabBar>

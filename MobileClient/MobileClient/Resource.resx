@@ -147,8 +147,14 @@
   <data name="EmptyLoginError" xml:space="preserve">
     <value>Login is null or empty</value>
   </data>
+  <data name="EmptyNameError" xml:space="preserve">
+    <value>Name required</value>
+  </data>
   <data name="EmptyPasswordError" xml:space="preserve">
     <value>Password is null or empty</value>
+  </data>
+  <data name="EmptySurNameError" xml:space="preserve">
+    <value>Surname required</value>
   </data>
   <data name="InputLoginLabelText" xml:space="preserve">
     <value>Login</value>
@@ -174,6 +180,9 @@
   <data name="MedalValue" xml:space="preserve">
     <value>Value</value>
   </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
   <data name="No" xml:space="preserve">
     <value>No</value>
   </data>
@@ -195,6 +204,9 @@
   <data name="SettingsPageSave" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="SurName" xml:space="preserve">
+    <value>Surname</value>
+  </data>
   <data name="ToolBarItemAdd" xml:space="preserve">
     <value>Add</value>
   </data>
@@ -203,6 +215,9 @@
   </data>
   <data name="ToolBarItemSettings" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Welcome</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>

@@ -11,9 +11,9 @@ namespace MobileClient.Models.Materials
 
         public decimal Price { get; set; }
 
-        public List<(int, string)> Interests { get; set; }
+        public List<Tuple<int, string>> Interests { get; set; }
 
-        public Dictionary<int, (string, int)> MaterialElectives { get; set; }
+        public Dictionary<int, Tuple<string, int>> MaterialElectives { get; set; }
 
         public DateTime DateCreate { get; set; }
     }

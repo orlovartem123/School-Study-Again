@@ -11,5 +11,9 @@ namespace SchoolStudyAgain.Interface.DataContracts
         public string Token { get; set; }
 
         public string TeacherId { get; set; }
+
+        public string Name { get; set; }
+
+        public string SurName { get; set; }
     }
 }

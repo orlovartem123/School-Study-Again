@@ -71,11 +71,12 @@ namespace SchoolDatabaseImplement.Implements.Teacher
                 .Include(rec => rec.ElectiveMaterials)
                 .ThenInclude(rec => rec.Material)
                 .Include(rec => rec.ActivityElectives)
-                .ThenInclude(rec => rec.Activity);
+                .ThenInclude(rec => rec.Activity)
+                .AsQueryable();
 
             if (model.TeacherId.HasValue && model.TeacherId != -900)
             {
-                query.Where(rec => rec.TeacherId == model.TeacherId.Value);
+                query = query.Where(rec => rec.TeacherId == model.TeacherId.Value);
             }
 
             if (model.DateFrom.HasValue && model.DateTo.HasValue && model.DateFrom.Value < model.DateTo.Value)

@@ -151,11 +151,29 @@ namespace MobileClient {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Name required.
+        /// </summary>
+        internal static string EmptyNameError {
+            get {
+                return ResourceManager.GetString("EmptyNameError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Password is null or empty.
         /// </summary>
         internal static string EmptyPasswordError {
             get {
                 return ResourceManager.GetString("EmptyPasswordError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Surname required.
+        /// </summary>
+        internal static string EmptySurNameError {
+            get {
+                return ResourceManager.GetString("EmptySurNameError", resourceCulture);
             }
         }
         
@@ -232,6 +250,15 @@ namespace MobileClient {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Name.
+        /// </summary>
+        internal static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на No.
         /// </summary>
         internal static string No {
@@ -295,6 +322,15 @@ namespace MobileClient {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Surname.
+        /// </summary>
+        internal static string SurName {
+            get {
+                return ResourceManager.GetString("SurName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Add.
         /// </summary>
         internal static string ToolBarItemAdd {
@@ -318,6 +354,15 @@ namespace MobileClient {
         internal static string ToolBarItemSettings {
             get {
                 return ResourceManager.GetString("ToolBarItemSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Welcome.
+        /// </summary>
+        internal static string Welcome {
+            get {
+                return ResourceManager.GetString("Welcome", resourceCulture);
             }
         }
         
