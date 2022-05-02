@@ -2,13 +2,24 @@
 {
     public class LocalPropsProviderService
     {
-        public static string UserName
+        public static string Name
         {
-            get => App.Database.GetProps().UserName;
+            get => App.Database.GetProps().Name;
             set
             {
                 var settings = App.Database.GetProps();
-                settings.UserName = value;
+                settings.Name = value;
+                App.Database.ApplySettings(settings);
+            }
+        }
+
+        public static string SurName
+        {
+            get => App.Database.GetProps().SurName;
+            set
+            {
+                var settings = App.Database.GetProps();
+                settings.SurName = value;
                 App.Database.ApplySettings(settings);
             }
         }

@@ -1,4 +1,5 @@
-﻿using MobileClient.Services.Auth;
+﻿using MobileClient.Models.Auth;
+using MobileClient.Services.Auth;
 using MobileClient.Views.Settings;
 using System;
 using System.Text;
@@ -20,20 +21,25 @@ namespace MobileClient.Views.Auth
         {
             var errors = new StringBuilder();
 
-            var model = new Models.Auth.SignUpModel
+            var signUp = new SignUpModel
             {
                 Login = entryLogin.Text,
                 Password = entryPassword.Text,
-                ConfirmPassword = entryPasswordConfirm.Text,
-                Name = entryName.Text,
-                SurName = entrySurName.Text
+                ConfirmPassword = entryPasswordConfirm.Text
             };
 
-            errors.Append(model.Validate());
+            var info = new TeacherInfo
+            {
+                Name = entryName.Text,
+                Surname = entrySurName.Text
+            };
+
+            errors.Append(signUp.Validate());
+            errors.Append(info.Validate());
 
             if (string.IsNullOrEmpty(errors.ToString()))
             {
-                errors.Append(await AuthService.TrySignUp(model));
+                errors.Append(await AuthService.TrySignUp(signUp, info));
                 if (string.IsNullOrEmpty(errors.ToString()))
                     await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
             }

@@ -9,9 +9,10 @@ namespace SchoolBusinessLogic.Interfaces.Teacher
         List<TeacherViewModel> GetFullList();
         List<TeacherViewModel> GetFilteredList(TeacherBindingModel model);
         TeacherViewModel GetElement(TeacherBindingModel model);
+        TeacherViewModel GetByExtId(string extId);
         void Insert(TeacherBindingModel model);
         void Update(TeacherBindingModel model);
         void Delete(TeacherBindingModel model);
-        int InsertWithId(TeacherBindingModel model);
+        TeacherViewModel InsertWithResult(TeacherBindingModel model);
     }
 }

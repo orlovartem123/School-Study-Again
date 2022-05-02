@@ -1,5 +1,4 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
 namespace SchoolBusinessLogic.BindingModels.TeacherModels
 {
@@ -26,5 +25,8 @@ namespace SchoolBusinessLogic.BindingModels.TeacherModels
 
         [DataMember]
         public string Password { get; set; }
+
+        [DataMember]
+        public string ExtId { get; set; }
     }
 }

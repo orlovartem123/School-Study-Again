@@ -63,10 +63,14 @@ namespace MobileClient.Services.Auth
                 result = await ApiClient.GetRequest("MobileAccount/Token");
                 var obj = JsonSerializer.Deserialize<TokenResponseContent>(result.Data.ToString());
                 LocalPropsProviderService.AuthToken = obj.Token;
-                var info = await GetTeacherInfo(signIn.Login, signIn.Password);
                 LocalPropsProviderService.Login = true;
+
+                var info = await GetTeacherInfo(obj.TeacherId);
+
                 LocalPropsProviderService.TeacherId = info.Id.ToString();
-                LocalPropsProviderService.UserName = $"{info.Name} {info.Surname}";
+                LocalPropsProviderService.Name = info.Name;
+                LocalPropsProviderService.SurName = info.Surname;
+
                 return string.Empty;
             }
 
@@ -77,7 +81,7 @@ namespace MobileClient.Services.Auth
         /// Sign up method
         /// </summary>
         /// <returns>Errors in form error\n error\n</returns>
-        public static async Task<string> TrySignUp(SignUpModel signUp)
+        public static async Task<string> TrySignUp(SignUpModel signUp, TeacherInfo info)
         {
             ApiClient.ConnectAuth();
 
@@ -88,32 +92,38 @@ namespace MobileClient.Services.Auth
                 result = await ApiClient.GetRequest("MobileAccount/Token");
                 var obj = JsonSerializer.Deserialize<TokenResponseContent>(result.Data.ToString());
                 LocalPropsProviderService.AuthToken = obj.Token;
+                LocalPropsProviderService.Login = true;
+
                 var contract = new TeacherContract
                 {
-                    Name = obj.Name.Split('1')[0],
-                    Surname = obj.Name.Split('1')[1],
+                    Name = info.Name,
+                    Surname = info.Surname,
                     Position = "teacher",
                     Email = signUp.Login,
                     Login = signUp.Login,
-                    Password = signUp.Password
+                    Password = signUp.Password,
+                    ExtId = obj.TeacherId
                 };
-                var result2 = await CreateTeacher(contract);
-                LocalPropsProviderService.Login = true;
-                LocalPropsProviderService.TeacherId = result2.ToString();
-                LocalPropsProviderService.UserName = obj.Name.Replace('1', ' ');
+
+                var createTeacherResult = await CreateTeacher(contract);
+
+                LocalPropsProviderService.TeacherId = createTeacherResult.Id.ToString();
+                LocalPropsProviderService.Name = createTeacherResult.Name;
+                LocalPropsProviderService.SurName = createTeacherResult.Surname;
+
                 return string.Empty;
             }
 
             return result.GetErrors();
         }
 
-        public static async Task<Teacher> GetTeacherInfo(string login, string password)
+        public static async Task<Teacher> GetTeacherInfo(string extId)
         {
             ApiClient.ConnectApi(LocalPropsProviderService.AuthToken);
 
-            var result = await ApiClient.GetRequest($"api/TeacherAccount/GetInfo?login={login}&password={password}");
+            var result = await ApiClient.GetRequest($"api/TeacherAccount/GetInfoByExtId?extId={extId}");
 
-            if (result.StatusCode == System.Net.HttpStatusCode.NoContent)
+            if (result.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 return JsonSerializer.Deserialize<Teacher>(result.Data.ToString(), _jsonOptions);
             }
@@ -121,15 +131,15 @@ namespace MobileClient.Services.Auth
             throw new Exception("Cant get teacher");
         }
 
-        public static async Task<int> CreateTeacher(TeacherContract contract)
+        public static async Task<Teacher> CreateTeacher(TeacherContract contract)
         {
             ApiClient.ConnectApi(LocalPropsProviderService.AuthToken);
 
             var result = await ApiClient.PostRequest($"api/TeacherAccount/CreateTeacher", contract);
 
-            if (result.StatusCode == System.Net.HttpStatusCode.NoContent)
+            if (result.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                return JsonSerializer.Deserialize<int>(result.Data.ToString());
+                return JsonSerializer.Deserialize<Teacher>(result.Data.ToString(), _jsonOptions);
             }
 
             throw new Exception("Cant create teacher");

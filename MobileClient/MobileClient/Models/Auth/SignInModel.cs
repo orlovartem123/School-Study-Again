@@ -1,5 +1,4 @@
 ﻿using MobileClient.DataContracts.Interfaces;
-using MobileClient.Localization;
 using System.Text;
 
 namespace MobileClient.Models.Auth
@@ -15,10 +14,10 @@ namespace MobileClient.Models.Auth
             var errors = new StringBuilder();
 
             if (string.IsNullOrEmpty(Login))
-                errors.AppendLine(ResDataProvider.EmptyLoginError);
+                errors.AppendLine(Resource.EmptyLoginError);
 
             if (string.IsNullOrEmpty(Password))
-                errors.AppendLine(ResDataProvider.EmptyPasswordError);
+                errors.AppendLine(Resource.EmptyPasswordError);
 
             return errors.ToString();
         }

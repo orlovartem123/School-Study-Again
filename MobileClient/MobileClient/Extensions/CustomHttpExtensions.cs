@@ -1,5 +1,4 @@
 ﻿using MobileClient.DataContracts;
-using MobileClient.Localization;
 using System.Text;
 
 namespace MobileClient.Extensions
@@ -19,7 +18,7 @@ namespace MobileClient.Extensions
 
             var resultString = result.ToString();
             if (resultString.Equals(string.Empty))
-                resultString = ResDataProvider.DefaultErrorMessage;
+                resultString = Resource.DefaultErrorMessage;
 
             return resultString;
         }

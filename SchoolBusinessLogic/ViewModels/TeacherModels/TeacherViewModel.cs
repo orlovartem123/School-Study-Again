@@ -20,5 +20,8 @@ namespace SchoolBusinessLogic.ViewModels.TeacherModels
 
         [DataMember]
         public string Email { get; set; }
+
+        [DataMember]
+        public string ExtId { get; set; }
     }
 }

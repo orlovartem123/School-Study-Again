@@ -12,5 +12,11 @@ namespace MobileClient.Views.Electives
             InitializeComponent();
             BindingContext = new ElectiveViewModel();
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            BindingContext = new ElectiveViewModel();
+        }
     }
 }

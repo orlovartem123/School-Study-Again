@@ -10,5 +10,11 @@ namespace MobileClient.Views
             InitializeComponent();
             BindingContext = new AboutViewModel();
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            BindingContext = new AboutViewModel();
+        }
     }
 }

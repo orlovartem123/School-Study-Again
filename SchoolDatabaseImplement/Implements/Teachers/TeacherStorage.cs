@@ -33,6 +33,15 @@ namespace SchoolDatabaseImplement.Implements.Teacher
             new TeacherViewModel { Name = client.Name, Email = client.Email, Id = client.Id, Surname = client.Surname } : null;
         }
 
+        public TeacherViewModel GetByExtId(string extId)
+        {
+            var client = context.Teachers
+                .Where(x => x.ExtId.Equals(extId))
+                .FirstOrDefault();
+            return client != null ?
+                new TeacherViewModel { Name = client.Name, Id = client.Id, Surname = client.Surname } : null;
+        }
+
         public List<TeacherViewModel> GetFilteredList(TeacherBindingModel model)
         {
             if (model == null)
@@ -56,11 +65,17 @@ namespace SchoolDatabaseImplement.Implements.Teacher
             context.SaveChanges();
         }
 
-        public int InsertWithId(TeacherBindingModel model)
+        public TeacherViewModel InsertWithResult(TeacherBindingModel model)
         {
             var result = context.Teachers.Add(CreateModel(model, new Models.Teacher()));
             context.SaveChanges();
-            return result.Entity.Id;
+            return new TeacherViewModel
+            {
+                Id = result.Entity.Id,
+                Name = result.Entity.Name,
+                Surname = result.Entity.Surname,
+                ExtId = result.Entity.ExtId
+            };
         }
 
         public void Update(TeacherBindingModel model)
@@ -76,6 +91,7 @@ namespace SchoolDatabaseImplement.Implements.Teacher
             client.Login = model.Login;
             client.Email = model.Email;
             client.Password = model.Password;
+            client.ExtId = model.ExtId;
             return client;
         }
     }

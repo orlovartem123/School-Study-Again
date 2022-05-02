@@ -28,6 +28,11 @@ namespace SchoolBusinessLogic.BusinessLogic.TeacherLogics
             return _teacherStorage.GetFilteredList(model);
         }
 
+        public TeacherViewModel GetByExtId(string extId)
+        {
+            return _teacherStorage.GetByExtId(extId);
+        }
+
         public void CreateOrUpdate(TeacherBindingModel model)
         {
             var element = _teacherStorage.GetElement(new TeacherBindingModel
@@ -49,7 +54,7 @@ namespace SchoolBusinessLogic.BusinessLogic.TeacherLogics
             }
         }
 
-        public int CreateWithId(TeacherBindingModel model)
+        public TeacherViewModel CreateWithResult(TeacherBindingModel model)
         {
             var element = _teacherStorage.GetElement(new TeacherBindingModel
             {
@@ -60,7 +65,7 @@ namespace SchoolBusinessLogic.BusinessLogic.TeacherLogics
             {
                 throw new Exception("There is already a teacher with the same email or login");
             }
-            var result = _teacherStorage.InsertWithId(model);
+            var result = _teacherStorage.InsertWithResult(model);
             return result;
         }
 

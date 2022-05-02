@@ -13,5 +13,11 @@ namespace MobileClient.Views.Materials
             InitializeComponent();
             BindingContext = new MaterialViewModel();
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            BindingContext = new MaterialViewModel();
+        }
     }
 }

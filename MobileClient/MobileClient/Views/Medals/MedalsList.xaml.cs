@@ -12,5 +12,11 @@ namespace MobileClient.Views.Medals
             InitializeComponent();
             BindingContext = new MedalViewModel();
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            BindingContext = new MedalViewModel();
+        }
     }
 }

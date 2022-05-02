@@ -21,14 +21,14 @@ namespace SchoolStudyAgainApi.Controllers
         }
 
         [HttpGet]
-        public CustomHttpResponse GetInfo(string login, string password)
+        public CustomHttpResponse GetInfoByExtId(string extId)
         {
             try
             {
                 var result = new CustomHttpResponse
                 {
                     StatusCode = System.Net.HttpStatusCode.OK,
-                    Data = _logic.Read(new TeacherBindingModel { Login = login, Password = password })?[0]
+                    Data = _logic.GetByExtId(extId)
                 };
                 return result;
             }
@@ -50,8 +50,8 @@ namespace SchoolStudyAgainApi.Controllers
         {
             try
             {
-                var result = _logic.CreateWithId(model);
-                return new CustomHttpResponse { StatusCode = System.Net.HttpStatusCode.NoContent, Data = result };
+                var result = _logic.CreateWithResult(model);
+                return new CustomHttpResponse { StatusCode = System.Net.HttpStatusCode.OK, Data = result };
             }
             catch (Exception ex)
             {

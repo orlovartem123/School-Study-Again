@@ -30,20 +30,21 @@ namespace MobileClient.ViewModels.About
 
         #endregion
 
-        private string Name { get; set; } = "NoName";
+        private string Name { get; set; }
 
-        private string Surname { get; set; } = "NoName";
+        private string Surname { get; set; }
 
         public string WelcomeText { get => $"{Resource.Welcome} {Name} {Surname}!"; }
 
         public AboutViewModel()
         {
-            var teacherInfo = LocalPropsProviderService.UserName;
-            if (teacherInfo != default)
-            {
-                Name = teacherInfo.Split(' ')[0];
-                Surname = teacherInfo.Split(' ')[1];
-            }
+            Name = LocalPropsProviderService.Name;
+            if (string.IsNullOrEmpty(Name))
+                Name = "NoName";
+
+            Surname = LocalPropsProviderService.SurName;
+            if (string.IsNullOrEmpty(Surname))
+                Surname = "NoName";
         }
     }
 }

@@ -15,6 +15,8 @@ namespace SchoolDatabaseImplement.Models
 
         public string Position { get; set; }
 
+        public string ExtId { get; set; }
+
         [Required]
         public string Email { get; set; }
 
